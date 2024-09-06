@@ -3,7 +3,7 @@
 *       Function: Converts a pfsearch -x output file into Pearson/Fasta
 *                 multiple sequence asignment format  
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.0 January 1996
+*       Version:  This file is part of pftools release 1.1 March 1996
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     

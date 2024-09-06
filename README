@@ -9,7 +9,7 @@ the following programs:
    psa2msa
    gtop  
 
-These programs have succssfully been compiled and tested under
+These programs have successfully been compiled and tested under
 SunOS, Solaris, OSF1, IRIX, HP-UX operating systems.
 
 For compilation under HP_UX and IRIX, the Makefile needs to be
@@ -17,6 +17,9 @@ modified according to instructions given therein.
 
 For use under HP-UX, the file sterr.f should also be modified
 according to instructions given therein. 
+
+To run the programs on machines with less than 32 MB RAM, modify 
+the file ardim.f according to instructions given therein. 
 
 In order to compile the programs, type:
 
@@ -60,4 +63,4 @@ Please send bug reports to:
    Philipp Bucher
    E-mail: pbucher@isrec-sun1.unil.ch  
 
-Philipp Bucher, January  8 1995  
+Philipp Bucher, March 15 1996  

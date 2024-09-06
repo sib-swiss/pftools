@@ -2,7 +2,7 @@
 *----------------------------------------------------------------------*     
 *       Function: Reformats profiles: in-fmt=GRIBSKOV / out-fmt=PROSITE    
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.0 January 1996
+*       Version:  This file is part of pftools release 1.1 March 1996
 *----------------------------------------------------------------------*     
 *
 * DATA
@@ -10,7 +10,7 @@
 
 * array dimensions and I/O units
 
-        Parameter        (IDMP=1023)
+        Parameter        (IDMP=8191)
 
         Parameter        (NOUT=   6)    
         Parameter        (NGPR=  11)    

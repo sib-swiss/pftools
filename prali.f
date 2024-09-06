@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 1.0 January 1996
+*       Version:  This file is part of pftools release 1.1 March 1996
 *----------------------------------------------------------------------*     
         Subroutine PRALI
      *    (LPRF,CHIP,CHMP,IDMP,LSEQ,LREV,
@@ -60,9 +60,9 @@
                  NPE=NPE-LPRF-1
                  NSE=NSE-LSEQ-1
               Write(6,'(''#'')')    
-              Write(6,'(''# P'',I8,'' '',60A,I9)')
+              Write(6,'(''# P'',I8,'' '',60A,I8)')
      *           NPB,(RCPR(ii1:ii1),ii1=1,60),NPE
-              Write(6,'(''# S'',I8,'' '',60A,I9)')
+              Write(6,'(''# S'',I8,'' '',60A,I8)')
      *           NSB,(RCSQ(ii1:ii1),ii1=1,60),NSE
               IX=0
            End if 
@@ -111,8 +111,8 @@
               Write(6,'(''#'')')    
               RCPR(IX+1:)=' '
               RCSQ(IX+1:)=' '
-              Write(RCPR(IX+1:IX+9),'(I9)') NPE
-              Write(RCSQ(IX+1:IX+9),'(I9)') NSE
+              Write(RCPR(IX+1:IX+9),'(I8)') NPE
+              Write(RCSQ(IX+1:IX+9),'(I8)') NSE
               IX=IX+9
               Write(6,'(''# P'',I8,'' '',80A)')
      *           NPB,(RCPR(ii1:ii1),ii1=1,IX)

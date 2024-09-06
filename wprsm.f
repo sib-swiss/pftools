@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 1.0 January 1996
+*       Version:  This file is part of pftools release 1.1 March 1996
 *----------------------------------------------------------------------*     
         Subroutine WPRSM(JSEQ,
      *     LUNI,LNOR,LREV,LPFA,
@@ -95,8 +95,8 @@
         LNEX=0 
 
         If(LPFA) then  
-           RCEX(LNEX+1:)='>' // CHMI 
-           LNEX=LNEX+LNMI+1
+           RCEX(LNEX+1:)='>' // CHMI // ' ' 
+           LNEX=LNEX+LNMI+2
         End if 
 
         If(LNOR) then 

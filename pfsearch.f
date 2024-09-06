@@ -3,18 +3,14 @@
 *       Function: Scan a protein or DNA sequence library for profile 
 *                 matches 
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.0 January 1996
+*       Version:  This file is part of pftools release 1.1 March 1996
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
 
 * array dimensions and I/O units
 
-        Parameter        (IDMP=1023)
-        Parameter        (IDMS=262144)
-        Parameter        (IDMN=1024) 
-        Parameter        (IDMA=8096)
-        Parameter        (IDMM=1048576)
+        Include         'ardim.f' 
 
         Parameter        (NOUT=   6)    
 
@@ -380,7 +376,7 @@
 
         If(OPTB) then 
            If(LREV) then 
-              LREF=.FALSE.
+              LREV=.FALSE.
               Go to  20
            Else
               Continue
