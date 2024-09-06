@@ -1,6 +1,6 @@
 # M A K E F I L E   F O R   P F T O O L S  R E L E A S E  2.3
 #----------------------------------------------------------------------#
-# $Id: Makefile,v 2.14 2003/07/15 13:20:32 vflegel Exp $
+# $Id: Makefile,v 2.15 2003/11/18 09:11:24 vflegel Exp $
 #----------------------------------------------------------------------#
 
 PROGS = gtop pfmake pfscan pfw ptoh htop \
@@ -21,6 +21,7 @@ PKGDIR = /usr/share/pftools23
 # Compilation with native fortran compilers (f77)
 #
 #F77  = f77
+#CC   = cc
 #
 # sunos / solaris
 #FFLAGS= -cg89 -O4
@@ -34,6 +35,8 @@ PKGDIR = /usr/share/pftools23
 # AIX 3.2.5
 #FFLAGS= -qcharlen=1024  -O3
 #
+# Tru64 UNIX V5.1A
+#FFLAGS= io.o
 #----------------------------------------------------------------------#
 
 all  :  io.o $(PROGS)

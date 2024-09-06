@@ -1,6 +1,6 @@
 *       Program pfsearch
 *----------------------------------------------------------------------*     
-* $Id: pfsearch.f,v 2.26 2003/08/12 06:53:33 vflegel Exp $
+* $Id: pfsearch.f,v 2.28 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Scan a protein or DNA sequence library for profile 
 *                 matches 
@@ -62,8 +62,15 @@
       Integer*2         IS
 
 * number of sequences read
+
       Integer           INBS
       Integer           INBP
+
+
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
 
 * options and command line parameters
 
@@ -172,7 +179,7 @@ C     Character*1024    RCOUT
      *   OPTK,FPRF,FSEQ,NCUC,KCUC,XCUC,NW,NMOD,OPTO,OPTD,OPTV,IRC)
       If(IRC.NE.0) then 
          Write(NERR,'(/,
-     *      ''pfsearch 2.3 revision 2'',//
+     *      ''pfsearch 2.3 revision 3'',//
      *      ''Usage: pfsearch [ -abCdfhlLmMkrsuvWxyz ] [ profile-file'',
      *      '' | - ] [ seq-library-file | - ] [ parameters ]'',//
      *      )')
@@ -719,8 +726,8 @@ C      End if
      *   CPID(1:Lblnk(CPID))
       IRC=1
       Go to 100
- 904  Write(NERR,*) 'Error: Normalisation mode(s) of level',LCUT,
-     *   ' is not defined in the profile.'
+ 904  Write(NERR,*) 'Error: Normalisation mode(s)',MCUT(I2,I1),
+     *   ' of level',MCLE(I1),' is not defined in the profile.'
       Write(NERR,*) '       While processing profile ',
      *   CPID(1:Lblnk(CPID))
       IRC=1

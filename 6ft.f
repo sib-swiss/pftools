@@ -1,6 +1,6 @@
 *       Program 6ft
 *----------------------------------------------------------------------*
-* $Id: 6ft.f,v 2.6 2003/07/03 13:08:58 vflegel Exp $
+* $Id: 6ft.f,v 2.7 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*
 *       Function: 6-frame translation of DNA sequence into protein
 *       Author:   Philipp Bucher
@@ -128,7 +128,7 @@
       Call Repar(OPTS,OPTR,NW,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''6ft 2.3 revision 2'',//
+     *      ''6ft 2.3 revision 3'',//
      *      ''Usage: 6ft [-[r|s]hW] < seq-library-file '',/
      *      )')
          Write(NERR,'(

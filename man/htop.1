@@ -1,5 +1,5 @@
 .\"
-.\" $Id: htop.1,v 1.1 2003/05/12 11:50:03 vflegel Exp $
+.\" $Id: htop.1,v 1.2 2003/11/18 10:54:42 vflegel Exp $
 .\" Copyright (c) 2003 Swiss Institute of Bioinformatics <pftools@isb-sib.ch>
 .\" Process this file with
 .\" groff -man -Tascii <name>
@@ -219,17 +219,16 @@ Maximal number of unprotected residues at the ends of the profile.
 .br
 Type: integer
 .br
-Default: 5
+Default: 5 (meaning that the protected region starts at position 6).
 .\" --- P ---
 .TP
 .BI \-P\  percent_unprotect
 Percent profile-length at the ends of the profile,
-which will not be included in the protected area
-(may be overwritten by parameter 
-.IR M ,
-see above).
+which will not be included in the protected area.
 .br
-Default: 0
+Type: real
+.br
+Default: 0 (range 0 to 100)
 .\" --- Q ---
 .TP
 .BI \-Q\  odds_ratio

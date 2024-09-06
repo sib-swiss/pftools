@@ -1,5 +1,5 @@
 *----------------------------------------------------------------------*     
-* $Id: wrprf.f,v 2.8 2003/07/03 13:08:58 vflegel Exp $
+* $Id: wrprf.f,v 2.9 2003/11/18 10:52:29 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
@@ -204,12 +204,12 @@ C      Write(CPAR,'(''LENGTH='',I6,'';'')') LPRF
       JP=0
       Do 20 I1=1,KDIP
          Write(CPAR(JP+1:),*)'N',I1,'=',NDIP(I1),';'
-         JP=Lblnk(CPAR)
+         JP=Lblnk(CPAR)+1
  20   Continue
       Call slpar(CPAR,JP)
       If(JB+JP+1.GT.LBUF) Go to 900
       CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
-      JB=JB+JP+1
+      JB=JB+JP
 
       Call wrblk(NOUT,LLLT,LLEN,CBLK,JB)
 
@@ -266,13 +266,13 @@ C      Write(CPAR,'(''LENGTH='',I6,'';'')') LPRF
             Else 
                Write(CHRP(I2),*) RNOP(I2,I1)
             End if
-            Write(CPAR(JP+1:),*)'R',I2,'=',CHRP(I2),';'
-            JP=Lblnk(CPAR)
+            Write(CPAR(JP+1:),*)'R',I2,'=',CHRP(I2),'; '
+            JP=Lblnk(CPAR)+1
  22      Continue
          Call slpar(CPAR,JP)
          If(JB+JP+1.GT.LBUF) Go to 900
          CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
-         JB=JB+JP+1
+         JB=JB+JP
 
 * - text
 

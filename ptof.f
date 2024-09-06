@@ -1,6 +1,6 @@
 *       Program ptof 
 *----------------------------------------------------------------------*     
-* $Id: ptof.f,v 2.8 2003/07/22 09:43:52 vflegel Exp $
+* $Id: ptof.f,v 2.10 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: converts a protein profile into a framesearch profile
 *       Author:   Philipp Bucher
@@ -32,6 +32,12 @@
       Include          'dfdat.f'
 
       Include          'sterr.f'
+
+
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
 
 * parameters and options
 
@@ -66,7 +72,7 @@
       Call Repar(FPRF,OPTR,LLLT,RB,RF,RI,RX,RY,RZ,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''ptof 2.3 revision 2'',//
+     *      ''ptof 2.3 revision 3'',//
      *      ''Usage: ptof [ -hlrBFIXYZ ] [ profile | - ] '',
      *      ''[ parameters ]'',//
      *      )')

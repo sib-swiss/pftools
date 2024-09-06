@@ -1,6 +1,6 @@
 *       Program htop 
 *----------------------------------------------------------------------*     
-* $Id: htop.f,v 2.8 2003/07/03 13:08:58 vflegel Exp $
+* $Id: htop.f,v 2.10 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Reformats profiles: in-fmt=HMMER / out-fmt=PROSITE    
 *       Author:   Philipp Bucher
@@ -50,6 +50,7 @@
       Logical           LLLT    
       Logical           LRNM   
       Logical           LEOF
+      Logical           LRPS
 
 * initialization of controlled vocabularies
 
@@ -69,11 +70,11 @@
 * read command line arguments
 
       Call Repar
-     *   (OPTF,OPTI,OPTO,OPTR,OPTS,LLLT,FPRF,FNUL,
+     *   (OPTF,OPTI,OPTO,OPTR,OPTS,LLLT,LRPS,FPRF,FNUL,
      *   DB,RC,DL,NM,RP,RQ,RF,RH,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''htop 2.3 revision 2'',//
+     *      ''htop 2.3 revision 3'',//
      *      ''Usage: htop [ -fhilosBCFHLMPQ ] [ hmm-file | - ] ''
      *      ''[ random-model-file ] [ parameters ]'',/
      *      )')
@@ -85,7 +86,7 @@
      *      ''    -l: do not impose limit on line length.'',/
      *      ''    -o: assume input to be HMMER1 format (default:'',
      *      '' HMMER2).'',/
-     *      ''    -s: implement semiglobal alignment.'',/
+     *      ''    -s: implement semiglobal alignment.''
      *      )')
          Write(NERR,'(
      *      ''    -B<value>:     (HMMER1 specific)'',/
@@ -95,7 +96,7 @@
      *      ''    -F<value>:     (HMMER2 specific)'',/
      *      ''        output score multiplier (default: 100).'',/
      *      ''    -H<value>:     (only effective with option -s)'',/
-     *      ''        initiation/termination score (default: *).'',/
+     *      ''        initiation/termination score (default: *).''
      *      )')
          Write(NERR,'(
      *      ''    -L<value>:     (HMMER1 specific)'',/
@@ -103,14 +104,14 @@
      *      ''    -M<value>:'',/
      *      ''        number of unprotected residues at end of '',
      *      ''profile (default: 5).'',/
-     *      ''    -P<value>:     (may be overwritten by option -M)'',/
+     *      ''    -P<value>:'',/
      *      ''        percent profile length not included in '',
      *      ''protected area (default: 0).'',/
      *      ''    -Q<value>:'',/
      *      ''        odds ratio of unknown residues (default: 0.8).'',/
      *      )')
          Write(NERR,'(
-     *      '' valid (but deprecated) parameters are:'',//,
+     *      '' valid (but deprecated) parameters are:'',/,
      *      ''  [B=norm-score-logbase]        use option -B instead'',/,
      *      ''  [C=cut-off-value]             use option -C instead'',/,
      *      ''  [F=rescaling factor]          use option -F instead'',/,
@@ -134,7 +135,7 @@
      *      CPID,CPAC,CPDT,CPDE,LHDR,CHDR,NABC,CABC,LPRF,LPCI,
      *      CDIS,JDIP,MDIS,NDIP,
      *      CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
-     *      JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 
+     *      JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
      *      IDMP,CHIP,IIPP,CHMP,IMPP,
      *      BLOG,FABC,P0,
      *      CHID,IIPD,CHMD,IMPD,
@@ -248,22 +249,22 @@
       BLOG=DL
       DL=1/LOG(DL)
       P0=1.0
-
+      
       MDIS=2
-      If(NM.GT.0.AND.NM.LT.(LPRF/2)) then
-         NDIP(1)=1   +M1
-         NDIP(2)=LPRF-M1
-      Else
-         NM=LPRF/2
-         N1=MIN(NM,NINT(LPRF*RP/100))
-         NDIP(1)=1   +N1
-         NDIP(2)=LPRF-N1
-      End if
-      If(NDIP(1).GT.NDIP(2)) then
-         ITMP=NDIP(1)
-         NDIP(1)=NDIP(2)
-         NDIP(1)=ITMP
-      End if
+C      If(NM.GT.0.AND.NM.LT.(LPRF/2)) then
+C         NDIP(1)=1   +NM
+C         NDIP(2)=LPRF-NM
+C      Else
+C         NM=LPRF/2
+C         N1=MIN(NM,NINT(LPRF*RP/100))
+C         NDIP(1)=1   +N1
+C         NDIP(2)=LPRF-N1
+C      End if
+C      If(NDIP(1).GT.NDIP(2)) then
+C         ITMP=NDIP(1)
+C         NDIP(1)=NDIP(2)
+C         NDIP(1)=ITMP
+C      End if
 
       JNOR=1
       MNOR(1)=1
@@ -428,14 +429,29 @@
          End do 
       End do
 
-* parameters P,M
-
-      If(NM.EQ.0) NM=LPRF/2
-      N1=MIN(NM,NINT(LPRF*RP/100))
-      NDIP(1)=1   +N1
-      NDIP(2)=LPRF-N1
-
  90   Continue
+
+* parameters P,M
+      
+      If((.NOT.LRPS).AND.(NM.GT.0.AND.NM.LT.(LPRF/2))) then
+         NDIP(1)=1   +NM
+         NDIP(2)=LPRF-NM
+      Else
+         NM=LPRF/2
+         N1=MIN(NM,NINT(LPRF*RP/100))
+         NDIP(1)=1   +N1
+         NDIP(2)=LPRF-N1
+      End if
+      If(NDIP(1).GT.NDIP(2)) then
+         ITMP=NDIP(1)
+         NDIP(1)=NDIP(2)
+         NDIP(1)=ITMP
+      End if
+C      If(NM.EQ.0) NM=LPRF/2
+C      N1=MIN(NM,NINT(LPRF*RP/100))
+C      NDIP(1)=1   +N1
+C      NDIP(2)=LPRF-N1
+
 
 * final modifications (parameter)
 
@@ -483,7 +499,7 @@
       End
 *----------------------------------------------------------------------*     
       Subroutine Repar
-     *     (OPTF,OPTI,OPTO,OPTR,OPTS,LLLT,FPRF,FNUL,
+     *     (OPTF,OPTI,OPTO,OPTR,OPTS,LLLT,LRPS,FPRF,FNUL,
      *     DB,RC,DL,NM,RP,RQ,RF,RH,IRC)
 
       Character*512     CARG
@@ -499,6 +515,7 @@
       Logical           OPTR
       Logical           OPTS
       Logical           LLLT
+      Logical           LRPS
 
 *     initializations
 
@@ -508,6 +525,7 @@
       OPTS=.FALSE.
       OPTO=.FALSE.
       LLLT=.TRUE.
+      LRPS=.FALSE.
       DB=2.0
       RC=0.0
       DL=1.0233739
@@ -590,6 +608,7 @@
                   Call GetArg(I2,CARG)
                   Read(CARG,*,Err=900) RP
                End if
+               LRPS=.TRUE.
             End if
             If(Index(CARG,'Q').NE.0) then
                If(CARG(3:3).NE.' ') then

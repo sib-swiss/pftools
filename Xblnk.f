@@ -1,9 +1,9 @@
 *----------------------------------------------------------------------*     
-* $Id: Xblnk.f,v 1.1 2003/07/03 13:29:16 vflegel Exp $
+* $Id: Xblnk.f,v 1.2 2003/11/18 09:12:30 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
-      Function          Xblnk(STRING,LIMIT) 
+      Integer Function  Xblnk(STRING,LIMIT) 
       Character*(*)     STRING
       Integer           LIMIT
 

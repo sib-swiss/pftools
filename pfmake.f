@@ -1,6 +1,6 @@
 *       Program pfmake
 *----------------------------------------------------------------------*     
-* $Id: pfmake.f,v 2.8 2003/07/22 09:37:15 vflegel Exp $
+* $Id: pfmake.f,v 2.10 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Constructs a profile from a multiple sequence 
 *                 alignment 
@@ -69,7 +69,14 @@ C      Character*64      FOUT
 * profile
 
       Character*512     FPRF
-      Character*24      FDAT
+      Character*24      FDAT,Fdate
+      External          Fdate
+
+
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
 
 * options
 
@@ -126,7 +133,7 @@ C      Character*64      FOUT
      *   LLLT,OPTM,RE,RF,RG,RH,RI,RL,RM,RS,RT,RX,NLOW,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''pfmake 2.3 revision 2'',//
+     *      ''pfmake 2.3 revision 3'',//
      *      ''Usage: pfmake [ -0123abcehlsEFGHILMSTX ] [ msf-file'',
      *      '' | - ] score-matrix [ profile-file ] [ parameters ]'',//
      *      )')

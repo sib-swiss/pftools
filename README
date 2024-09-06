@@ -1,5 +1,5 @@
 *-----------------------------------------------------------------------------*
-* $Id: README,v 2.3 2003/05/22 11:33:01 vflegel Exp $
+* $Id: README,v 2.4 2003/11/19 11:56:10 vflegel Exp $
 *-----------------------------------------------------------------------------*
 *
 * README - Description of 'pftools' release 2.3 package and files.
@@ -79,8 +79,9 @@ programs:
 Some supplementary manual pages describing the 'psa' and 'xpsa' file formats
 have also been included.
 
-These programs have successfully been compiled and tested under Solaris, IRIX64,
-HP-UX, and Linux operating systems, using the GNU g77 compiler. 
+These programs have successfully been compiled and tested under Solaris,
+IRIX64, HP-UX, Tru64 and Linux operating systems, using the GNU g77 or f77
+compilers. 
 
 For compilation with native f77 compilers, the Makefile needs to be modified
 according to instructions given therein.  

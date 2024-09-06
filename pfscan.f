@@ -1,6 +1,6 @@
 *       Program pfscan
 *----------------------------------------------------------------------*     
-* $Id: pfscan.f,v 2.13 2003/08/12 06:53:32 vflegel Exp $
+* $Id: pfscan.f,v 2.15 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Scan a DNA or protein sequences with a profile library 
 *       Author:   Philipp Bucher
@@ -67,6 +67,12 @@
 
       Integer           INBS
       Integer           INBP
+
+
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
 
 * options and command line parameters
 
@@ -174,7 +180,7 @@ C      Character*256     RCIN
      *   OPTK,FPRF,FSEQ,LCUC,NW,NMOD,OPTO,OPTD,OPTV,IRC)
       If(IRC.NE.0) then 
          Write(NERR,'(/,
-     *      ''pfscan 2.3 revision 2'',//
+     *      ''pfscan 2.3 revision 3'',//
      *      ''Usage: pfscan[ -abCdfhlLmMkrsuvWxyz ] [ seq-file'',
      *      '' | - ] [ profile-library-file | - ] [ parameters ]'',//
      *      )')

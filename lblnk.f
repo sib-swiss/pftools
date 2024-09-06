@@ -1,9 +1,9 @@
 *----------------------------------------------------------------------*     
-* $Id: lblnk.f,v 2.4 2003/04/10 11:58:37 vflegel Exp $
+* $Id: lblnk.f,v 2.5 2003/11/18 10:19:38 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
-      Function          Lblnk(STRING) 
+      Integer Function  Lblnk(STRING) 
       Character*(*)     STRING
 
       L=Len(STRING)

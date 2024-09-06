@@ -1,5 +1,5 @@
 *----------------------------------------------------------------------*     
-* $Id: wprsm.f,v 2.11 2003/07/03 13:25:24 vflegel Exp $
+* $Id: wprsm.f,v 2.12 2003/11/18 10:50:07 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
@@ -32,6 +32,10 @@
       Logical           LPMM
       Logical           LFCL
 
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
 
 * sequence header 
       

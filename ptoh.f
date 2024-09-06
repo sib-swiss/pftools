@@ -1,6 +1,6 @@
 *       Program ptoh 
 *----------------------------------------------------------------------*     
-* $Id: ptoh.f,v 2.7 2003/07/22 09:44:14 vflegel Exp $
+* $Id: ptoh.f,v 2.9 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Reformats profile -> hmm: in-fmt=PROSITE / out-fmt=SAM    
 *       Author:   Philipp Bucher
@@ -45,6 +45,12 @@
 
       Include          'hmdat.f' 
 
+
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
+
 * parameters and options
 
       Logical           OPTF
@@ -73,7 +79,7 @@
       Call Repar(FPRF,FNUL,OPTF,OPFF,OPTH,OPTS,RD,RI,DL,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''ptoh 2.3 revision 2'',//
+     *      ''ptoh 2.3 revision 3'',//
      *      ''Usage: ptoh [ -fhsFDIL ] [ profile-file | - ] '',
      *      ''[ random-model-file ] [ parameters ]'',//
      *      )')

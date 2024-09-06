@@ -1,6 +1,6 @@
 *       Program psa2msa
 *----------------------------------------------------------------------*     
-* $Id: psa2msa.f,v 2.9 2003/07/04 08:53:05 vflegel Exp $
+* $Id: psa2msa.f,v 2.10 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Converts a pfsearch -x output file into Pearson/Fasta
 *                 multiple sequence alignment format  
@@ -49,7 +49,7 @@
      *   (FSEQ,OPTL,OPTU,OPTP,OPTD,NM,NW,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''psa2msa 2.3 revision 2'',//
+     *      ''psa2msa 2.3 revision 3'',//
      *      ''Usage: psa2msa [ -dhlpuMW ] [ psa-file | - ] '',
      *      ''[ parameters ]'',//
      *      )')

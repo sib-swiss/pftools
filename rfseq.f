@@ -1,5 +1,5 @@
 *----------------------------------------------------------------------*     
-* $Id: rfseq.f,v 2.9 2003/07/24 08:38:35 vflegel Exp $
+* $Id: rfseq.f,v 2.10 2003/11/18 10:50:07 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
@@ -9,6 +9,12 @@
       
       Include          'ardim.f'
       Include          'sterr.f'
+
+
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
 
 * reads sequence file in Pearson Fasta format 
 

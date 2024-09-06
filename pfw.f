@@ -1,6 +1,6 @@
 *       Program pfw
 *----------------------------------------------------------------------*     
-* $Id: pfw.f,v 2.7 2003/07/03 13:08:58 vflegel Exp $
+* $Id: pfw.f,v 2.8 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Calculate weights for individual sequences of a 
 *                 multiple sequence alignment.      
@@ -79,7 +79,7 @@ C       Integer           Fputc
      *   (FMSF,NRAN,RX,RW,IRAN,OPTM,IRC) 
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''pfw 2.3 revision 2'',//
+     *      ''pfw 2.3 revision 3'',//
      *      ''Usage: pfw [ -hmNXRW ] [ msf-file | - ] '',
      *      ''[ parameters ]'',//
      *      )')

@@ -1,5 +1,5 @@
 *----------------------------------------------------------------------*     
-* $Id: reseq.f,v 2.11 2003/07/24 08:37:29 vflegel Exp $
+* $Id: reseq.f,v 2.12 2003/11/18 10:50:07 vflegel Exp $
 *----------------------------------------------------------------------*     
 *        Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
@@ -10,6 +10,12 @@
       Include          'ardim.f'
       Include          'sterr.f'
      
+
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
+
 * reads sequence file in Swiss-Prot/EMBL format 
 
       Character*(*)     FSEQ

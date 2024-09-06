@@ -1,5 +1,5 @@
 *----------------------------------------------------------------------*     
-* $Id: rhmmer2.f,v 2.5 2003/07/03 13:08:58 vflegel Exp $
+* $Id: rhmmer2.f,v 2.6 2003/11/18 10:51:07 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
@@ -8,7 +8,7 @@
      *   CPID,CPAC,CPDT,CPDE,LHDR,CHDR,NABC,CABC,LPRF,LPCI,
      *   CDIS,JDIP,MDIS,NDIP,
      *   CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
-     *   JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 
+     *   JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
      *   IDMP,CHIP,IIPP,CHMP,IMPP,
      *   BLOG,FABC,P0,
      *   CHID,IIPD,CHMD,IMPD, 
@@ -212,9 +212,12 @@
       MCLE(1)=0
       CCUT(1)=' '
       JCNM(1)=1
-      RCUT(1,1)=RC
       MCUT(1,1)=1
-      ICUT(1)=NINT((RCUT(1,1)-RNOP(1,1))/RNOP(2,1))+1
+
+*** This is done in htop.f:
+C     RCUT(1,1)=RC
+C     ICUT(1)=NINT((RCUT(1,1)-RNOP(1,1))/RNOP(2,1))+1
+***
       
 * defaults
 

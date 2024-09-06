@@ -1,5 +1,5 @@
 *----------------------------------------------------------------------*     
-* $Id: reprf.f,v 2.16 2003/07/24 08:35:10 vflegel Exp $
+* $Id: reprf.f,v 2.17 2003/11/18 10:50:07 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
@@ -29,6 +29,11 @@
 
       Character*512     RCIN
 
+
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
 
 * work fields
 
@@ -763,11 +768,16 @@ C 96   Continue
       Subroutine NEXTP(NPRF,RCIN,LR,JR,NKEY,LNEW,CPAR,CVAL,LFTR,
      *   CFTR,IRC) 
 
-      Character*(*)        RCIN
-      Character*(*)        CPAR 
-      Character*(*)        CVAL 
-      Character*(*)        CFTR(1024)
-      Logical              LNEW 
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
+
+      Character*(*)     RCIN
+      Character*(*)     CPAR 
+      Character*(*)     CVAL 
+      Character*(*)     CFTR(1024)
+      Logical           LNEW 
 
       LNEW=.FALSE.
  3    Do  4 I1=JR+1,LR
@@ -968,6 +978,11 @@ C 96   Continue
       End
 *----------------------------------------------------------------------*
       Subroutine PINTS(NSCO,ISCO,CVAL,NLOW,NABC,IRC)
+
+* function return types
+
+      Integer           Xblnk
+      External          Xblnk
 
       Integer           ISCO(*)
       Character*(*)     CVAL 

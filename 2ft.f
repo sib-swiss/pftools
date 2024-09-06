@@ -1,6 +1,6 @@
 *       Program 2ft 
 *----------------------------------------------------------------------*     
-* $Id: 2ft.f,v 2.6 2003/07/03 13:08:58 vflegel Exp $
+* $Id: 2ft.f,v 2.7 2003/11/19 11:51:57 vflegel Exp $
 *----------------------------------------------------------------------*
 *       Function: 2-frame translation of DNA sequence into protein
 *       Author:   Philipp Bucher
@@ -128,7 +128,7 @@
       Call Repar(OPTS,OPTR,NW,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''2ft 2.3 revision 2'',//
+     *      ''2ft 2.3 revision 3'',//
      *      ''Usage: 2ft [-[r|s]hW] < seq-library-file '',/
      *      )')
          Write(NERR,'(
