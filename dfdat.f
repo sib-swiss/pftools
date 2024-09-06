@@ -1,9 +1,13 @@
-*       Version:  This file is part of pftools release 2.2 June 1999
+*----------------------------------------------------------------------*     
+* $Id: dfdat.f,v 2.4 2003/02/19 08:38:24 vflegel Exp $
+*----------------------------------------------------------------------*     
+*       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
 * DEFAULT
-
-        Character         CHID
-        Integer           IIPD(0:46)
-
-        Character         CHMD
-        Integer           IMPD(0:27)  
+      
+      Character         CHID
+      Integer           IIPD(0:46)
+      
+      Character         CHMD
+      Integer           IMPD(0:27)  
+      

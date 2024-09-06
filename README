@@ -1,11 +1,67 @@
-"pftools" is a collection of experimental programs supporting the
+*-----------------------------------------------------------------------------*
+* $Id: README,v 2.3 2003/05/22 11:33:01 vflegel Exp $
+*-----------------------------------------------------------------------------*
+*
+* README - Description of 'pftools' release 2.3 package and files.
+*          Package install instructions.
+*
+* Author:
+*    Philipp Bucher
+*
+* Maintainer:
+*    Volker Flegel
+*
+*-----------------------------------------------------------------------------*
+*
+* Contact and bug reports:
+*    pftools@isb-sib.ch
+*
+*-----------------------------------------------------------------------------*
+*
+* Copyright:
+*    (c) 2003 Swiss Institute of Bioinformatics
+*
+*-----------------------------------------------------------------------------*
+*-----------------------------------------------------------------------------*
+
+Contents:
+
+ - Package description
+   . Profile format
+   . Programs and manual pages
+   . Compilation issues
+
+ - Installation
+   . Compiling
+   . Installing
+
+ - File list
+
+ - Testing
+
+ - Contact
+
+*-----------------------------------------------------------------------------*
+
+Package description:
+-------------------
+The 'pftools' package is a collection of experimental programs supporting the
 generalized profile format and search method of PROSITE.
-A description of the generalized profile format is given in file:
+A description of the generalized profile format is given in the file:
 
    profile.txt
 
-Version 2.2 contains FORTRAN 77 source code and manual pages for
-the following programs:
+The official web site for the 'pftools' package can be found under:
+
+   http://www.isrec.isb-sib.ch/pftools
+
+Further information on PROSITE specific applications of the 'pftools' programs
+can be found at the following URL:
+
+   http://www.expasy.org/prosite/
+
+Release 2.3 contains FORTRAN 77 source code and manual pages for the following
+programs:
 
    pfsearch
    pfscan
@@ -20,34 +76,68 @@ the following programs:
    6ft
    2ft
 
-These programs have successfully been compiled and tested under
-Solaris, IRIX64, HP-UX, and Linux operating systems, using
-the GNU g77 compiler. 
+Some supplementary manual pages describing the 'psa' and 'xpsa' file formats
+have also been included.
 
-For compilation with native f77 compilers, the Makefile needs
-to be modified according to instructions given therein.  
+These programs have successfully been compiled and tested under Solaris, IRIX64,
+HP-UX, and Linux operating systems, using the GNU g77 compiler. 
 
-For use under HP-UX, the file sterr.f should also be modified
-according to instructions given therein. 
+For compilation with native f77 compilers, the Makefile needs to be modified
+according to instructions given therein.  
 
-To run the programs on machines with less than 32 MB RAM, modify 
-the file ardim.f according to instructions given therein. 
+For use under HP-UX, the file 'sterr.f' should also be modified according to
+instructions given therein. 
+
+The buffer sizes in release 2.3 of the 'pftools' have been significantly
+increased to handle large sequences and profiles. Therefore it might be 
+necessary to reduce the buffer sizes in order to run the programs on machines
+with less RAM. This can be achieved by modifying the file 'ardim.f' according
+to instructions given therein. 
 
 The "Integer*2" declarations may cause problems with early versions
 of the g77 compiler; solution: replace "Integer*2" by "Integer". 
 
-In order to compile the programs, type:
+*-----------------------------------------------------------------------------*
 
-   make
+Installation:
+------------
+The compressed 'tar' archive can be extracted to the current directory using
+the following command:
 
-This will create the nine binaries listed above. To install the 
-the binaries and the corresponding manual pages, first define
-the target directories in the Makefile, then type:
+   tar -xzvf pftools_23.tar.gz
+
+This will create a directory containing the source and package files.
+
+In order to compile the programs on Unix like systems with a FORTRAN 77
+compiler, change into the source directory and simply type:
+
+   make all
+
+This will create the 12 binaries listed above. To install the binaries and the
+corresponding manual pages, an installation script has been provided. It can
+be invoked using:
 
    make install
 
-*-----
- 
+The installation script will ask the user the destination directory for the
+'pftools' package. This directory will contain all the supplementary files,
+as well as a 'bin' directory for the executable programs. The installer will
+then create symbolic links to the binary programs in a directory specified by
+the user. This directory should be included in the users 'PATH' variable for
+him to be able to execute the 'pftools' programs.
+In a last step, the installer will link the man pages in the system wide man
+page location, this location can also be specified by the user.
+After successful installation, the build directory can safely be deleted.
+
+Note that you should have write permissions on the destination directories
+specified during installation. For system wide installation you may need root
+privileges, if necessary contact your system administrator.
+
+
+*-----------------------------------------------------------------------------*
+
+File list:
+---------
 Further included in this release are the following demo data files:
 
    CVPBR322
@@ -85,17 +175,17 @@ plus the following additional substution matrices in old GCG format:
    pam250.cmp
    pam400.cmp
 
-a test script: 
+*-----------------------------------------------------------------------------*
 
-   test.sh 
-
-and a test ouput file: 
-
-   test.out
-
+Testing:
+-------
+A test script is provided. It will simply execute all the 'pftools' binaries
+with some example files. The test script 'test.sh' should be executed in
+the same directory as the binaries and the demo files. An example test
+output file 'test.out' is provided as a reference.
 To test the programs, type: 
 
-   sh  test.sh > out 
+   ./test.sh > out 
    diff test.out out 
 
 Some rounding or formatting variation may occur with real number
@@ -105,15 +195,24 @@ differences in the result of test 7.
 Note that the file pfam_sh3.hmm contains a hidden Markov model from the
 PFAM A collection release 4.0 (see http://www.sanger.ac.uk/Pfam).
 
-*-----
 
-Total number of files included in this directory: 101
+*-----------------------------------------------------------------------------*
 
-*-----
-
+Contact:
+-------
 Please send bug reports to:
 
-   Philipp Bucher
-   E-mail: Philipp.Bucher@isrec.unil.ch
+   pftools@isb-sib.ch
 
-Philipp Bucher, July 1999
+The pftools package was originaly developped by Philipp Bucher and is
+currently maintained by Volker Flegel at the:
+
+Swiss Institute of Bioinformatics (Epalinges office)
+chemin des Boveresses 155
+1066 Epalinges
+Switzerland 
+
+http://www.isb-sib.ch
+
+*-----------------------------------------------------------------------------*
+*-----------------------------------------------------------------------------*

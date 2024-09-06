@@ -1,6 +1,10 @@
-*       Version:  This file is part of pftools release 2.2 June 1999
+*----------------------------------------------------------------------*     
+* $Id: avdat.f,v 2.4 2003/04/10 11:58:37 vflegel Exp $
+*----------------------------------------------------------------------*     
+*       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
 * AVERAGE SCORE  
-
-        Real              FAVE(0:26)
-        Real              PAVE(0:26)
+      
+      Real              FAVE(0:26)
+      Real              PAVE(0:26)
+      
