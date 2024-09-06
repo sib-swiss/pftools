@@ -4,20 +4,20 @@ pfsearch \- search a protein or DNA sequence library for sequence segments
 matching a profile
 .SH SYNOPSIS
 .B pfsearch 
-[ -abflrsuxyz ] [ profile-file | - ]
-            [ seq-library-file | - ]    [C=#] 
+[ -abflLrsuxyz ] [ profile-file | - ]
+            [ seq-library-file | - ]    [C=#] [W=#] 
 .SH DESCRIPTION
 .B pfsearch 
 compares a query profile against a DNA or protein sequence library.
 The result is an unsorted list of profile-sequence matches written to the standard output. 
 A variety of output formats containing different informations can be specified 
 via the options 
-.I -a, -l, -r, -u, -s,
+.I -a, -l,  -L, -r, -u, -s,
 .I -x, -y, -z,
 and the command-line parameter 
 .I C=#.
 .I profile-file
-contains a profile in PROSITE/NUCSITE format.
+contains a profile in PROSITE format.
 .I seq-library-file
 contains a sequence library in EMBL/SWISS-PROT
 format (assumed by default) or in Pearson/Fasta
@@ -40,8 +40,16 @@ Search the complementary strands of DNA sequences as well.
 Input sequence-library is in Pearson/Fasta format.
 .TP
 \-l
-Indicate highest cut-off level exceeded by the match score
-in the output list. 
+Indicate by number the highest cut-off level exceeded by the
+match score in the output list. 
+.TP
+\-L
+Indicate by character string the highest cut-off level exceeded by the match score
+in the output list. Note that the generalized profile format includes a text
+string field to specify a name for a cut-off level. The \-L option causes the
+program to display the first two characters of this text string 
+(usually something like "!", "?", "??", etc.) at the beginning of
+each match description. 
 .TP
 \-r
 Use raw scores rather than normalized 
@@ -75,7 +83,16 @@ Cut-off value.
 Over-writes the level zero cut-off value specified in
 the profile.
 An integer argument is interpreted as a raw score value,
-a decimal argument as a normalized score value. 
+a decimal argument as a normalized score value. An integer value 
+forces option 
+\-r.
+.TP
+W=#
+Output width. 
+Output lines will be truncated after 
+.I W
+characters. 
+Default: W=132. 
 .SH EXAMPLES 
 .TP
 (1)
@@ -113,4 +130,4 @@ also manual pages of
 .SH AUTHOR
 Philipp Bucher
 .br
-pbucher@isrec-sun1.unil.ch
+Philipp.Bucher@isrec.unil.ch

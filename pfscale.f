@@ -3,7 +3,7 @@
 *       Function: Fits paramters of an extreme value distribution to a
 *                 profile score distribution. Input: sorted score list.
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*
@@ -12,18 +12,32 @@
 
         Parameter        (IDM1=131072)
 
+        Parameter        (NOUT=     6)
         Parameter        (NSCL=    10)
-
-        Include          'sterr.f'      
 
 * Parameters and options
 
         Character*64      FSCL  
+        Character*64      FPRF  
 
         Real*8            DL
         Integer           NN
         Real              RP
         Real              RQ
+
+* Profile fields
+
+        Parameter        (IDMP=   9999)
+
+        Include          'psdat.f'
+        Include          'gsdat.f'
+        Include          'djdat.f'
+        Include          'nodat.f'
+        Include          'codat.f'
+        Include          'pfdat.f'
+        Include          'dfdat.f'
+        Include          'sterr.f'
+        Include          'cvini.f'
 
 * score statistics  
 
@@ -39,7 +53,7 @@
 
 * read command line 
 
-        Call Repar(FSCL,DL,NN,RP,RQ,IRC) 
+        Call Repar(FSCL,FPRF,DL,NN,RP,RQ,IRC) 
         If(FSCL.NE.' '.AND.FSCL.NE.'-') then
            MSCL=NSCL 
            Open(MSCL,File=FSCL,Status='OLD',Iostat=IOP)
@@ -48,7 +62,8 @@
         End if
         If(IRC.NE.0.OR.IOP.NE.0) then
            Write(NERR,'(
-     *      ''pfscale [ score-list | - ] [L=#] [N=#] [P=#] [Q=#]'',/, 
+     *      ''pfscale [ score-list | - ] [ profile-file ] ''
+     *      ''[L=#] [N=#] [P=#] [Q=#]'',/, 
      *      ''  e.g. pfscale - N=14147368 P=0.0001 Q=0.000001'',
      *      '' < score-list''
      *        )')
@@ -103,24 +118,104 @@
 
         XB=XCO*XFV/XSV
         XA=XFM-XB*XSM
-        Write(6,'(''# -LogP ='',F8.4,'' + '',F12.8,'' * raw-score'')')
-     *     XA,XB 
+
+        If(FPRF.NE.' ') Go to  50 
+
+* Case 1: no profile input file - print list
+
+        Write(NOUT,
+     *  '(''# -LogP ='',F8.4,'' + '',F12.8,'' * raw-score'')') XA,XB 
  
-        Write(6,'(''#'')')
-        Write(6,'(''#   rank raw-score  -logFreq  -logProb'')')
-        Write(6,'(''#'')')
+        Write(NOUT,'(''#'')')
+        Write(NOUT,'(''#   rank raw-score  -logFreq  -logProb'')')
+        Write(NOUT,'(''#'')')
 
         Do  40 I1=1,NSCO
            XPRE=XA+XB*XSCO(I1) 
-           Write(6,'(I8,F10.2,F10.4,F10.4)') I1,XSCO(I1),XFRQ(I1),XPRE
+           Write(NOUT,'(I8,F10.2,F10.4,F10.4)')
+     *        I1,XSCO(I1),XFRQ(I1),XPRE
    40   Continue
+        Go to 100
 
-        Stop
+* Case 2: Modify profile input file
+
+   50   Continue 
+
+        Call REPRF
+     *    (NPRF,FPRF,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
+     *     BLOG,FABC,P0,
+     *     CDIS,JDIP,MDIS,NDIP,
+     *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
+     *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
+     *     IDMP,CHIP,IIPP,CHMP,IMPP,
+     *     CHID,IIPD,CHMD,IMPD,
+     *     IRC)
+
+* Check normalization modes (NO mode J1 will be updated)
+
+           J1=1
+           K1=NNPR(J1)
+        Do I1=2,JNOR
+           If(NNPR(I1).LT.K1) then
+              K1=NNPR(I1)
+              J1=I1
+           End if 
+        End do 
+        CNTX(J1)='-LogE'
+        If(MNOR(J1).NE.1) then
+           Write(NERR,'(
+     *      ''1st priority normalization mode not linear - '',
+     *      ''scaling impossible.''
+     *        )')
+            Stop
+        End if 
+
+* add normalisation parameters: 
+
+        RNOP(1,J1)=XA
+        RNOP(2,J1)=XB
+
+* define cut-offs::
+
+        Do I1=1,JCUT
+           Call NtoR
+     *       (RCUT(J1,I1),ICUT(I1),RNOP,KNPM,MAXN,J1,1,LSEQ,RAVE)
+        End do 
+
+* rescaling command
+
+        LFTR=LFTR+1
+        Do I1=LFTR,2,-1
+           CFTR(I1)=CFTR(I1-1)
+        End do
+
+        CFTR(1)='CC   /RESCALED_BY="'
+        Call Recmd(CFTR(1)(21:130))
+        IC=Lblnk(CFTR(1))
+        CFTR(1)(IC+1:)='";'
+
+* write profile
+
+        Call WRPRF
+     *    (NOUT,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
+     *     CDIS,JDIP,MDIS,NDIP,
+     *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
+     *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
+     *     IDMP,CHIP,IIPP,CHMP,IMPP,
+     *     BLOG,FABC,P0,
+     *     CHID,IIPD,CHMD,IMPD,
+     *     IRC)
+
+  100   Stop
         End
 *----------------------------------------------------------------------*
-        Subroutine Repar(FSCL,DL,NN,RP,RQ,IRC) 
+        Subroutine Repar(FSCL,FPRF,DL,NN,RP,RQ,IRC) 
+
 
         Character*64      FSCL  
+        Character*64      FPRF
 
         Real*8            DL
         Integer           NN
@@ -132,6 +227,7 @@
 * initializations
 
         FSCL=' '
+        FPRF=' '
         DL=10.0
         NN=14147368
         RP=0.0001
@@ -156,10 +252,12 @@
               Read(CARG(3:64),*,Err=900) RP
            Else if(CARG(1:2).EQ.'Q=') then
               Read(CARG(3:64),*,Err=900) RQ
-           Else if(K1.LE.0) then
+           Else if(K1.LE.1) then
               K1=K1+1
               If     (K1.EQ.1) then
                 FSCL=CARG
+              Else if(K1.EQ.2) then
+                FPRF=CARG
               End if
            Else
               Go to 900
@@ -170,3 +268,9 @@
   900   IRC=-1  
         Return 
         End
+*----------------------------------------------------------------------*
+        Include          'reprf.f'
+        Include          'wrprf.f'
+        Include          'recmd.f'
+        Include          'NtoR.f'
+        Include          'lblnk.f'

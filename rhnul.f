@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
         Subroutine RHNUL(NNUL,FNUL,FABC,NABC,IRC)   
 

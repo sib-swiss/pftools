@@ -1,11 +1,11 @@
-.TH PFMAKE 1 "February 1998" "pftools 2.1"
+.TH PFMAKE 1 "July 1999" "pftools 2.2"
 .SH NAME
 pfmake \- generate a profile from a multiple sequence alignment 
 .SH SYNOPSIS
 .LP
 .nf
-\fBpfmake\fP [ -0123abes ] [ msf-file | - ] score-matrix [E=#] [F=#] [G=#]
-           [H=#] [I=#] [L=#] [M=#] [S=#] [T=#] [X=#] 
+\fBpfmake\fP [ -0123abes ] [ msf-file | - ] score-matrix [ profile-file ]
+           [E=#] [F=#] [G=#] [H=#] [I=#] [L=#] [M=#] [S=#] [T=#] [X=#] 
 .fi
 .SH DESCRIPTION
 .B pfmake
@@ -18,25 +18,32 @@ The score-matrix file must also be in GCG format.
 If `-' is specified instead
 of a real filename, the multiple sequence alignment is read
 from the standard input.
-The profile is written to the standard output. 
 
-Alignment mode and accessories:
-The disjointness definition is set to PROTECT with borders leaving 
+If an already existing profile is given as input via the third optional
+argument, the parameters of the DISJOINT, NORMALIZATION, AND CUT_OFF
+blocks will be read from input, all other profile parameters
+will be recalculated.
+Header and footer lines outside the matrix block will also be transferred 
+from input to output.
+
+If no input profile is given,
+the disjointness definition will be set to PROTECT with borders leaving 
 short unprotected tails (maximum 5 positions) at the beginning and
-at the end of the profile. One normalization mode is specified:
-\fIn-score = raw-score / F\fP , where \fIF\fP is the output score multiplier
-(\fIsee\fP below).   
+at the end of the profile. Furthermore, one normalization mode  
+(\fIn-score = raw-score / F\fP , where \fIF\fP is the output score multiplier
+, \fIsee\fP below), and two cut-off values (level 0:8.5, level -1:6.5) 
+will be defined.   
 .SH OPTIONS 
 .TP
 \-0
 Global alignment mode; initiation (termination) at low cost
 is possible only if the alignment starts at the beginning (end) of the 
-profile and the sequence.
+profile and at the beginning (end) of the sequence.
 .TP
 \-1
 Domain global alignment mode; initiation (termination) at low cost
-is possible only at the beginning (end) of the profile but at
-any position in the sequence. 
+is possible only at the beginning (end) of the profile; it may
+start and end at any position within the sequence. 
 .TP
 \-2
 Semi-global alignment mode; initiation (termination) at low cost
@@ -64,7 +71,7 @@ usually corresponds to the place where gap excision has been applied
 .I X).
 If no gap excision has been applied, the position is chosen such as to 
 maximize the sum of deletion opening events before, and  
-and deletion closing events after the gap center.
+deletion closing events after the gap center.
 Within a given gap region
 reduced deletion opening penalties are offered only before,
 reduced deletion closing penalties only after,
@@ -75,6 +82,11 @@ and
 .I -e
 and 
 automatically disables them.
+.TP
+\-c
+Circular profile. The topology of the profile is declared as 
+circular. The first and the last insert positions are merged 
+by retaining the higher value of each parameter type. 
 .TP
 \-e
 Enables endgap-weighting mode as implemented in the GCG program
@@ -161,9 +173,9 @@ Default: X=0.5.
 
 Generates a domain-global block profile from a multiple alignment
 of SH3 domains using the blosum45 matrix. 
-"sh3.seq" contains a multiple alignment of 20 SH3 domains from SWISS-PROT
+sh3.msf contains a multiple alignment of 20 SH3 domains from SWISS-PROT
 release 32 including sequence weights. 
-"blodsum45.cmp" contains a 1/3 bits-scaled blosum45 matrix in
+blosum45.cmp contains a 1/3 bits-scaled blosum45 matrix in
 GCG format.
 Note that fragment matches (alignments to parts of the profile) are not 
 prohibited but penalized by the parameter 
@@ -198,4 +210,4 @@ Comput. Appl. Biosci.
 .SH AUTHOR
 Philipp Bucher
 .br
-pbucher@isrec-sun1.unil.ch
+Philipp.Bucher@isrec.unil.ch

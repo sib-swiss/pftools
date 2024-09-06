@@ -2,7 +2,7 @@
 *----------------------------------------------------------------------*     
 *       Function: Reformats profiles: in-fmt=GRIBSKOV / out-fmt=PROSITE    
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
 *
 * DATA
@@ -77,9 +77,13 @@
 
         If(IRC.NE.0) go to 100
 
+        CPDT=' '
+        LHDR=0
+        LFTR=0
+
         Call WRPRF
      *    (NOUT,
-     *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 

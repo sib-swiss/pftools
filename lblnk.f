@@ -1,14 +1,17 @@
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
-        Function          Lblnk(string) 
-        Character*(*)     string 
+        Function          Lblnk(STRING) 
+        Character*(*)     STRING
 
-        L=Len(string)
+        L=Len(STRING)
+        Lblnk=0
 
-        Do   9 I1=L,1,-1
-           If(STRING(I1:I1).NE.' ') go to  10
-    9   Continue
-   10   Lblnk=I1
+        Do I1=L,1,-1
+           If(STRING(I1:I1).NE.' ') then
+              Lblnk=I1
+              Exit
+           End if
+        End do 
 
         Return
         End

@@ -3,13 +3,14 @@
 *       Function: Caluclate weights for individual sequences of a 
 *                 multiple sequence alignments.      
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*
 
 * array sizes, I/O units
 
+C       Parameter        (IDM1=16777216)
         Parameter        (IDM1=1048576)
         Parameter        (IDM2=   9999)
         Parameter        (IDM3=   2024)
@@ -220,13 +221,13 @@ C    *        SQID(I1)(1:16),RWGT(I1)
         Rewind(NMSF)
 
    51   Read(NMSF,'(A)',End=900) RCIO
-	L=Lblnk(RCIO)
+        L=Lblnk(RCIO)
         Write(6,'(256A)')(RCIO(ii1:ii1),ii1=1,L)
         If(Index(RCIO(1:L),'..').EQ.0) go to  51
  
         K1=1
    52   Read(NMSF,'(A)',End=900) RCIO
-	L=Lblnk(RCIO)
+        L=Lblnk(RCIO)
         IX=Index(RCIO(1:L),'Weight: ') 
         If(IX.NE.0) then 
            Write(RCIO(IX+8:),'(F6.4)') RW*RWGT(K1)
@@ -237,7 +238,7 @@ C    *        SQID(I1)(1:16),RWGT(I1)
         If(RCIO(1:2).NE.'//') go to  52
 
    53   Read(NMSF,'(A)',End=100) RCIO
-	L=Lblnk(RCIO)
+        L=Lblnk(RCIO)
         Write(6,'(256A)')(RCIO(ii1:ii1),ii1=1,L)
         Go to  53 
 
@@ -346,7 +347,7 @@ C  20   Continue
           IY=IDUM
         ENDIF
         J=1+(97*IY)/M
-        IF(J.GT.97.OR.J.LT.1)PAUSE
+        IF(J.GT.97.OR.J.LT.1) PAUSE
         IY=IR(J)
         RAN2=IY*RM
         IDUM=MOD(IA*IDUM+IC,M)

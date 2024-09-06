@@ -1,4 +1,4 @@
-.TH PTOH 1 "February 1998" "pftools 2.1"
+.TH PTOH 1 "February 1998" "pftools 2.2"
 .SH NAME
 ptoh \- converts a PROSITE-formatted profile into an approximately equivalent HMM
 .SH SYNOPSIS
@@ -10,17 +10,17 @@ ptoh \- converts a PROSITE-formatted profile into an approximately equivalent HM
 .SH DESCRIPTION
 .B ptoh
 converts a PROSITE-formatted generalized profile into an approximately equivalent
-HMMER- or SAM-formatted hidden Markov model (HMM).
+HMMER1- or SAM-formatted hidden Markov model (HMM).
 .I profile-file
 is a nucleic acid or protein profile in PROSITE format.
 .I random-model-file
 contains a simple null-model in the format used by the HMM search programs
-of the HMMER package.
+of the HMMER1 package.
 The result is written to the standard output.
 
 The profile-to-HMM conversion method is described in Bucher et al. (1996). 
 All profile scores corresponding to transitions which are not supported
-by the HMM architectures of the SAM and HMMER packages, are ignored. 
+by the HMM architectures of the SAM and HMMER1 packages, are ignored. 
 If no random model is specified on the command line, 
 the null model given in the GENERAL_SPEC data block of the profile is used. 
 If this is also missing, a flat residue distribution
@@ -40,7 +40,7 @@ and at the end of the model which approximately emulate
 local alignment mode. 
 .TP 
 \-h
-Output in HMMER ascii format. This is the default.
+Output in HMMER1 ascii format. This is the default.
 .TP 
 \-s
 Output in SAM format.
@@ -121,4 +121,4 @@ Comput. Chem.
 .SH AUTHOR
 Philipp Bucher
 .br
-pbucher@isrec-sun1.unil.ch
+Philipp.Bucher@isrec.unil.ch

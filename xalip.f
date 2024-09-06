@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
         Subroutine XALIP(
      *     NABC,CABC,LPRF,LPCI,N1,N2,
@@ -606,7 +606,7 @@ C             Write(6,'(7I8)'),I1,I2,JALS,JALB,JAL1,JAL2,JALE
                  JAL2=IOD2(I2-1)
                  If(JAL1.EQ.0) JAL1=JALB
                  If(JAL2.EQ.0) JAL2=I1
-                 Write(6,'(7I8)'),I1,I2,JALS,JALB,JAL1,JAL2,JALE
+C                Write(6,'(7I8)') I1,I2,JALS,JALB,JAL1,JAL2,JALE
               End if 
    89      Continue
    90      Continue

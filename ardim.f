@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
 
 * Note: for use on machines with less than 32 MB RAM, replace the actual 

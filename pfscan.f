@@ -2,7 +2,7 @@
 *----------------------------------------------------------------------*     
 *       Function: Scan a DNA or protein sequences with a profile library 
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -68,6 +68,7 @@
         Logical           OPTX 
         Logical           OPTY 
         Logical           OPTZ 
+        Logical           OPLU
 
 * alignments
 
@@ -120,14 +121,15 @@
 * read command line arguments
 
         Call Repar(
-     *     OPTA,OPTB,OPTF,OPTL,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
-     *     FPRF,FSEQ,LCUC,IRC)
+     *     OPTA,OPTB,OPTF,OPTL,OPTR,OPTS,OPTU,OPLU,OPTX,OPTY,OPTZ,
+     *     FPRF,FSEQ,LCUC,NW,IRC)
         If(IRC.NE.0) then 
            Write(NERR,'(
-     *      ''Usage: pfscan [ - abfrsuxyz ] [ seq-file | - ] '',
+     *      ''Usage: pfscan [ - abflLrsuxyz ] [ seq-file | - ] '',
      *      ''[ prf-library-file | - ] [ parameters ]'',//,
      *      ''   valid parameters are:'',//,
      *      ''                 [L=cut-off-level]          '',/,
+     *      ''                 [W=output-width]           '',/,
      *        )')
            Stop
         End if
@@ -202,7 +204,7 @@
 
         Call REPRF
      *    (MPRF,FPRF,
-     *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
      *     BLOG,FABC,P0,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP, 
@@ -212,6 +214,7 @@
      *     IRC)
         If(IRC.EQ.-1) go to 100
         If(IRC.GT. 0) go to 100
+
 
 * cut-off value
 
@@ -223,6 +226,7 @@
     3   Continue
             
            KCUT=0
+
         Do   6 I1=1,JCUT
            If(MCLE(I1).EQ.LCUT) then
                  INOR=0
@@ -414,7 +418,7 @@
            End if
 
            Call WPRSM(JSEQ,
-     *       LUNI,LNOR,LREV,LPFA,OPTZ,OPTL,
+     *       LUNI,LNOR,LREV,LPFA,OPTZ,OPTL,OPLU,NW,
      *       CPID,CPAC,CPDE,
      *       IALS(I1),IALB(I1),IALE(I1),NALI,IPMB,IPME,
      *       JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
@@ -428,7 +432,7 @@
            Else if(OPTY) then
               Call PRALI
      *          (LPRF,CHIP,CHMP,IDMP,LSEQ,LREV,
-     *           CALI,LALI,IALB(I1),IALE(I1),LREV)
+     *           CALI,LALI,IALB(I1),IALE(I1))
            End if
  
    40   Continue
@@ -484,13 +488,14 @@
         End
 *----------------------------------------------------------------------*     
         Subroutine Repar(
-     *     OPTA,OPTB,OPTF,OPTL,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
-     *     FPRF,FSEQ,LCUC,IRC)
+     *     OPTA,OPTB,OPTF,OPTL,OPTR,OPTS,OPTU,OPLU,OPTX,OPTY,OPTZ,
+     *     FPRF,FSEQ,LCUC,NW,IRC)
 
         Logical           OPTA 
         Logical           OPTB 
         Logical           OPTF 
         Logical           OPTL
+        Logical           OPLU
         Logical           OPTR 
         Logical           OPTS 
         Logical           OPTU 
@@ -504,7 +509,20 @@
 
         IRC=0
 
+        OPTA=.FALSE.
+        OPTB=.FALSE.
+        OPTF=.FALSE.
+        OPTL=.FALSE.
+        OPLU=.FALSE.
+        OPTR=.FALSE.
+        OPTS=.FALSE.
+        OPTU=.FALSE.
+        OPTX=.FALSE.
+        OPTY=.FALSE.
+        OPTZ=.FALSE.
+
         LCUC=0
+        NW=132
         N1=Iargc()
 
            K1=0
@@ -516,6 +534,7 @@
               If(Index(CARG,'b').NE.0) OPTB=.TRUE.
               If(Index(CARG,'f').NE.0) OPTF=.TRUE.
               If(Index(CARG,'l').NE.0) OPTL=.TRUE.
+              If(Index(CARG,'L').NE.0) OPLU=.TRUE.
               If(Index(CARG,'r').NE.0) OPTR=.TRUE.
               If(Index(CARG,'s').NE.0) OPTS=.TRUE.
               If(Index(CARG,'u').NE.0) OPTU=.TRUE.

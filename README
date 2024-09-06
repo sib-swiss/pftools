@@ -1,10 +1,10 @@
 "pftools" is a collection of experimental programs supporting the
-generalized profile format and search method of PROSITE and NUCSITE.
+generalized profile format and search method of PROSITE.
 A description of the generalized profile format is given in file:
 
    profile.txt
 
-Version 2.1 contains FORTRAN 77 source code and manual pages for
+Version 2.2 contains FORTRAN 77 source code and manual pages for
 the following programs:
 
    pfsearch
@@ -21,9 +21,10 @@ the following programs:
    2ft
 
 These programs have successfully been compiled and tested under
-SunOS, Solaris, OSF1, IRIX, HP-UX, and Linux operating systems.
+Solaris, IRIX64, HP-UX, and Linux operating systems, using
+the GNU g77 compiler. 
 
-For compilation under HP_UX, IRIX, and Linux, the Makefile needs
+For compilation with native f77 compilers, the Makefile needs
 to be modified according to instructions given therein.  
 
 For use under HP-UX, the file sterr.f should also be modified
@@ -32,7 +33,7 @@ according to instructions given therein.
 To run the programs on machines with less than 32 MB RAM, modify 
 the file ardim.f according to instructions given therein. 
 
-The "Integer*2" declarations may cause problems with some versions
+The "Integer*2" declarations may cause problems with early versions
 of the g77 compiler; solution: replace "Integer*2" by "Integer". 
 
 In order to compile the programs, type:
@@ -41,7 +42,7 @@ In order to compile the programs, type:
 
 This will create the nine binaries listed above. To install the 
 the binaries and the corresponding manual pages, first define
-the target directories in "Makefile", then type:
+the target directories in the Makefile, then type:
 
    make install
 
@@ -65,9 +66,28 @@ Further included in this release are the following demo data files:
    MYSA_HUMAN
    R76849.seq
 
+plus the following additional substution matrices in old GCG format: 
+
+   blosum30.cmp
+   blosum50.cmp
+   blosum62.cmp
+   blosum65.cmp
+   blosum80.cmp
+   blosum100.cmp
+   gonnet.cmp
+   pam30.cmp
+   pam40.cmp
+   pam80.cmp
+   pam120.cmp
+   pam160.cmp
+   pam200.cmp
+   pam220.cmp
+   pam250.cmp
+   pam400.cmp
+
 a test script: 
 
-   test.csh 
+   test.sh 
 
 and a test ouput file: 
 
@@ -75,25 +95,25 @@ and a test ouput file:
 
 To test the programs, type: 
 
-   ( csh test.csh ) > out 
+   sh  test.sh > out 
    diff test.out out 
 
 Some rounding or formatting variation may occur with real number
 editing. With g77 there will be lots of small integer rounding
 differences in the result of test 7.  
 
-Note that file pfam_sh3.hmm contains a hidden Markov model from the
-PFAM A collection release 2.0 (see http://www.sanger.ac.uk/Pfam).
+Note that the file pfam_sh3.hmm contains a hidden Markov model from the
+PFAM A collection release 4.0 (see http://www.sanger.ac.uk/Pfam).
 
 *-----
 
-Total number of files included in this directory: 82 
+Total number of files included in this directory: 101
 
 *-----
 
 Please send bug reports to:
 
    Philipp Bucher
-   E-mail: pbucher@isrec-sun1.unil.ch  
+   E-mail: Philipp.Bucher@isrec.unil.ch
 
-Philipp Bucher, February 1998  
+Philipp Bucher, July 1999

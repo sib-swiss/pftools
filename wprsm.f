@@ -1,7 +1,7 @@
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
         Subroutine WPRSM(JSEQ,
-     *     LUNI,LNOR,LREV,LPFA,OPTZ,OPTL,
+     *     LUNI,LNOR,LREV,LPFA,OPTZ,OPTL,OPLU,NW,
      *     CHID,CHAC,CHDE,
      *     IOPT,JALB,JALE,NALI,IPMB,IPME,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
@@ -20,6 +20,7 @@
         Logical           LREV
         Logical           LPFA
         Logical           OPTL
+        Logical           OPLU
         Logical           OPTZ 
 
 * sequence header 
@@ -32,13 +33,13 @@
 
         Character*04      CHLE
         Character*08      CHNS
-        Character*06      CHRS 
+        Character*07      CHRS 
         Character*20      CHLO 
         Character*18      CHPP
         Character*64      CHER 
         Character*64      CHMI
 
-        Character*132     RCEX
+        Character*1024    RCEX
 
 * prepare output fields 
 
@@ -47,12 +48,15 @@
         If(LNOR) then
            Call RtoN
      *        (IOPT,XOPT,RNOP,KNPM,MAXN,INOR,IFUN,LSEQ,RAVE)
-           Write(CHNS,'(F8.4)') XOPT
+           R=XOPT
+           If(R.GT.9999.999) R=9999.999 
+           If(R.LT.-999.999) R=-999.999
+           Write(CHNS,'(F7.3)') R
         End if 
 
 * - cut-off level
 
-        If(OPTL) then
+        If(OPTL.OR.OPLU) then
            If(LNOR) then
               K=MCLE(1)
               Do I1=2,JCUT
@@ -71,7 +75,13 @@
                  If(IOPT.GE.ICUT(I1)) K=MAX(K,MCLE(I1))
               End do 
            End if 
-           If(K.LT.0.OR.K.GT.9) then 
+           If     (OPLU) then
+              Do I1=1,JCUT
+                 J=I1 
+                 If(K.EQ.MCLE(I1)) Exit
+              End do 
+              CHLE=CCUT(J)
+           Else if(K.LT.0.OR.K.GT.9) then 
               Write(CHLE,'(''L='',I2)') K 
            Else
               Write(CHLE,'(''L='',I1,'' '')') K 
@@ -80,7 +90,10 @@
 
 * - raw-score
 
-        Write(CHRS,'(I6)') IOPT
+        I=IOPT
+        If(I.GT.999999) I=999999
+        If(I.LE.-99999) I=-99999
+        Write(CHRS,'(I7)') I
         
 * - location in sequence
 
@@ -116,7 +129,7 @@
 
 * - match-id
 
-        If(LPFA) then 
+        If(LPFA.AND.NALI.GT.1) then 
            CHMI=CHID(1:L2) // '_'
            Write(CHMI(L2+2:),'(I6)') JSEQ
               J1=L2+1
@@ -127,6 +140,9 @@
               End if
            End do
            LNMI=J1
+        Else
+           CHMI=CHID(1:L2)
+           LNMI=L2
         End if
 
 * assemble ouput record
@@ -138,18 +154,19 @@
            LNEX=LNEX+LNMI+2
         End if 
 
-        If(OPTL) then
+        If(OPTL.OR.OPLU) then
            RCEX(LNEX+1:)=CHLE
            LNEX=LNEX+4
+           If(OPLU) LNEX=LNEX-2
         End if
 
         If(LNOR) then 
            RCEX(LNEX+1:)=CHNS
-           LNEX=LNEX+8
+           LNEX=LNEX+7
         End if
 
         RCEX(LNEX+1:)=CHRS
-        LNEX=LNEX+6
+        LNEX=LNEX+7
 
         If(.NOT.LUNI) then 
            RCEX(LNEX+1:)=CHLO
@@ -164,13 +181,12 @@
         RCEX(LNEX+2:)=CHER(1:LNER)
         LNEX=LNEX+1+LNER
 
-        L3=MIN(132-LNEX-1,Lblnk(CHDE))
+        L3=MAX(0,MIN(NW-LNEX-1,Lblnk(CHDE)))
         RCEX(LNEX+2:)=CHDE(1:L3)
         LNEX=LNEX+1+L3
 
 * Write output record
-
-        Write(6,'(132A)')(RCEX(ii1:ii1),ii1=1,LNEX)
+        Write(6,'(1024A)')(RCEX(ii1:ii1),ii1=1,LNEX)
 
   100   Return 
         End 

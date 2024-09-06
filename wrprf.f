@@ -1,8 +1,8 @@
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
         Subroutine WRPRF
      *    (NOUT,
-     *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 
@@ -91,11 +91,26 @@
         RCEX='AC   '  // CPAC(1:IX) // ';'
         Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lblnk(RCEX))
 
+* - DT line
+ 
+        If(CPDT.NE.' ') then
+           RCEX='DT   ' 
+     *       // CPDT(1:Lblnk(CPDT))
+           Write(NOUT,'(132A)')(RCEX(ii1:ii1),ii1=1,Lblnk(RCEX))
+        End if 
+
 * - DE line
  
         RCEX='DE   ' 
      *    // CPDE(1:Lblnk(CPDE))
-        Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lblnk(RCEX))
+        Write(NOUT,'(132A)')(RCEX(ii1:ii1),ii1=1,Lblnk(RCEX))
+
+* - Additional header lines
+
+        Do I1=1,LHDR
+           Write(NOUT,'(132A)')
+     *       (CHDR(I1)(ii1:ii1),ii1=1,Lblnk(CHDR(I1)))
+        End do 
 
 * write /GENERAL_SPEC: block 
 
@@ -263,8 +278,8 @@
 
 * - score
 
-        Write(CPAR,'(''SCORE='',I6,'';'')') ICUT(I1) 
-        JP=13
+        Write(CPAR,'(''SCORE='',I8,'';'')') ICUT(I1) 
+        JP=15
         Call slpar(CPAR,JP)
         CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
         JB=JB+JP+1
@@ -465,7 +480,11 @@
            JP=0 
         Else
            If(K1.EQ.1) then
-              Write(CPAR,'(''I='',I6)') IIPP( 1,I1)
+              If(IIPP( 1,I1).LE.NLOW) then 
+                 CPAR='I=     *'
+              Else
+                  Write(CPAR,'(''I='',I6)') IIPP( 1,I1)
+              End if 
               JP=9
               CPAR(JP:JP)=';'
            Else
@@ -621,7 +640,7 @@
 
 * write /I: block 
 
-        If(I1.NE.0.OR..NOT.LPCI) then 
+        If(I1.NE.LPRF.OR..NOT.LPCI) then 
 
         CBLK='/I:'
         JB=3
@@ -650,6 +669,7 @@
         Else
            If(K1.EQ.1) then
               Write(CPAR,'(''I='',I6)') IIPP( 1,I1)
+              If(IIPP( 1,I1).EQ.NLOW) CPAR='I=     *'
               JP=9
               CPAR(JP:JP)=';'
            Else
@@ -671,6 +691,7 @@
 
         If(IIPP( 0,I1).NE.IIPD( 0)) then
            Write(CPAR,'(''I0='',I6)') IIPP( 0,I1)
+           If(IIPP( 0,I1).LE.NLOW) CPAR='I0=     *'
            JP=10
            CPAR(JP:JP)=';'
            Call slpar(CPAR,JP)
@@ -701,6 +722,13 @@
         End if 
 
    90   Continue
+
+* - Footer lines
+
+        Do I1=1,LFTR
+           Write(NOUT,'(132A)')
+     *       (CFTR(I1)(ii1:ii1),ii1=1,Lblnk(CFTR(I1)))
+        End do 
 
         Write(NOUT,'(''//'')')
 

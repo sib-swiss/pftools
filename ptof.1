@@ -1,4 +1,4 @@
-.TH PTOF 1 "February 1998" "pftools 2.1"
+.TH PTOF 1 "July 1999" "pftools 2.2"
 .SH NAME
 ptof \- convert a protein profile into a frame-search profile  
 
@@ -124,7 +124,7 @@ is first converted into a frame-search profile
 .I sh3.fps.
 Then both strands of the Fasta-formatted EST sequence in
 .I R76849.seq
-(GenBank/EMBL-accession: R76849) are converted into three-frame interleaved
+(GenBank/EMBL-accession: R76849) are converted into interleaved frame-translated
 protein sequences and searched for SH3 domains with the frame-search profile 
 generated in the preceding step.
 
@@ -143,10 +143,7 @@ also manual pages of
 .B 2ft
 and 
 .B 6ft.
-.SH BUGS
-.B ptof
-does not accept circular profiles as input. 
 .SH AUTHOR
 .nf
 Philipp Bucher
-pbucher@isrec-sun1.unil.ch
+Philipp.Bucher@isrec.unil.ch

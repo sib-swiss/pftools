@@ -1,10 +1,9 @@
-*       Program HtoP 
+*       Program htop 
 *----------------------------------------------------------------------*     
 *       Function: Reformats profiles: in-fmt=HMMER / out-fmt=PROSITE    
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
-*
 * DATA
 *----------------------------------------------------------------------*     
 
@@ -16,7 +15,7 @@
         Parameter        (NOUT=   6)
         Parameter        (NNUL=  12)
 
-* profile and sequence fields :
+* profile and sequence fields:
 
         Character*64      FPRF
 
@@ -42,6 +41,8 @@
 
         Logical           OPTF
         Logical           OPTI    
+        Logical           OPTO    
+        Logical           OPTR    
         Logical           OPTS    
 
 * initialization of controlled vocabularies
@@ -52,19 +53,25 @@
 * INPUT SECTION 
 *----------------------------------------------------------------------*     
 
+* initializations
+
         IRC=0
+        LHDR=0
 
 * read command line arguments
 
         Call Repar
-     *    (OPTF,OPTI,OPTS,FPRF,FNUL,DB,RC,DL,NM,RP,RQ,IRC)
+     *    (OPTF,OPTI,OPTO,OPTR,OPTS,FPRF,FNUL,
+     *     DB,RC,DL,NM,RP,RQ,RF,RH,IRC)
         If(IRC.NE.0) then
            Write(NERR,'(
-     *      ''Usage: gtop [ -fsi ] [ hmm-file | - ] ''
+     *      ''Usage: gtop [ -fios ] [ hmm-file | - ] ''
      *      ''[ random-model-file ] [ parameters ]'',//,
      *      ''   valid parameters are:'',//,
      *      ''                 [B=norm-score-logbase]'',/,
      *      ''                 [C=cut-off-value]'',/,
+     *      ''                 [F=rescaling factor'',/
+     *      ''                 [H=high-cost-init-term-score'',/
      *      ''                 [L=profile-logbase]'',/,
      *      ''                 [M=length-unprotected-ends'',/,
      *      ''                 [P=percent-unprotected-ends'',/
@@ -76,7 +83,85 @@
 * read profile
 
     1   Continue           
+
+        If(.NOT.OPTO) then 
+           Call RHMMER2 
+     *       (NPRF,FPRF,
+     *        CPID,CPAC,CPDT,CPDE,LHDR,CHDR,NABC,CABC,LPRF,LPCI,
+     *        CDIS,JDIP,MDIS,NDIP,
+     *        CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
+     *        JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 
+     *        IDMP,CHIP,IIPP,CHMP,IMPP,
+     *        BLOG,FABC,P0,
+     *        CHID,IIPD,CHMD,IMPD,
+     *        IRC)
+           If(IRC.EQ.0) then
+
+* rescale 
+
+              Do I1=0,LPRF
+                 Do I2=0,46
+                    If(IIPP(I2,I1).NE.NLOW)
+     *              IIPP(I2,I1)=NINT(RF*IIPP(I2,I1))
+                 End do 
+              End do 
+              Do I1=1,LPRF
+                 Do I2=0,27
+                    If(IMPP(I2,I1).NE.NLOW)
+     *              IMPP(I2,I1)=NINT(RF*IMPP(I2,I1))
+                 End do 
+              End do 
+
+              RNOP(1,1)=RNOP(1,1)+LOG10(350.0)
+              RNOP(2,1)=RNOP(2,1)/RF
+              BLOG=BLOG**(1/RF)
+              RCUT(1,1)=RC
+              ICUT(1)=NINT((RCUT(1,1)-RNOP(1,1))/RNOP(2,1))+1
+
+              If(RC.EQ.0) then 
+                 JCUT=2
+                 MCLE(1)=0
+                 CCUT(1)='!'
+                 JCNM(1)=1
+                 RCUT(1,1)=8.5
+                 MCUT(1,1)=1
+                 ICUT(1)=NINT((RCUT(1,1)-RNOP(1,1))/RNOP(2,1))+1
+                 MCLE(2)=-1
+                 CCUT(2)='?'
+                 JCNM(2)=1
+                 RCUT(1,2)=6.5
+                 MCUT(1,2)=1
+                 ICUT(2)=NINT((RCUT(1,2)-RNOP(1,1))/RNOP(2,1))+1
+              End if 
+
+* semilocal alignment mode
+
+              If(OPTS) then 
+                 IIPD(B0)=0
+                 IIPD(E0)=0
+                 Do I1=1,LPRF
+                    IIPP(B0,I1-1)=0
+                    IIPP(E0,I1)=0
+                 End do
+              End if
+
+* option -i
+
+              If(OPTI) then 
+                 Do I1=0,LPRF
+                 Do I2=0,NABC
+                    IIPP(I2,I1)=0
+                 End do
+                 End do
+              End if
+
+              Go to  90
+           Else
+              Go to 100
+           End if  
+        End if
   
+
         Call RHMMER(NPRF,FPRF,LPRF,RIHM,RMHM,IDMP,NABC,CABC,IRC)
         If(IRC.NE.0) go to 100
 
@@ -104,6 +189,7 @@
         If(FPRF.EQ.'-') FPRF='stdin'
         CPID='HMMER-HMM'
         CPAC='HH99999'
+        CPDT=' '
         CPDE='Automatically reformatted from file '''
      *    // FPRF(1:Lblnk(FPRF))
      *    // '''.'
@@ -270,7 +356,7 @@
         IIPP(E0,LPRF)=0
         IIPP(E1,LPRF)=0
 
-* Generate consensus sequence 
+* generate consensus sequence 
  
            CHIP( 0)='-'
         Do I1=1,LPRF 
@@ -285,11 +371,47 @@
            End do 
         End do
 
+* parameters P,M
+
+        If(NM.EQ.0) NM=LPRF/2
+        N1=MIN(NM,NINT(LPRF*RP/100))
+        NDIP(1)=1   +N1
+        NDIP(2)=LPRF-N1
+
+   90   Continue
+
+* final modifications (parameter)
+
+        If(RH.GT.0.0) then
+           If(OPTR) then 
+              NH=-RH/RNOP(2,1)
+           Else
+              NH=-RH*RF
+           End if
+              IIPD(B0)=MAX(IIPD(B0),NH)
+              IIPD(B1)=MAX(IIPD(B1),NH)
+              IIPD(E1)=MAX(IIPD(E1),NH)
+              IIPD(E0)=MAX(IIPD(E0),NH)
+           Do I1=0,LPRF
+              IIPP(B0,I1)=MAX(IIPP(B0,I1),NH)
+              IIPP(B1,I1)=MAX(IIPP(B1,I1),NH)
+              IIPP(E1,I1)=MAX(IIPP(E1,I1),NH)
+              IIPP(E0,I1)=MAX(IIPP(E0,I1),NH)
+           End do
+        End if
+
 * write profile
+
+
+        LFTR=1
+        CFTR(1)='CC   /GENERATED_BY="'
+        Call Recmd(CFTR(1)(21:130))
+        IC=Lblnk(CFTR(1))
+        CFTR(1)(IC+1:)='";'
 
         Call WRPRF
      *    (NOUT,
-     *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 
@@ -304,7 +426,8 @@
         End
 *----------------------------------------------------------------------*     
         Subroutine Repar
-     *    (OPTF,OPTI,OPTS,FPRF,FNUL,DB,RC,DL,NM,RP,RQ,IRC)
+     *    (OPTF,OPTI,OPTO,OPTR,OPTS,FPRF,FNUL,
+     *     DB,RC,DL,NM,RP,RQ,RF,RH,IRC)
 
         Character*64      CARG
         Character*(*)     FPRF
@@ -315,22 +438,28 @@
 
         Logical           OPTF
         Logical           OPTI
+        Logical           OPTO
+        Logical           OPTR
         Logical           OPTS
 
 * initializations
 
         OPTF=.FALSE.
         OPTI=.FALSE.
+        OPTR=.FALSE.
         OPTS=.FALSE.
+        OPTO=.FALSE.
         DB=2.0
         RC=0.0
         DL=1.0233739
         NM=5
         RP=0.0
         RQ=0.8
+        RH=0.0
 
         FPRF=' '
         FNUL=' '
+        RF=1.0
 
         IRC=0
 
@@ -342,11 +471,15 @@
            If     (CARG(1:1).EQ.'-'.AND.CARG(2:2).NE.' ') then
               If(Index(CARG,'f').NE.0) OPTF=.TRUE.
               If(Index(CARG,'i').NE.0) OPTI=.TRUE.
+              If(Index(CARG,'o').NE.0) OPTO=.TRUE.
+              If(Index(CARG,'r').NE.0) OPTR=.TRUE.
               If(Index(CARG,'s').NE.0) OPTS=.TRUE.
            Else if(CARG(1:2).EQ.'B=') then
               Read(CARG(3:64),*,Err=900) DB
            Else if(CARG(1:2).EQ.'C=') then
               Read(CARG(3:64),*,Err=900) RC
+           Else if(CARG(1:2).EQ.'F=') then
+              Read(CARG(3:64),*,Err=900) RF
            Else if(CARG(1:2).EQ.'L=') then
               Read(CARG(3:64),*,Err=900) DL
            Else if(CARG(1:2).EQ.'M=') then
@@ -355,6 +488,8 @@
               Read(CARG(3:64),*,Err=900) RP
            Else if(CARG(1:2).EQ.'Q=') then
               Read(CARG(3:64),*,Err=900) RQ
+           Else if(CARG(1:2).EQ.'H=') then
+              Read(CARG(3:64),*,Err=900) RH
            Else if(K1.LE.1) then
               K1=K1+1
               If     (K1.EQ.1) then
@@ -375,6 +510,8 @@
         End
 *----------------------------------------------------------------------*     
         Include          'rhmmer.f'
+        Include          'rhmmer2.f'
         Include          'rhnul.f'
+        Include          'recmd.f'
         Include          'wrprf.f'
         Include          'lblnk.f'

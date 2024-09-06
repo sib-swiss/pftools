@@ -1,9 +1,8 @@
-*       Program psa2msa
 *----------------------------------------------------------------------*     
 *       Function: Converts a pfsearch -x output file into Pearson/Fasta
 *                 multiple sequence asignment format  
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -37,10 +36,13 @@
 * command line arguments
  
         Call Repar
-     *    (FSEQ,OPTL,OPTU,OPTP,OPTD,IRC)
+     *    (FSEQ,OPTL,OPTU,OPTP,OPTD,NM,IRC)
         If(IRC.NE.0) then
            Write(NERR,'(
-     *      ''Usage: psa2msa [ -dlpd ] [ [ psa-file | - ] ]''
+     *      ''Usage: psa2msa [ -dlpd ] [ [ psa-file | - ] '',
+     *      ''[ parameters ]'',//,
+     *      ''   valid parameters are:'',//,
+     *      ''                 [M=max-insert-length]'',/
      *        )')
            Stop
         End if
@@ -93,15 +95,17 @@
         Do I1=0,LPRF
            LMSA=LMSA+IPRF(I1)
         End do 
+        LMSB=LMSA
         
    60   Call GetSeq(NSEQ,CSEQ,LSEQ,RCIO,LDES,IRC)
         If(IRC.NE.0) go to 100
 
         Call UpdSeq(CSEQ,LSEQ,LMSA,IPRF,LPRF)
         Call EdtSeq(CSEQ,LMSA,OPTL,OPTU,OPTP,OPTD)
+        If(NM.GT.0) Call CutSeq(CSEQ,LMSA,LMSB,IPRF,LPRF,NM)
 
         Write(6,'((512A))')(RCIO(ii1:ii1),ii1=1,LDES)
-        Write(6,'(( 60A))')(CSEQ(ii1),ii1=1,LMSA)
+        Write(6,'(( 60A))')(CSEQ(ii1),ii1=1,LMSB)
 
         Go to  60
  
@@ -110,7 +114,7 @@
         End
 *----------------------------------------------------------------------*
         Subroutine Repar
-     *    (FSEQ,OPTL,OPTU,OPTP,OPTD,IRC)
+     *    (FSEQ,OPTL,OPTU,OPTP,OPTD,NM,IRC)
 
         Character*64      FSEQ
         Character*64      CARG 
@@ -127,6 +131,8 @@
         OPTP=.FALSE.
         OPTD=.FALSE.
 
+        NM=0
+
         N1=Iargc()
         K1=0
         Do  I1=1,N1
@@ -136,7 +142,10 @@
               If(Index(CARG,'u').NE.0) OPTU=.TRUE.
               If(Index(CARG,'p').NE.0) OPTP=.TRUE.
               If(Index(CARG,'d').NE.0) OPTD=.TRUE.
+              If(Index(CARG,'d').NE.0) OPTD=.TRUE.
               If(CARG(1:2).EQ.'-h') go to 900
+           Else if(CARG(1:2).EQ.'M=') then
+              Read(CARG(3:64),*,Err=900) NM
            Else
               FSEQ=CARG 
               K1=K1+1
@@ -159,7 +168,7 @@
         Character*(*)     RCIO
 
         Character*512     RCIN
-	Save              RCIN
+        Save              RCIN
 
         IRC=0
         LSEQ=0
@@ -208,7 +217,7 @@
            Do I1=1,LSEQ
               K1=Ichar(CSEQ(I1))
               If((K1.GE.65.AND.K1.LE. 90).OR.
-     *           (CSEQ(I1).EQ.'-')) then
+     *          (CSEQ(I1).EQ.'-')) then
                  LPRF=LPRF+1
               End if 
            End do 
@@ -249,22 +258,55 @@
         N1=0
         Do I1=LSEQ,1,-1
            K1=Ichar(CSEQ(I1))
+*   Print *,M1,CSEQ(I1)
            If((K1.GE.65.AND.K1.LE. 90).OR.
      *        (CSEQ(I1).EQ.'-')) then
-              Do I2=N1+1,IPRF(J1)
-                 CSEQ(M1)='.'
-                 M1=M1-1
-              End do
+                 K1=IPRF(J1)-N1
+                 M1=M1-K1
+                 Do I2=M1+1,M1+K1
+                    CSEQ(I2)='.'
+                 End do
+              If(J1.EQ.LPRF) then 
+*                Print *,J1,M1,IPRF(J1),K1,N1
+                 Do I2=M1+1,M1+N1
+                    CSEQ(I2)=CSEQ(I2+K1)
+                 End do
+                 Do I2=M1+N1+1,M1+N1+K1
+                    CSEQ(I2)='.'
+                 End do
+              Else
+
+* place dots at the center of insert region  
+
+                 L1=(N1+1)/2
+*                Print *,J1,M1,IPRF(J1),K1,N1,L1
+*         If(IPRF(J1).NE.0)
+*    *    Write(6,'(132A)')(CSEQ(ii1),ii1=M1+1,M1+IPRF(J1))
+                 Do I2=M1+1,M1+L1
+                    CSEQ(I2)=CSEQ(I2+K1)
+                 End do
+*         If(IPRF(J1).NE.0) 
+*    *    Write(6,'(132A)')(CSEQ(ii1),ii1=M1+1,M1+IPRF(J1))
+                 Do I2=M1+L1+1,M1+L1+K1
+                    CSEQ(I2)='.'
+                 End do
+*         If(IPRF(J1).NE.0)
+*    *    Write(6,'(132A)')(CSEQ(ii1),ii1=M1+1,M1+IPRF(J1))
+              End if 
                  CSEQ(M1)=CSEQ(I1)
                  M1=M1-1
                  N1=0
                  J1=J1-1
            Else 
-                 CSEQ(M1)=CSEQ(I1)
-                 M1=M1-1
-                 N1=N1+1
+              CSEQ(M1)=CSEQ(I1)
+              M1=M1-1
+              N1=N1+1
            End if
         End do 
+              Do I2=N1+1,IPRF(J1)
+                 CSEQ(M1)='.'
+                 M1=M1-1
+              End do
   100   Return
         End
 *----------------------------------------------------------------------*
@@ -302,6 +344,46 @@
               If(CSEQ(I1).EQ.'.') CSEQ(I1)='-'
             End do 
         End if 
+
+        Return
+        End
+*----------------------------------------------------------------------*
+        Subroutine CutSeq(CSEQ,LMSA,LMSB,IPRF,LPRF,NM)
+
+        Character*01      CSEQ(*)
+        Integer           IPRF(0:8191)
+
+        M1=NM/2
+        L1=NM-M1
+        J1=0
+        K1=0
+        Do I1=0,LPRF
+        If(IPRF(I1).GT.NM) then
+           Do I2=1,M1
+              J1=J1+1
+              K1=K1+1
+              CSEQ(J1)=CSEQ(K1)
+           End do 
+           K1=K1+IPRF(I1)-NM
+           Do I2=1,L1
+              J1=J1+1
+              K1=K1+1
+              CSEQ(J1)=CSEQ(K1)
+           End do 
+        Else
+           Do I2=1,IPRF(I1)
+              J1=J1+1
+              K1=K1+1
+              CSEQ(J1)=CSEQ(K1)
+           End do 
+        End if 
+        If(I1.NE.LPRF) then
+              J1=J1+1
+              K1=K1+1
+              CSEQ(J1)=CSEQ(K1)
+        End if
+        End do 
+        LMSB=J1
 
         Return
         End

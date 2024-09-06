@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
         Subroutine REGPR
      *    (NGPR,FGPR,
@@ -13,7 +13,7 @@
 
         Character*64      FGPR
         Character*256     RCIN  
-	Character         B
+        Character         B
 
         Include          'psdat.f'
         Include          'gsdat.f'
@@ -40,7 +40,7 @@
     1      Open(NGPR,Status='SCRATCH')
     2      Continue 
            Do I1=1,256
-	   If(Getc(B).NE.0) go to 3
+           If(Getc(B).NE.0) go to 3
               If(Ichar(B).EQ.10) then
                  Write(NGPR,'(256A)')(RCIN(ii1:ii1),ii1=1,I1-1)
                  Go to   2  

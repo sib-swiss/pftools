@@ -1,8 +1,8 @@
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
         Subroutine REPRF
      *    (NPRF,FPRF,
-     *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
      *     BLOG,FABC,P0,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
@@ -24,7 +24,7 @@
         Include          'pfdat.f'
         Include          'sterr.f'
 
-        Character*132     RCIN
+        Character*256     RCIN
 
 * work fields
 
@@ -65,24 +65,33 @@
         CPAC=RCIN( 6:IC-1)
         CPAC=RCIN(6:IX) // '|'
 
-* description 
+* date, description 
 
+        CPDT=' '
     3   Read(NPRF,'(A)',Err=999,End=999) RCIN
         If(RCIN(1:2).EQ.'//') go to 999
+        If(RCIN(1:2).EQ.'DT') then 
+           LR=Lblnk(RCIN)
+           CPDT=RCIN( 6:LR)
+           Go to   3
+        End if 
         If(RCIN(1:2).NE.'DE') go to   3   
         LR=Lblnk(RCIN)
         CPDE=RCIN( 6:LR)
 
-* go to first MA line
-
+* go to first MA line, read additinional header lines 
+ 
+        LHDR=0
     5   Read(NPRF,'(A)',Err=999,End=999) RCIN
         If(RCIN(1:2).EQ.'//') go to   1 
-        If(RCIN(1:2).NE.'MA') go to   5   
+        If(RCIN(1:2).NE.'MA') then
+           If(LHDR.LT.1024) then
+              LHDR=LHDR+1
+              CHDR(LHDR)=RCIN
+           End if
+           go to   5   
+        End if
         LR=Lblnk(RCIN)
-
-C       Print *,CPID
-C       Print *,CPAC
-C       Print *,CPDE
 
 * initialize position-independent profile parameters
 
@@ -169,7 +178,8 @@ C       Print *,CPDE
 * read next parameter 
 
    20   Continue
-        Call NEXTP(NPRF,RCIN,LR,JR,NKEY,LNEW,CPAR,CVAL,IRC) 
+        LFTR=0
+        Call NEXTP(NPRF,RCIN,LR,JR,NKEY,LNEW,CPAR,CVAL,LFTR,CFTR,IRC) 
         If(IRC.EQ.-1) go to  90
         If(IRC.NE.0 ) go to 999
 
@@ -436,25 +446,39 @@ C    *        CVAL(1:Lblnk(CVAL))
         Go to 100
         End
 *----------------------------------------------------------------------*
-        Subroutine NEXTP(NPRF,RCIN,LR,JR,NKEY,LNEW,CPAR,CVAL,IRC) 
+        Subroutine NEXTP(NPRF,RCIN,LR,JR,NKEY,LNEW,CPAR,CVAL,LFTR,
+     *     CFTR,IRC) 
 
         Character*(*)        RCIN
         Character*(*)        CPAR 
         Character*(*)        CVAL 
+        Character*(*)        CFTR(1024)
         Logical              LNEW 
 
         LNEW=.FALSE.
 
     3   Do  4 I1=JR+1,LR
            JR=JR+1
-           If(Index(' ;,.	',RCIN(JR:JR)).EQ.0) go to 10
+           If(Index(' ;,.        ',RCIN(JR:JR)).EQ.0) go to 10
     4   Continue
 
     5   Read(NPRF,'(A)',Err=999,End=101) RCIN
-        If(RCIN(1:2).EQ.'CC') go to   5 
+        If     (RCIN(1:2).EQ.'MA') then
+           LFTR=0
+        Else if(RCIN(1:2).EQ.'CC') then
+           If(LFTR.LT.1024) then 
+              LFTR=LFTR+1
+              CFTR(LFTR)=RCIN
+           End if
+           Go to   5 
+        Else if(RCIN(1:2).EQ.'//') then
+           Go to 101
+        Else
+           Go to 102
+        End if 
+
         LR=Lblnk(RCIN)
         If(Ichar(RCIN(LR:LR)).EQ.13) LR=LR-1 
-        If(RCIN(1:2).NE.'MA') go to 101
         JR=5
         Go to   3
 
@@ -499,7 +523,13 @@ C    *        CVAL(1:Lblnk(CVAL))
 
         If(JR.GT.LR) then 
    21      Read(NPRF,'(A)',Err=999,End=101) RCIN
-           If(RCIN(1:2).EQ.'CC') go to  21
+           If(RCIN(1:2).EQ.'CC') then
+              If(LFTR.LT.1024) then
+                 LFTR=LFTR+1
+                 CFTR(LFTR)=RCIN
+              End if
+              Go to  21
+           End if
            LR=Lblnk(RCIN)
            If(Ichar(RCIN(LR:LR)).EQ.13) LR=LR-1 
            If(RCIN(1:2).NE.'MA') then 
@@ -507,6 +537,7 @@ C    *        CVAL(1:Lblnk(CVAL))
               CVAL=' '
               Go to  100
            End if
+           LFTR=0
            JR=6
         End if  
 
@@ -533,10 +564,17 @@ C    *        CVAL(1:Lblnk(CVAL))
 
         If(JR.GT.LR) then 
    31      Read(NPRF,'(A)',Err=999,End=101) RCIN
-           If(RCIN(1:2).EQ.'CC') go to  31
+           If(RCIN(1:2).EQ.'CC') then 
+              If(LFTR.LT.1024) then
+                 LFTR=LFTR+1 
+                 CFTR(LFTR)=RCIN 
+              End if
+              Go to  31
+           End if
            LR=Lblnk(RCIN)
            If(Ichar(RCIN(LR:LR)).EQ.13) LR=LR-1
-           If(RCIN(1:2).NE.'MA') go to 101
+           If(RCIN(1:2).NE.'MA') go to 102
+           LFTR=0
            JR=6
         End if  
 
@@ -551,6 +589,18 @@ C    *        CVAL(1:Lblnk(CVAL))
   100   Return
   101   IRC=-1
         Go to 100
+  102      If(LFTR.LT.1024) then 
+              LFTR=LFTR+1
+              CFTR(LFTR)=RCIN
+           End if
+  103   Read(NPRF,'(A)',Err=999,End=101) RCIN
+        If(RCIN(1:2).NE.'//') then
+           LFTR=LFTR+1
+           CFTR(LFTR)=RCIN
+           Go to 103
+        Else 
+           Go to 101
+        End if 
   999   IRC= 1
         Go to 100
 

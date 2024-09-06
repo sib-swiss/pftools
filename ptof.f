@@ -2,7 +2,7 @@
 *----------------------------------------------------------------------*     
 *       Function: converts a protein profile into a framsearch profile
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -80,7 +80,7 @@
 
         Call REPRF
      *    (MPRF,FPRF,
-     *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
      *     BLOG,FABC,P0,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
@@ -89,16 +89,19 @@
      *     CHID,IIPD,CHMD,IMPD,
      *     IRC)
 
-        If(LPCI) then
-           Write(NERR,'(
-     *      ''Sorry, this version does not yet support circular'',
-     *      '' profiles.'',/
-     *      ''Suggestion: change profile to linear topology and'',
-     *      '' circularize the resulting'',/,
-     *      ''frame-search profile by manual editing.'',/
-     *        )')
-            Stop
-        End if
+        If(IRC.NE.0) Stop
+
+* add command-line to footer lines
+
+        LFTR=LFTR+1
+        Do I1=LFTR,2,-1
+           CFTR(I1)=CFTR(I1-1)
+        End do 
+
+        CFTR(1)='CC   /GENERATED_BY="'
+        Call Recmd(CFTR(1)(21:130))
+        IC=Lblnk(CFTR(1))
+        CFTR(1)(IC+1:)='";'
 
 *----------------------------------------------------------------------*     
 * CONVERSION SECTION
@@ -171,17 +174,30 @@
 
 * Expand profile
 
+* -define architecture of profile according to topology 
+
+        If(LPCI) then 
+           NBB=1
+           NB=2
+           NE=3*LPRF-1
+           NEE=3*LPRF
+        Else 
+           NBB=1
+           NB=1
+           NE=3*LPRF-2
+           NEE=3*LPRF-2
+        End if       
+
 * - move last insert position to new end of profile
 
-        JPRF=3*LPRF-2
         Do I1=0,46
-           IIPP(I1,JPRF)=IIPP(I1,LPRF)
+           IIPP(I1,NEE)=IIPP(I1,LPRF)
         End do 
-        CHIP(JPRF)=CHIP(LPRF)
+        CHIP(NEE)=CHIP(LPRF)
 
 * - move other positions 
 
-           K1=JPRF
+           K1=NE
         Do I1=LPRF,1,-1
            Do I2=0,27
               IMPP(I2,K1)=IMPP(I2,I1) 
@@ -190,7 +206,7 @@
            K1=K1-3
         End do 
 
-           K1=JPRF-2
+           K1=NE-2
         Do I1=LPRF-1,1,-1
            Do I2= 0,26
               IIPP(I2,K1)=NINT(IIPP(I2,I1)*RI)
@@ -204,14 +220,16 @@
 
 * - fill in m-1, m+1 positions
 
-        Do I1=2,JPRF,3
+        Do I1=NB+1,NEE,3
            Do I2=0,27
               IMPP(I2,I1)=0
            End do
            CHMP(I1)='>'
         End do
 
-        Do I1=3,JPRF,3
+        J1=NB-1
+        If(J1.LE.0) J1=J1+3
+        Do I1=J1,NEE,3
            Do I2=0,27
               IMPP(I2,I1)=0
            End do
@@ -221,47 +239,54 @@
 *- fill i-1 position 
      
            Do I2= 0,26
-              IIPP(I2, 1)=0
+              IIPP(I2,NB)=0
            End do
            Do I2=27,46
-              IIPP(I2, 1)=NLOW
+              IIPP(I2,NB)=NLOW
            End do
-              IIPP(MM, 1)=0
-              IIPP(DD, 1)=0
-              IIPP(MI, 1)=NINT(RF/2)
-              IIPP(II, 1)=NINT(RF)
-              IIPP(IM, 1)=NINT(RF/2)
-        Do I1=4,JPRF-1,3
+              IIPP(MM,NB)=0
+              IIPP(DD,NB)=0
+              IIPP(MI,NB)=NINT(RF/2)
+              IIPP(II,NB)=NINT(RF)
+              IIPP(IM,NB)=NINT(RF/2)
+           CHIP(NB)='*'
+        Do I1=NB+3,NEE-1,3
            Do I2= 0,47
-              IIPP(I2,I1)=IIPP(I2, 1)
+              IIPP(I2,I1)=IIPP(I2,NB)
            End do
            CHIP(I1)='*'
         End do 
 
 * - fill i+1 position 
      
+           J1=3
+           If(LPCI) J1=1
            Do I2= 0,26
-              IIPP(I2, 3)=0
+              IIPP(I2,J1)=0
            End do
            Do I2=27,46
-              IIPP(I2, 3)=NLOW
+              IIPP(I2,J1)=NLOW
            End do
-              IIPP(MM, 3)=0
-              IIPP(DD, 3)=0
-              IIPP(MI, 3)=NINT(RY/2)
-              IIPP(II, 3)=MIN(-1,NINT(RZ))
-              IIPP(IM, 3)=NINT(RY/2)
-        Do I1=6,JPRF-1,3
+              IIPP(MM,J1)=0
+              IIPP(DD,J1)=0
+              IIPP(MI,J1)=NINT(RY/2)
+              IIPP(II,J1)=MIN(-1,NINT(RZ))
+              IIPP(IM,J1)=NINT(RY/2)
+           CHIP(J1)=':'
+        Do I1=J1+3,NEE-1,3
            Do I2=0,46
-              IIPP(I2,I1)=IIPP(I2, 3)
+              IIPP(I2,I1)=IIPP(I2,J1)
            End do
            CHIP(I1)=':'
         End do 
 
 * frameshift deletetion scores: 
 
-           K1=3
-        Do I1=2,LPRF-1
+        J1=2   
+        If(LPCI) J1=1
+        K1=3
+        If(LPCI) K1=1
+        Do I1=J1,LPRF-1
            IIPP(MD,K1)=(NINT(RF-IMPP( D,K1+1))/2)
            IIPP(DM,K1+1)=NINT(RF-IIPP(MD,K1)-IMPP( D,K1+1))
            K1=K1+3
@@ -269,30 +294,55 @@
 
 * begin and end scores
 
-        Do I1=2,JPRF,3
-           IIPP(B0,I1-1)=IIPP(B0,I1)
-           IIPP(B1,I1-1)=IIPP(B1,I1) 
-           IIPP(BM,I1-1)=IIPP(BM,I1) 
-           IIPP(BI,I1-1)=IIPP(BI,I1) 
-           IIPP(BD,I1-1)=IIPP(BD,I1) 
-           IIPP(E0,I1-1)=IIPP(E0,I1)
-           IIPP(E1,I1-1)=IIPP(E1,I1)
-           IIPP(ME,I1-1)=IIPP(ME,I1) 
-           IIPP(IE,I1-1)=IIPP(IE,I1) 
-           IIPP(DE,I1-1)=IIPP(DE,I1) 
-           IIPP(B0,I1+1)=IIPP(B0,I1)
-           IIPP(B1,I1+1)=IIPP(B1,I1)
-           IIPP(BM,I1+1)=IIPP(BM,I1) 
-           IIPP(BI,I1+1)=IIPP(BI,I1) 
-           IIPP(BD,I1+1)=IIPP(BD,I1) 
-           IIPP(E0,I1+1)=IIPP(E0,I1)
-           IIPP(E1,I1+1)=IIPP(E1,I1)
-           IIPP(ME,I1+1)=IIPP(ME,I1) 
-           IIPP(IE,I1+1)=IIPP(IE,I1) 
-           IIPP(DE,I1+1)=IIPP(DE,I1) 
-        End do
+        If(.NOT.LPCI) then
+           Do I1=2,NEE,3
+              IIPP(B0,I1-1)=IIPP(B0,I1)
+              IIPP(B1,I1-1)=IIPP(B1,I1) 
+              IIPP(BM,I1-1)=IIPP(BM,I1) 
+              IIPP(BI,I1-1)=IIPP(BI,I1) 
+              IIPP(BD,I1-1)=IIPP(BD,I1) 
+              IIPP(E0,I1-1)=IIPP(E0,I1)
+              IIPP(E1,I1-1)=IIPP(E1,I1)
+              IIPP(ME,I1-1)=IIPP(ME,I1) 
+              IIPP(IE,I1-1)=IIPP(IE,I1) 
+              IIPP(DE,I1-1)=IIPP(DE,I1) 
+              IIPP(B0,I1+1)=IIPP(B0,I1)
+              IIPP(B1,I1+1)=IIPP(B1,I1)
+              IIPP(BM,I1+1)=IIPP(BM,I1) 
+              IIPP(BI,I1+1)=IIPP(BI,I1) 
+              IIPP(BD,I1+1)=IIPP(BD,I1) 
+              IIPP(E0,I1+1)=IIPP(E0,I1)
+              IIPP(E1,I1+1)=IIPP(E1,I1)
+              IIPP(ME,I1+1)=IIPP(ME,I1) 
+              IIPP(IE,I1+1)=IIPP(IE,I1) 
+              IIPP(DE,I1+1)=IIPP(DE,I1) 
+           End do
+        Else
+           Do I1=2,NEE,3
+              IIPP(B0,I1-1)=IIPP(B0,I1-2)
+              IIPP(B1,I1-1)=IIPP(B1,I1-2) 
+              IIPP(BM,I1-1)=IIPP(BM,I1-2) 
+              IIPP(BI,I1-1)=IIPP(BI,I1-2) 
+              IIPP(BD,I1-1)=IIPP(BD,I1-2) 
+              IIPP(E0,I1-1)=IIPP(E0,I1-2)
+              IIPP(E1,I1-1)=IIPP(E1,I1-2)
+              IIPP(ME,I1-1)=IIPP(ME,I1-2) 
+              IIPP(IE,I1-1)=IIPP(IE,I1-2) 
+              IIPP(DE,I1-1)=IIPP(DE,I1-2) 
+              IIPP(B0,I1  )=IIPP(B0,I1+1)
+              IIPP(B1,I1  )=IIPP(B1,I1+1)
+              IIPP(BM,I1  )=IIPP(BM,I1+1) 
+              IIPP(BI,I1  )=IIPP(BI,I1+1) 
+              IIPP(BD,I1  )=IIPP(BD,I1+1) 
+              IIPP(E0,I1  )=IIPP(E0,I1+1)
+              IIPP(E1,I1  )=IIPP(E1,I1+1)
+              IIPP(ME,I1  )=IIPP(ME,I1+1) 
+              IIPP(IE,I1  )=IIPP(IE,I1+1) 
+              IIPP(DE,I1  )=IIPP(DE,I1+1) 
+           End do
+        End if 
 
-        Do I1=1,JPRF-1
+        Do I1=NBB,NEE-1
            IIPP(B0,I1)=MAX(IIPD(B0),IIPP(B0,I1)) 
            IIPP(B1,I1)=MAX(IIPD(B1),IIPP(B1,I1)) 
            IIPP(E0,I1)=MAX(IIPD(E0),IIPP(E0,I1)) 
@@ -308,7 +358,7 @@
 
 * adjust length
 
-        LPRF=JPRF
+        LPRF=NEE
 
 *----------------------------------------------------------------------*     
 * OUTPUT SECTION
@@ -318,7 +368,7 @@
 
         Call WRPRF
      *    (NOUT,
-     *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
@@ -401,5 +451,6 @@
         End
 *----------------------------------------------------------------------*
         Include          'reprf.f'
+        Include          'recmd.f'
         Include          'wrprf.f'
         Include          'lblnk.f' 

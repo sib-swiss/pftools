@@ -3,7 +3,7 @@
 *       Function: Scan a protein or DNA sequence library for profile 
 *                 matches 
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -60,6 +60,7 @@
         Logical           OPTB 
         Logical           OPTF 
         Logical           OPTL 
+        Logical           OPLU 
         Logical           OPTR 
         Logical           OPTS 
         Logical           OPTU 
@@ -115,20 +116,29 @@
 *----------------------------------------------------------------------*     
 
         IRC=0
+
+        LUNI=.FALSE.
+        LNOR=.FALSE.
+        LREV=.FALSE.
+        LTRA=.FALSE.
+        LPFA=.FALSE.
+        LEOF=.FALSE.
+
         LEOF=.FALSE.
         CABC(0)='-'
  
 * read command line arguments
 
         Call Repar(
-     *     OPTA,OPTB,OPTF,OPTL,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
-     *     FPRF,FSEQ,NCUC,KCUC,XCUC,IRC)
+     *     OPTA,OPTB,OPTF,OPTL,OPLU,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
+     *     FPRF,FSEQ,NCUC,KCUC,XCUC,NW,IRC)
         If(IRC.NE.0) then 
            Write(NERR,'(
-     *      ''Usage: pfsearch [ -abflrsuxyz ] [ profile-file | - ] '',
+     *      ''Usage: pfsearch [ -abflLrsuxyz ] [ profile-file | - ] '',
      *      ''[ seq-library-file | - ] [ parameters ]'',//,
      *      ''   valid parameters are:'',//,
      *      ''                 [C=cut-off-value]          '',/
+     *      ''                 [W=output-width]           '',/
      *        )')
            Stop
         End if
@@ -149,7 +159,7 @@
 
         Call REPRF
      *    (MPRF,FPRF,
-     *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
      *     BLOG,FABC,P0,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP, 
@@ -380,7 +390,7 @@
            End if 
 
            Call WPRSM(JSEQ,
-     *       LUNI,LNOR,LREV,LPFA,OPTZ,OPTL,
+     *       LUNI,LNOR,LREV,LPFA,OPTZ,OPTL,OPLU,NW,
      *       CSID,CSAC,CSDE,
      *       IALS(I1),IALB(I1),IALE(I1),NALI,IPMB,IPME,
      *       JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
@@ -437,13 +447,14 @@
         End
 *----------------------------------------------------------------------*     
         Subroutine Repar(
-     *     OPTA,OPTB,OPTF,OPTL,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
-     *     FPRF,FSEQ,NCUC,KCUC,XCUC,IRC)
+     *     OPTA,OPTB,OPTF,OPTL,OPLU,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
+     *     FPRF,FSEQ,NCUC,KCUC,XCUC,NW,IRC)
 
         Logical           OPTA 
         Logical           OPTB 
         Logical           OPTF 
         Logical           OPTL 
+        Logical           OPLU 
         Logical           OPTR 
         Logical           OPTS 
         Logical           OPTU 
@@ -456,7 +467,20 @@
         Character*64      CARG
 
         IRC=0
-	NCUC=0
+        NCUC=0
+        OPTA=.FALSE.
+        OPTB=.FALSE.
+        OPTF=.FALSE.
+        OPTL=.FALSE.
+        OPLU=.FALSE.
+        OPTR=.FALSE.
+        OPTS=.FALSE.
+        OPTU=.FALSE.
+        OPTX=.FALSE.
+        OPTY=.FALSE.
+        OPTZ=.FALSE.
+
+        NW=132
 
         N1=Iargc()
 
@@ -469,6 +493,7 @@
               If(Index(CARG,'b').NE.0) OPTB=.TRUE.
               If(Index(CARG,'f').NE.0) OPTF=.TRUE.
               If(Index(CARG,'l').NE.0) OPTL=.TRUE.
+              If(Index(CARG,'L').NE.0) OPLU=.TRUE.
               If(Index(CARG,'r').NE.0) OPTR=.TRUE.
               If(Index(CARG,'s').NE.0) OPTS=.TRUE.
               If(Index(CARG,'u').NE.0) OPTU=.TRUE.
@@ -486,7 +511,7 @@
 
 * - cut-off value on command line    
 
-              If(CARG(1:2).EQ.'C=') then
+              If     (CARG(1:2).EQ.'C=') then
                  CARG(1:2)='  '
                  If(Index(CARG,'.').EQ.0) then
                     NCUC=1 
@@ -495,13 +520,17 @@
                     NCUC=2
                     Read(CARG,*) XCUC
                  End if 
+              Else if(CARG(1:2).EQ.'W=') then
+                 Read(CARG(3:64),*,Err=900) NW
               End if
            End if
    10   Continue 
 
         If (K1.NE.2) IRC=1 
            
-        Return
+  100   Return
+  900   IRC=1
+        Go to 100
         End 
 *----------------------------------------------------------------------*     
         Include          'reprf.f'

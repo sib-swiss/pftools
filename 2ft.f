@@ -2,7 +2,7 @@
 *----------------------------------------------------------------------*
 *       Function: 2-frame translation of DNA sequence into protein
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*
 
         Parameter        (NOUT=   6) 

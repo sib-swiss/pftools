@@ -3,7 +3,7 @@
 *       Function: Constructs a profile from a multiple sequence 
 *                 alignment 
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.1 February 1998
+*       Version:  This file is part of pftools release 2.2 June 1999
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*
@@ -16,6 +16,7 @@
         Parameter        (NOUT=      6)
         Parameter        (NMSF=      5)
         Parameter        (NCMP=     12)
+        Parameter        (NPRF=     13)
 
 * profile and sequence fields :
 
@@ -45,7 +46,7 @@
 
 * frequency profile
 
-        Real              FPRF(26,IDMP)
+        Real              RPRF(26,IDMP)
         Real              FUNK(IDMP)
         Real              FRES(IDMP)
         Real              FDEL(IDMP)
@@ -62,12 +63,18 @@
 
         Real              RCMP(26,26)
 
+* profile
+
+        Character*64      FPRF
+        Character*24      FDAT
+
 * options
 
         Logical           OPT0
         Logical           OPT1
         Logical           OPT2
         Logical           OPT3
+        Logical           OPTC
 
         Logical           LBLK  
         Logical           LSYM  
@@ -101,16 +108,17 @@
 
         IRC=0
         IDUM=-2
+	BLOG=0.0
 
 * read command line 
 
         Call Repar
-     *    (FMSF,FCMP,OPT0,OPT1,OPT2,OPT3,LSYM,LWGE,LBLK,
+     *    (FMSF,FCMP,FPRF,OPT0,OPT1,OPT2,OPT3,OPTC,LSYM,LWGE,LBLK,
      *     RE,RF,RG,RH,RI,RL,RM,RS,RT,RX,NLOW,IRC)
         If(IRC.NE.0) then
            Write(NERR,'(
-     *      ''Usage: pfmake [ -0123abes] [ msf-file | - ] '',
-     *      ''score-matrix [ parameters ]'',//, 
+     *      ''Usage: pfmake [ -0123abces] [ msf-file | - ] '',
+     *      ''score-matrix [ profile-file ] [ parameters ]'',//, 
      *      ''   valid parameters are:'',//,
      *      ''                 [E=gap-extension-weight]     '',/
      *      ''                 [F=output-score-multiplier]  '',/
@@ -133,11 +141,38 @@
      *     IDM1,CSEQ,NSEQ,LSEQ,
      *     IDM2,RWGT,SQID,
      *     IRC)
-	If(IRC.NE.0) go to 100
+        If(IRC.NE.0) go to 100
 
 * read score-matrix 
 
         Call RECMP(NERR,NCMP,FCMP,NABC,CABC,RCMP,IRC)
+
+* read input profile  
+
+        If(FPRF.NE.' ')
+     *  Call REPRF
+     *    (NPRF,FPRF,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
+     *     BLOG,FABC,P0,
+     *     CDIS,JDIP,MDIS,NDIP,
+     *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
+     *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
+     *     IDMP,CHIP,IIPP,CHMP,IMPP,
+     *     CHID,IIPD,CHMD,IMPD,
+     *     IRC)
+
+        If(IRC.NE.0.OR.FPRF.EQ.' ') then
+           IRC=0
+           CPID=' '
+           CPAC=' '
+           CPDT=' '
+           CPDE=' '
+           MDIS=0
+           JNOR=0
+           JCUT=0
+           LHDR=0
+           LFTR=0
+        End if
  
 *----------------------------------------------------------------------*
 * DATA PROCESSING SECTION 
@@ -196,7 +231,7 @@
 * make frequency profile
 *    
 *   for residue i and profile position j: 
-*      FPRF(i,j) = residue frequency(residue,position)
+*      RPRF(i,j) = residue frequency(residue,position)
 *   for profile position j: 
 *      FUNK(  j) = fraction of unknown residues
 *      FRES(  j) = fraction of residues residues and gaps 
@@ -206,7 +241,7 @@
 
         Do  12  I1=1,LSEQ
            Do  11 I2=1,NABC
-              FPRF(I2,I1)=0.0
+              RPRF(I2,I1)=0.0
    11      Continue
            FUNK(I1)=0.0
            FRES(I1)=0.0
@@ -229,7 +264,7 @@
 
                  FRES(   K2)=FRES(   K2)+RWGT(K1)
               If     (IX.NE.0) then 
-                 FPRF(IX,K2)=FPRF(IX,K2)+RWGT(K1)
+                 RPRF(IX,K2)=RPRF(IX,K2)+RWGT(K1)
               else if(CSEQ(I2).EQ.'-') then
                  FDEL(   K2)=FDEL(   K2)+RWGT(K1)
               else if(CSEQ(I2).EQ.' ') then
@@ -250,7 +285,7 @@
               R1=FRES(I1)-FUNK(I1)
               If(R1.EQ.0) go to  25
            Do  23 I2=1,NABC
-              FPRF(I2,I1)=FPRF(I2,I1)/R1
+              RPRF(I2,I1)=RPRF(I2,I1)/R1
    23      Continue
    25   Continue
 
@@ -302,7 +337,7 @@
               Do  33 I2=1,NABC  
                  SPRF(I2,K1)=0.0
               Do  32 I3=1,NABC 
-                 SPRF(I2,K1)=SPRF(I2,K1)+RCMP(I3,I2)*FPRF(I3,I1)
+                 SPRF(I2,K1)=SPRF(I2,K1)+RCMP(I3,I2)*RPRF(I3,I1)
    32         Continue
                  SPRF(I2,K1)=RS*SPRF(I2,K1)
 C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
@@ -319,41 +354,60 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
         If(J1.GT.0) SINS(K1)=-SINS(K1)  
         LPRF=K1
 
+
 * initialize generalized profile
 
 * - header
- 
-        CPID='SEQUENCE_RPOFILE'
-        CPAC='ZZ99999'
+
+        If(CPID.EQ.' ') CPID='SEQUENCE_RPOFILE'
+        If(CPAC.EQ.' ') CPAC='ZZ99999'
+        FDAT=Fdate()
+        If(CPDT.NE.' ') then
+           CPDT=FDAT(1:Lblnk(FDAT)) // ' ! ' // CPDT
+        Else
+           CPDT=FDAT(1:Lblnk(FDAT))
+        End if
         If(FMSF.EQ.'-') FMSF='stdin'
-        CPDE='Generated from MSF file: '''
+        If(CPDE.EQ.' ') CPDE='Generated from MSF file: '''
      *    // FMSF(1:Lblnk(FMSF))
      *    // '''.'
  
 * - accessories
  
-        LPCI=.FALSE.
+        If(MDIS.EQ.0) then 
+           MDIS=2
+           N1=MIN(5,LPRF/10) 
+           NDIP(1)=1   +N1
+           NDIP(2)=LPRF-N1
+        End If
+ 
+        If(JNOR.EQ.0.OR.JCUT.EQ.0) then 
+           JNOR=1
+           MNOR(1)=1
+           NNOR(1)=1
+           NNPR(1)=1
+           CNTX(1)='No_units'
+           RNOP(1,1)=0.0
+           RNOP(2,1)=1/RF
+        End if
+ 
+        If(JCUT.EQ.0) then
+           JCUT=2
 
-        MDIS=2
-        N1=MIN(5,LPRF/10) 
-        NDIP(1)=1   +N1
-        NDIP(2)=LPRF-N1
- 
-        JNOR=1
-        MNOR(1)=1
-        NNOR(1)=1
-        NNPR(1)=1
-        CNTX(1)='OrigScore'
-        RNOP(1,1)=0.0
-        RNOP(2,1)=1/RF
- 
-        JCUT=1
-        MCLE(1)=0
-        CCUT(1)=' '
-        ICUT(1)=0
-        JCNM(1)=1
-        RCUT(1,1)=0.0
-        MCUT(1,1)=1
+           MCLE(1)=0
+           CCUT(1)='!'
+           ICUT(1)=INT(RF*8.5)
+           JCNM(1)=1
+           RCUT(1,1)=8.5
+           MCUT(1,1)=1
+
+           MCLE(2)=-1
+           CCUT(2)='?'
+           ICUT(2)=INT(RF*6.5)
+           JCNM(2)=1
+           RCUT(1,2)=6.5
+           MCUT(1,2)=1
+        End if
  
 * - defaults for match and insert position
  
@@ -621,15 +675,59 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
              IIPD(E1)=NL
         End if
 
+* - default M0 value: 
+
+        R=0.0
+        Do I1=1,LPRF
+        Do I2=1,NABC
+           R=R+IMPP(I2,I1)
+        End do
+        End do
+        IMPD(M0)=INT(R/(LPRF*NABC))
+
+        Do I1=1,LPRF
+           IMPP(M0,I1)=IMPD(M0)
+        End do 
+
+* linear of circular profile ? 
+
+        If(OPTC) then 
+           Do I1=0,46 
+              K1=MAX(IIPP(I1,   0),IIPP(I1,LPRF))
+              IIPP(I1,   0)=K1
+              IIPP(I1,LPRF)=K1
+           End do
+           IIPP(MM,0)=MAX(IIPP(MM,0),IIPP(BM,0),IIPP(ME,0)) 
+           IIPP(MI,0)=MAX(IIPP(MI,0),IIPP(BI,0))
+           IIPP(MD,0)=MAX(IIPP(MD,0),IIPP(BD,0))
+           IIPP(IM,0)=MAX(IIPP(IM,0),IIPP(IE,0))
+           IIPP(DM,0)=MAX(IIPP(DM,0),IIPP(DE,0))
+           LPCI=.TRUE.
+        Else 
+           LPCI=.FALSE.
+        End if
+
 *----------------------------------------------------------------------*
 * OUTPUT SECTION 
 *----------------------------------------------------------------------*
 
         FOUT='stdout'
 
+* add command-line to footer lines
+
+        LFTR=LFTR+1
+        Do I1=LFTR,2,-1
+        CFTR(I1)=CFTR(I1-1)
+        End do
+
+        CFTR(1)='CC   /GENERATED_BY="'
+        Call Recmd(CFTR(1)(21:130))
+        IC=Lblnk(CFTR(1))
+        CFTR(1)(IC+1:)='";'
+
         Call WRPRF
      *    (NOUT,
-     *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     CPID,CPAC,CPDT,CPDE,LHDR,CHDR,LFTR,CFTR,NABC,CABC,LPRF,LPCI,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
@@ -643,26 +741,31 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
         End
 *----------------------------------------------------------------------*
         Subroutine Repar
-     *    (FMSF,FCMP,OPT0,OPT1,OPT2,OPT3,LSYM,LWGE,LBLK,
+     *    (FMSF,FCMP,FPRF,OPT0,OPT1,OPT2,OPT3,OPTC,LSYM,LWGE,LBLK,
      *     RE,RF,RG,RH,RI,RL,RM,RS,RT,RX,NLOW,IRC)
 
         Character*64      CPAR
         Character*64      FMSF 
         Character*64      FCMP
+        Character*64      FPRF
 
         Logical           OPT0
         Logical           OPT1
         Logical           OPT2
         Logical           OPT3
+        Logical           OPTC
 
         Logical           LBLK 
         Logical           LSYM
         Logical           LWGE
 
+        FPRF=' '
+
         OPT0=.FALSE.
         OPT1=.FALSE.
         OPT2=.TRUE.
         OPT3=.FALSE.
+        OPTC=.FALSE.
 
         LBLK=.FALSE.
         LSYM=.TRUE.
@@ -681,6 +784,7 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
 
         FMSF=' '
         FCMP=' '
+        FPRF=' '
 
         N1=Iargc()
 
@@ -701,6 +805,8 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
                  else if(CPAR(I2:I2).EQ.'3') then
                     OPT3=.TRUE. 
                     OPT2=.FALSE.
+                 else if(CPAR(I2:I2).EQ.'c') then
+                    OPTC=.TRUE.
                  else if(CPAR(I2:I2).EQ.'a') then
                     LSYM=.FALSE.
                  else if(CPAR(I2:I2).EQ.'b') then
@@ -735,6 +841,8 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
               FMSF=CPAR
            Else if(FCMP     .EQ.' ' ) then
               FCMP=CPAR
+           Else if(FPRF     .EQ.' ' ) then
+              FPRF=CPAR
            End if
 
    50   Continue
@@ -797,5 +905,7 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
         End
 *----------------------------------------------------------------------*
         Include          'remsf.f'
+        Include          'recmd.f'
+        Include          'reprf.f'
         Include          'wrprf.f'
         Include          'lblnk.f'

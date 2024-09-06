@@ -1,11 +1,11 @@
-.TH PFSCAN  1 "February 1998" "pftools 2.1"
+.TH PFSCAN  1 "June 1999" "pftools 2.2"
 .SH NAME
 pfscan \- scan a protein or DNA sequence with a profile library 
 
 .SH SYNOPSIS
 .B pfscan
-[ -abflrsuxy ] [ seq-file | - ]
-            [ profile-library-file | - ]    [L=#] 
+[ -abflLrsuxy ] [ seq-file | - ]
+            [ profile-library-file | - ]    [L=#] [W=#]
 .SH DESCRIPTION
 .B pfscan 
 compares a protein or nucleic acid sequence against a profile library. 
@@ -13,7 +13,7 @@ The result is an unsorted list of profile-sequence matches written to
 the standard output.
 A variety of output formats containing different informations can be specified
 via the options
-.I -a, -l, -r, -u, -s, -x, -y
+.I -a, -l, -L, -r, -u, -s, -x, -y
 and 
 .I -z.
 .I seq-file
@@ -22,7 +22,7 @@ format (assumed by default) or in Pearson/Fasta
 format (indicated by option 
 .I -f).
 .I profile-library-file 
-contains a library of profiles in PROSITE/NUCSITE format. 
+contains a library of profiles in PROSITE format. 
 .B pfscan
 can be used as a filter if - is used instead of one of the input
 filenames.
@@ -42,6 +42,13 @@ Input sequence is in Pearson/Fasta format.
 \-l
 Indicate highest cut-off level exceeded by the match score
 in the output list. 
+.TP
+\-L
+Indicate by character string the highest cut-off level exceeded by the match score
+in the output list. Note that the generalized profile format includes a text
+string field to specify a name for a cut-off level. The \-L option causes the
+program to display the first two characters of this text string
+(usually something like "!" "?", "??", etc.) at the beginning of each match description.
 .TP
 \-r
 Use raw scores rather than normalized 
@@ -80,6 +87,13 @@ is negative) or next lower (if
 .I L
 is positive) level specified
 is used instead.
+.TP
+W=#
+Output width.
+Output lines will be truncated after
+.I W
+characters.
+Default: W=132.
 .SH EXAMPLES
 .TP
 (1)
@@ -110,4 +124,4 @@ format.
 .SH AUTHOR
 Philipp Bucher
 .br
-pbucher@isrec-sun1.unil.ch
+Philipp.Bucher@isrec.unil.ch
