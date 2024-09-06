@@ -1,7 +1,6 @@
 *       Version:  This file is part of pftools release 1.0 January 1996
 *----------------------------------------------------------------------*     
-* PROSITE 
+* AVERAGE SCORE  
 
-        Character*64      CPID
-        Character*64      CPAC
-        Character*256     CPDE
+        Real              FAVE(0:26)
+        Real              PAVE(0:26)

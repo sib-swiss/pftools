@@ -1,0 +1,107 @@
+.TH PFSCAN  1 "January 1996"
+.SH NAME
+pfscan \- scan a protein or DNA sequence with a profile library 
+
+.SH SYNOPSIS
+.B pfscan
+[ -abfrsuxy ] [ seq-file | - ]
+            [ profile-library-file | - ]    [L=#] 
+.SH DESCRIPTION
+.B pfscan 
+compares a protein or nucleic acid sequence against a profile library. 
+The result is an unsorted list of profile-sequence matches written to
+the standard output.
+A variety of output formats containing different informations can be specified
+via the options
+.I -a, -r, -u, -s, -x,
+and 
+.I -y.
+.I seq-file
+contains a sequence in EMBL/SWISS-PROT
+format (assumed by default) or in Pearson/Fasta
+format (indicated by option 
+.I -f).
+.I profile-library-file 
+contains a library of profiles in PROSITE/NUCSITE format. 
+.B pfscan
+can be used as a filter if - is used instead of one of the input
+filenames.
+.SH OPTIONS 
+.TP
+\-a
+Report optimal alignment scores for 
+all profiles regardless of the cut-off value. 
+This option simultaneously forces DISJOINT=UNIQUE.   
+.TP
+\-b
+Search the complementary strand of the DNA sequence as well.
+.TP
+\-f
+Input sequence is in Pearson/Fasta format.
+.TP
+\-r
+Use raw scores rather than normalized 
+scores for match selection. Normalized scores 
+will not be listed in the output. 
+.TP
+\-s
+List the sequences of the matched regions as well. 
+The output will be a Pearson/Fasta-formatted sequence
+library.
+.TP
+\-u
+Forces DISJOINT=UNIQUE. 
+.TP
+\-x
+List profile-sequence alignments 
+in pftools PSA format.  
+.TP
+\-y
+Display alignments between the profile and the matched sequence regions in 
+a human-friendly format.   
+.SH PARAMETERS
+.TP
+L=#
+Cut-off level to be used for match selection.
+If level 
+.I L
+is not specified in the profile, the next higher (if 
+.I L
+is negative) or next lower (if
+.I L
+is positive) level specified
+is used instead.
+.SH EXAMPLES
+.TP
+(1)
+.B pfscan
+-s GTPA_HUMAN prosite13.prf
+
+Scans the human GAP protein for matches to profiles in PROSITE 
+release 13. 
+GTPA_HUMAN contains the SWISS-PROT entry P20936|GTPA_HUMAN.
+prosite13.prf contains all profile entries of PROSITE release 13.  
+The output is a Pearson/Fasta-formatted sequence library containing 
+all sequence regions of the input sequence matching a profile in the 
+profile library. 
+.TP
+(2)
+.B pfscan
+-by CVPBR322 ecp.prf L=2
+
+Scans both strands of plasmid PBR322 for high-scoring (level 2) 
+.I E. coli
+promoter matches.   
+CVPBR322 contains EMBL entry J01749|CVPBR322.
+ecp.prf contains a profile for
+.I E. coli  
+promoters.
+The output includes profile-sequence alignments in a human-friendly
+format. 
+.SH BUGS
+.B pfscan
+neither supports circular profiles nor circular sequences.
+.SH AUTHOR
+Philipp Bucher
+.br
+pbucher@isrec-sun1.unil.ch

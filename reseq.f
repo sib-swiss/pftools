@@ -1,9 +1,9 @@
-*       Version:  This file is part of pftools release 0.1 January 1995
+*       Version:  This file is part of pftools release 1.0 January 1996
 *----------------------------------------------------------------------*     
         Subroutine RESEQ
      *    (NSEQ,FSEQ,NABC,CABC,CSID,CSAC,CSDE,LSEQ,ISEQ,IRC)
            
-* reads sequence file in Pearson format 
+* reads sequence file in Swiss-Prot/EMBL format 
 
         Character*(*)     FSEQ
         Character         CABC(0:26)
@@ -16,7 +16,7 @@
         
         IRC=0
 
-        Open(NSEQ,File=FSEQ,Status='OLD',Err=999)
+        If(FSEQ.NE.'-') Open(NSEQ,File=FSEQ,Status='OLD',Err=999)
     1   Read(NSEQ,'(A)',Err=999,End=901) RCIN
         If(RCIN(1:2).NE.'ID') go to   1   
         IC=Index(RCIN(6:17),' ')+5
@@ -25,7 +25,8 @@
     2   Read(NSEQ,'(A)',Err=999,End=999) RCIN
         If(RCIN(1:2).NE.'AC'.AND.RCIN(1:2).NE.'DE') go to   2   
         If(RCIN(1:2).EQ.'AC') then 
-           CSAC=RCIN( 6:Index(RCIN,';'))
+           IX=Index(RCIN,';')-1
+           CSAC=RCIN(6:IX) // '|'
         Else
            CSDE=RCIN( 6:80)
            Go to   4
@@ -37,7 +38,7 @@
 
     4   Read(NSEQ,'(A)',Err=999,End=999) RCIN
         If(RCIN(1:2).NE.'DE') go to   5   
-        LR=Lnblnk(CSDE)
+        LR=Lblnk(CSDE)
         If(CSDE(LR:LR).EQ.Char(13)) LR=LR-1
         CSDE=CSDE(1:LR) // ' ' // RCIN( 6:80)
 
@@ -50,7 +51,8 @@
     7   Continue
 
            J1=0
-   10   Read(NSEQ,'(Q,A)',Err=999,End= 20) L,RCIN
+   10   Read(NSEQ,'(A)',Err=999,End= 20) RCIN
+        L=Lblnk(RCIN)
         If(RCIN(1:2).EQ.'//') go to  20
 
         Do 15 I1=1,L

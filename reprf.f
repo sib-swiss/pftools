@@ -1,11 +1,11 @@
-*       Version:  This file is part of pftools release 0.1 January 1995
+*       Version:  This file is part of pftools release 1.0 January 1996
 *----------------------------------------------------------------------*     
         Subroutine REPRF
      *    (NPRF,FPRF,
      *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
-     *     MDIS,NDIP,
-     *     JNOR,MNOR,NNOR,NNPR,CNTX,RNOP, 
-     *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 
+     *     CDIS,JDIP,MDIS,NDIP,
+     *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
+     *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
      *     IDMP,CHIP,IIPP,CHMP,IMPP,
      *     CHID,IIPD,CHMD,IMPD,
      *     IRC)
@@ -21,6 +21,7 @@
         Include          'codat.f'
         Include          'dfdat.f'
         Include          'pfdat.f'
+        Include          'sterr.f'
 
         Character*132     RCIN
 
@@ -35,45 +36,45 @@
         Character*64      CH64
         
         IRC=0
+        RCIN=' '
 
 * open profile file 
 
-        If(FPRF.NE.'stdin'.OR.NPRF.NE.5)
+        If(FPRF.NE.'-'.OR.NPRF.NE.5)
      *     Open(NPRF,File=FPRF,Status='OLD',Err=999)
 
 * profile-id 
        
-    1   Read(NPRF,'(A)',Err=999,End= 999) RCIN
-        If(RCIN(1:2).EQ.'//') go to 999
+    1   Read(NPRF,'(A)',Err=999,End=901) RCIN
         If(RCIN(1:2).NE.'ID') go to   1   
-        LR=Lnblnk(RCIN)
+        LR=Lblnk(RCIN)
         IC=Index(RCIN,';')
         CPID=RCIN( 6:IC-1)
-        If(Index(RCIN(IC:LR),'MATRIX').EQ.0) go to 999 
+        If(Index(RCIN(IC:LR),'MATRIX').EQ.0) go to   1 
 
 * ac-number 
        
-    2   Read(NPRF,'(A)',Err=999,End= 999) RCIN
-        If(RCIN(1:2).EQ.'//') go to 999
+    2   Read(NPRF,'(A)',Err=999,End=999) RCIN
+        If(RCIN(1:2).EQ.'//') go to 999 
         If(RCIN(1:2).NE.'AC') go to   2   
-        LR=Lnblnk(RCIN)
-        IC=Index(RCIN,';')
+        IX=Index(RCIN,';')-1
         CPAC=RCIN( 6:IC-1)
+        CPAC=RCIN(6:IX) // '|'
 
 * description 
 
-    3   Read(NPRF,'(A)',Err=999,End= 999) RCIN
+    3   Read(NPRF,'(A)',Err=999,End=999) RCIN
         If(RCIN(1:2).EQ.'//') go to 999
         If(RCIN(1:2).NE.'DE') go to   3   
-        LR=Lnblnk(RCIN)
+        LR=Lblnk(RCIN)
         CPDE=RCIN( 6:LR)
 
 * go to first MA line
 
-    5   Read(NPRF,'(A)',Err=999,End= 999) RCIN
-        If(RCIN(1:2).EQ.'//') go to 999
+    5   Read(NPRF,'(A)',Err=999,End=999) RCIN
+        If(RCIN(1:2).EQ.'//') go to   1 
         If(RCIN(1:2).NE.'MA') go to   5   
-        LR=Lnblnk(RCIN)
+        LR=Lblnk(RCIN)
 
 C       Print *,CPID
 C       Print *,CPAC
@@ -156,7 +157,8 @@ C       Print *,CPDE
 
 * intialize profile input buffers.
 
-        LR=Lnblnk(RCIN)
+        LR=Lblnk(RCIN)
+        If(Ichar(RCIN(LR:LR)).EQ.13)LR=LR-1 
         JR=5
 
 * read next parameter 
@@ -174,7 +176,7 @@ C       Print *,CPDE
 
            If(CPAR.EQ.'ALPHABET') then
               Read(CVAL,*,Err=999) CH64
-              NABC=Lnblnk(CH64)
+              NABC=Lblnk(CH64)
               Read(CH64,'(64A)',Err=999)(CABC(ii1),ii1=1,NABC)
            End if
    
@@ -253,7 +255,7 @@ C       Print *,CPDE
            Else if(CPAR.EQ.'TEXT') then
               Read(CVAL,*,Err=999) CCUT(JCUT)
            Else if(CPAR.EQ.'N_SCORE') then
-              L1=Lnblnk(CVAL) 
+              L1=Lblnk(CVAL) 
                  J1=1
               Do  51 I1=1,L1
                  If(CVAL(I1:I1).EQ.',') J1=J1+1
@@ -261,7 +263,7 @@ C       Print *,CPDE
               Read(CVAL,*,Err=999)(RCUT(ii1,JCUT),ii1=1,J1)
               JCNM(JCUT)=J1
            Else if(CPAR.EQ.'MODE') then
-              L1=Lnblnk(CVAL) 
+              L1=Lblnk(CVAL) 
                  J1=1
               Do  52 I1=1,L1
                  If(CVAL(I1:I1).EQ.',') J1=J1+1
@@ -373,12 +375,13 @@ C       Print *,CPDE
         End if  
 
 C       Print *,JI,JM,NKEY,' ',LNEW,' ',
-C    *        CPAR(1:Lnblnk(CPAR)),'=',
-C    *        CVAL(1:Lnblnk(CVAL))
+C    *        CPAR(1:Lblnk(CPAR)),'=',
+C    *        CVAL(1:Lblnk(CVAL))
 
         Go to  20
 
    90   Continue
+        IRC=0
 
 * last insert position 
 
@@ -406,8 +409,10 @@ C    *        CVAL(1:Lnblnk(CVAL))
         LPRF=JI
            
   100   Return
-  999   Write(0,*)  'Profile format error, last record read: ',
-     *     RCIN(1:Lnblnk(RCIN))
+  901   IRC=-1
+        Go to 100
+  999   Write(NERR,*)  'Profile format error, last record read: ',
+     *     RCIN(1:Lblnk(RCIN))
            If(IRC.EQ.0) IRC=1
         Go to 100
         End
@@ -428,7 +433,8 @@ C    *        CVAL(1:Lnblnk(CVAL))
 
     5   Read(NPRF,'(A)',Err=999,End=101) RCIN
         If(RCIN(1:2).EQ.'CC') go to   5 
-        LR=Lnblnk(RCIN)
+        LR=Lblnk(RCIN)
+        If(Ichar(RCIN(LR:LR)).EQ.13) LR=LR-1 
         If(RCIN(1:2).NE.'MA') go to 101
         JR=5
         Go to   3
@@ -475,7 +481,8 @@ C    *        CVAL(1:Lnblnk(CVAL))
         If(JR.GT.LR) then 
    21      Read(NPRF,'(A)',Err=999,End=101) RCIN
            If(RCIN(1:2).EQ.'CC') go to  21
-           LR=Lnblnk(RCIN)
+           LR=Lblnk(RCIN)
+           If(Ichar(RCIN(LR:LR)).EQ.13) LR=LR-1 
            If(RCIN(1:2).NE.'MA') then 
               JR=LR
               CVAL=' '
@@ -508,7 +515,8 @@ C    *        CVAL(1:Lnblnk(CVAL))
         If(JR.GT.LR) then 
    31      Read(NPRF,'(A)',Err=999,End=101) RCIN
            If(RCIN(1:2).EQ.'CC') go to  31
-           LR=Lnblnk(RCIN)
+           LR=Lblnk(RCIN)
+           If(Ichar(RCIN(LR:LR)).EQ.13) LR=LR-1
            If(RCIN(1:2).NE.'MA') go to 101
            JR=6
         End if  
@@ -520,9 +528,7 @@ C    *        CVAL(1:Lnblnk(CVAL))
            End if
            Go to  30
         End if
-
 *  
-
   100   Return
   101   IRC=-1
         Go to 100
@@ -551,7 +557,7 @@ C    *        CVAL(1:Lnblnk(CVAL))
         Character*(*)     CVAL 
         Integer           NLOW
 
-        L1=Lnblnk(CVAL) 
+        L1=Lblnk(CVAL) 
         NSCO=0
         J1=1
         Do  10 I1=1,L1

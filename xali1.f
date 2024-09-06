@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 0.1 January 1995
+*       Version:  This file is part of pftools release 1.0 January 1996
 *----------------------------------------------------------------------*     
         Subroutine XALI1
      *    (NABC,CABC,LPRF,LPCI,

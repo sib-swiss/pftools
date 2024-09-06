@@ -1,8 +1,10 @@
+*       Version:  This file is part of pftools release 1.0 January 1996
+*----------------------------------------------------------------------*     
         Subroutine WRPRF
-     *    (NOUT,FPRF,
+     *    (NOUT,
      *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
-     *     MDIS,NDIP,
-     *     JNOR,MNOR,NNOR,NNPR,CNTX,RNOP, 
+     *     CDIS,JDIP,MDIS,NDIP,
+     *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 
      *     IDMP,CHIP,IIPP,CHMP,IMPP,
      *     CHID,IIPD,CHMD,IMPD, 
@@ -20,7 +22,8 @@
 
         Character*1024    CBLK
         Character*256     CPAR
-        Character*80      RCEX
+        Character*132     RCEX
+        Character*16      CHRP(MAXN) 
 
         Logical           LPRI
 
@@ -55,22 +58,22 @@
 * - ID line
  
         RCEX='ID   ' 
-     *    // CPID(1:Lnblnk(CPID))
+     *    // CPID(1:Lblnk(CPID))
      *    // '; MATRIX.'
-        Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lnblnk(RCEX))
+        Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lblnk(RCEX))
 
 * - AC line 
  
         RCEX='AC   ' 
-     *    // CPAC(1:Lnblnk(CPAC))
+     *    // CPAC(1:Lblnk(CPAC))
      *    // ';'
-        Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lnblnk(RCEX))
+        Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lblnk(RCEX))
 
 * - DE line
  
         RCEX='DE   ' 
-     *    // CPDE(1:Lnblnk(CPDE))
-        Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lnblnk(RCEX))
+     *    // CPDE(1:Lblnk(CPDE))
+        Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lblnk(RCEX))
 
 * write /GENERAL_SPEC: block 
 
@@ -110,7 +113,7 @@
 * - definition
 
         CPAR='DEFINITION=' // CDIS(MDIS)
-        JP=Lnblnk(CPAR)+1
+        JP=Lblnk(CPAR)+1
         CPAR(JP:JP)=';'
         CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
         JB=JB+JP+1
@@ -162,7 +165,7 @@
 * - function
 
         CPAR='FUNCTION=' // CNOR(MNOR(I1))
-        JP=Lnblnk(CPAR)+1
+        JP=Lblnk(CPAR)+1
         CPAR(JP:JP)=';'
         CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
         JB=JB+JP+1
@@ -170,9 +173,18 @@
 * - paramaters
  
         KNOP=JNOP(MNOR(I1))
-        Write(CPAR,'(8('' R'',I1,''='',G12.5,'';''))')
-     *    (ii1,RNOP(ii1,I1),ii1=1,KNOP)
-        JP=17*KNOP
+        Do  22 I2=1,KNOP
+           If(ABS(RNOP(I2,I1)).LE.10.0
+     *       .AND.ABS(RNOP(I2,I1)).GT.0.0001
+     8       .OR.RNOP(I2,I1).EQ.0.0) then
+              Write(CHRP(I2),'(F10.7)') RNOP(I2,I1)
+           Else 
+              Write(CHRP(I2),*) RNOP(I2,I1)
+           End if
+   22   Continue
+        Write(CPAR,'(8('' R'',I1,''='',A16,'';''))')
+     *    (ii1,CHRP(ii1),ii1=1,KNOP)
+        JP=21*KNOP
         Call slpar(CPAR,JP)
         CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
         JB=JB+JP+1
@@ -180,8 +192,8 @@
 * - text
 
         If(CNTX(I1).NE.' ') then 
-           CPAR='TEXT=''' // CNTX(I1)(1:Lnblnk(CNTX(I1))) // ''''
-           JP=Lnblnk(CPAR)+1
+           CPAR='TEXT=''' // CNTX(I1)(1:Lblnk(CNTX(I1))) // ''''
+           JP=Lblnk(CPAR)+1
            CPAR(JP:JP)=';'
            CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
            JB=JB+JP+1
@@ -238,8 +250,8 @@
 * - text
 
         If(CCUT(I1).NE.' ') then 
-           CPAR='TEXT=''' // CCUT(I1)(1:Lnblnk(CCUT(I1))) // ''''
-           JP=Lnblnk(CPAR)+1
+           CPAR='TEXT=''' // CCUT(I1)(1:Lblnk(CCUT(I1))) // ''''
+           JP=Lblnk(CPAR)+1
            CPAR(JP:JP)=';'
            CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
            JB=JB+JP+1
@@ -677,20 +689,20 @@
         Subroutine wrblk(NOUT,CBLK,JB)
 
         Character*(*)     CBLK
-        Character*80      RCEX
+        Character*132     RCEX
 
         RCEX='MA'
 
-        If(JB.LE.73) then
+        If(JB.LE.127) then
            RCEX(6:)=CBLK(1:JB)
-           Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,JB+5)
+           Write(NOUT,'(132A)')(RCEX(ii1:ii1),ii1=1,JB+5)
         Else
-
-           Do  14 I1=73,1,-1
-              If(CBLK(I1:I1).EQ.';'.OR.CBLK(I1:I1).EQ.',') go to 15 
+           Do  14 I1=126,1,-1
+              If(CBLK(I1:I1).EQ.';'
+     *           .OR.CBLK(I1:I1).EQ.',') go to 15 
    14      Continue
    15      RCEX(6:)=CBLK(1:I1)
-           Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,I1+5)
+           Write(NOUT,'(132A)')(RCEX(ii1:ii1),ii1=1,I1+5)
            RCEX='MA'
            KB=I1+1
 
@@ -700,14 +712,13 @@
               If(CBLK(I1:I1).NE.' ') go to 23 
    22      Continue
    23      KB=I1
-
-           Do  24 I1=MIN(KB+69,JB),KB,-1
+           Do  24 I1=MIN(KB+124,JB),KB,-1
               If(   CBLK(I1:I1).EQ.';'
-     *          .OR.CBLK(I1:I1).EQ.','
-     *          .OR.CBLK(I1:I1).EQ.' ') go to  25
+     *          .OR.CBLK(I1:I1).EQ.',') go to  25
    24      Continue
    25      RCEX(9:)=CBLK(KB:I1)
-           Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lnblnk(RCEX))
+           Write(NOUT,'(132A)')(RCEX(ii1:ii1),ii1=1,Lblnk(RCEX))
+           RCEX='MA'
            KB=I1+1
            If(KB.LT.JB) go to  20 
 

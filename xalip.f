@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 0.1 January 1995
+*       Version:  This file is part of pftools release 1.0 January 1996
 *----------------------------------------------------------------------*     
         Subroutine XALIP(
      *     NABC,CABC,LPRF,LPCI,N1,N2,
@@ -6,7 +6,7 @@
      *     IDMS,LSEQ,ISEQ,LCKS,
      *     IOPM,IOPI,IOPD,
      *     IOMB,IOM1,IOM2,IOIB,IOI1,IOI2,IODB,IOD1,IOD2,
-     *     IDMA,NALI,IALS,IALB,IAL1,IAL2,IALE, 
+     *     IDMN,NALI,IALS,IALB,IAL1,IAL2,IALE, 
      *     IRC)
 
 *----------------------------------------------------------------------* 
@@ -18,6 +18,7 @@
         Include          'gsdat.f'
         Include          'pfdat.f'
         Include          'pxdat.f'
+        Include          'sterr.f'
 
 * sequence
 
@@ -27,11 +28,11 @@
 
 * alignments
 
-        Integer           IALS(IDMA)
-        Integer           IALB(IDMA)
-        Integer           IAL1(IDMA)
-        Integer           IAL2(IDMA)
-        Integer           IALE(IDMA)
+        Integer           IALS(IDMN)
+        Integer           IALB(IDMN)
+        Integer           IAL1(IDMN)
+        Integer           IAL2(IDMN)
+        Integer           IALE(IDMN)
 
 * alignment scores
 
@@ -157,15 +158,15 @@ C       Write(6,'(''Searching range:'',I6,'' - '',I6)') IBEG,LSEQ
                  IALE(NALI)=JALE
 
                  If(JAL2.LT.JAL1) then  
-                    Write(0,*) 'Error: Illegal alignment found' //
+                    Write(NERR,*) 'Error: Illegal alignment found' //
      *                ' - no list produced.'
                     IRC=1
                     Go to 100
                  End if 
                     
-                 If(NALI.GE.IDMA) then 
-                    Write(0,*) 'Warning: Too many alingments found' //
-     *                ' - list may be imcomplete.'
+                 If(NALI.GE.IDMN) then 
+                    Write(NERR,*) 'Warning: Too many alingments found'
+     *                 // ' - list may be imcomplete.'
                     IRC=-1
                     Go to 100
                  End if 

@@ -1,13 +1,14 @@
-*       Version:  This file is part of pftools release 0.1 January 1995
+*       Version:  This file is part of pftools release 1.0 January 1996
 *----------------------------------------------------------------------*     
         Subroutine RFSEQ
-     *    (NSEQ,FSEQ,NABC,CABC,CSID,CSDE,LSEQ,ISEQ,IRC)
+     *    (NSEQ,FSEQ,NABC,CABC,CSID,CSAC,CSDE,LSEQ,ISEQ,IRC)
            
 * reads sequence file in Pearson Fasta format 
 
         Character*(*)     FSEQ
         Character         CABC(0:26)
         Character*(*)     CSID
+        Character*(*)     CSAC
         Character*(*)     CSDE
         Integer*2         ISEQ(*)
 
@@ -15,15 +16,33 @@
         
         IRC=0
 
-        Open(NSEQ,File=FSEQ,Status='OLD',Err=999)
-    1   Read(NSEQ,'(Q,A)',Err=999,End=901) L,RCIN
+        CSID=' '
+        CSAC=' '
+        CSDE=' '
+
+        If(RCIN(1:1).EQ.'>') Go to  2
+ 
+        If(FSEQ.NE.'-') Open(NSEQ,File=FSEQ,Status='OLD',Err=999)
+    1   Read(NSEQ,'(A)',Err=999,End=901) RCIN
         If(RCIN(1:1).NE.'>') go to   1   
-        IC=MIN(13,Index(RCIN(1:L),' '))
-        CSID=RCIN( 2:IC)
-        CSDE=RCIN( 2:L)
+
+    2   L=Lblnk(RCIN)
+        IX2=Index(RCIN(1:L),' ')-1
+        Do I1=IX2,2,-1
+           If(Index(':;|',RCIN(I1:I1)).NE.0) go to   3
+        End do
+    3   IX1=I1
+        Do I1=IX2+1,L
+           If(RCIN(I1:I1).NE.' ') go to  4
+        End do
+    4   IX3=I1 
+        CSAC=RCIN(2:IX1)
+        CSID=RCIN(IX1+1:IX2)
+        CSDE=RCIN(IX3:L)
 
            J1=0
-   10   Read(NSEQ,'(Q,A)',Err=999,End= 20) L,RCIN
+   10   Read(NSEQ,'(A)',Err=999,End= 20) RCIN
+        L=Lblnk(RCIN)
         If(RCIN(1:1).EQ.'>') go to  20
 
         Do 15 I1=1,L
@@ -47,7 +66,6 @@
         Go to  10 
 
    20   LSEQ=J1
-        Backspace(NSEQ)
 
   100   Return
 

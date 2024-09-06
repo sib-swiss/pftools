@@ -1,31 +1,63 @@
 "pftools" is a collection of experimental programs supporting the
 new profile format and search method of PROSITE and NUCSITE.
 
-Version 0.1 contains FORTRAN 77 source code for two main programs:
+Version 1.0 contains FORTRAN 77 source code and manual pages for
+the following programs:
 
    pfsearch
-   GtoP  
+   pfscan
+   psa2msa
+   gtop  
 
-These programs compile successfully under SunOS and OSF/1 (and
-perhaps other UNIX operation systems).  
+These programs have succssfully been compiled and tested under
+SunOS, Solaris, OSF1, IRIX, HP-UX operating systems.
 
-In order to compile them, type:
+For compilation under HP_UX and IRIX, the Makefile needs to be
+modified according to instructions given therein.  
 
-   make 
+For use under HP-UX, the file sterr.f should also be modified
+according to instructions given therein. 
 
-Man pages are available in: 
+In order to compile the programs, type:
 
-   GtoP.1
-   pfsearch.1.
+   make
+
+This will create the four binaries listed above. You may now move these
+binaries as well as the corresponding manual pages in:
  
-Further included in this directory are the following sample
-input files:
+   pfsearch.1
+   pfscan.1
+   psa2msa.1
+   gtop.1  
 
-   sh3.prf
+to more appropriate directories.  
+ 
+Further included in this release are seven demo data files:
+
+   CVPBR322 
+   GTPA_HUMAN
+   ecp.prf
+   prosite13.prf
    sh3.gpr
-   PBR322 
+   sh3.prf
+   sh3.seq
+
+a test script: 
+
+   test.csh 
+
+and a test ouput file. 
+
+   test.out
+
+To test the programs, type: 
+
+   ( csh test.csh ) > out 
+   diff test.out out 
 
 Please send bug reports to:
 
    Philipp Bucher
    E-mail: pbucher@isrec-sun1.unil.ch  
+
+Philipp Bucher, January  8 1995  

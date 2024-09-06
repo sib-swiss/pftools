@@ -1,9 +1,8 @@
 *       Version:  This file is part of pftools release 1.0 January 1996
 *----------------------------------------------------------------------*     
-* GEN_SPEC  
+        Parameter         (NERR=0) 
 
-        Integer           LPRF
-        Logical           LPCI
+* For use under HP-UX, comment previous line and uncomment following
+* line 
 
-        Integer           NABC
-        Character*01      CABC(0:26)
+C       Parameter         (NERR=7) 

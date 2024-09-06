@@ -1,6 +1,6 @@
-*       Version:  This file is part of pftools release 0.1 January 1995
+*       Version:  This file is part of pftools release 1.0 January 1996
 *----------------------------------------------------------------------*     
-        Subroutine NtoR(R,N,RNOP,KNPM,MAXN,INOR,IFUN,LSEQ)
+        Subroutine NtoR(R,N,RNOP,KNPM,MAXN,INOR,IFUN,LSEQ,RAVE)
 
         Real              RNOP(KNPM,MAXN)
 
@@ -9,6 +9,9 @@
         Else if(IFUN.EQ.2) then 
            X=( RNOP(1,INOR)*(1.0-EXP(RNOP(2,INOR)*LSEQ-RNOP(3,INOR) )))
      *      *( RNOP(5,INOR) * R + RNOP(4,INOR) )
+        Else if(IFUN.EQ.3) then 
+           X=( RNOP(1,INOR)*(1.0-EXP(RNOP(2,INOR)*LSEQ-RNOP(3,INOR) )))
+     *      *( RNOP(5,INOR) * R + RNOP(4,INOR) ) + RAVE
         End if 
            N=INT(X)
            If(Real(N).LT.X) N=N+1

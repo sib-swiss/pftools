@@ -1,99 +1,108 @@
-.TH PFSEARCH 1 "January 1995"
+.TH PFSEARCH 1 "January 1996"
 .SH NAME
-pfsearch \- scan a protein or DNA sequence library for profile matches 
-
+pfsearch \- search a protein or DNA sequence library for sequence segments 
+matching a profile
 .SH SYNOPSIS
 .B pfsearch 
-[-abfru] profile-file seq-library-file [cut-off] 
+[ -abfrsuxy ] [ profile-file | - ]
+            [ seq-library-file | - ]    [C=#] 
 .SH DESCRIPTION
 .B pfsearch 
-scans a protein or nucleic acid sequence library 
-for sequences similar to a profile.
-The result is an unsorted list of profile matches sent to the standard 
-output. 
+compares a query profile against a DNA or protein sequence library.
+The result is an unsorted list of profile-sequence matches written to the standard output. 
+A variety of output formats containing different informations can be specified 
+via the options 
+.I -a, -r, -u, -s, -x, -y
+and the command-line parameter 
+.I C=#.
 .I profile-file
-must be in PROSITE format.
+contains a profile in PROSITE/NUCSITE format.
 .I seq-library-file
-may be in EMBL/SWISS-PROT
-format (assumed by default) or in Pearson Fasta
-format (indicated by option -f). 
-The optional argument
-.I cut-off
-over-writes the level zero
-cut-off value specified in
-the profile itself; 
-an integer is interpreted as a raw score value,
-a decimal as normalized score value. 
- 
+contains a sequence library in EMBL/SWISS-PROT
+format (assumed by default) or in Pearson/Fasta
+format (indicated by option 
+.I -f). 
+.B pfsearch 
+can be used as a filter if - is used instead of one of the input 
+filenames. 
 .SH OPTIONS 
-
 .TP
 \-a
-Causes pfsearch to report optimal alignment scores for 
+Report optimal alignment scores for 
 all sequences regardless of the cut-off value. 
 This option simultaneously forces DISJOINT=UNIQUE.   
-
 .TP
 \-b
-Bidirectional option. Causes 
-.B pfsearch
-to search the
-complementary strands of DNA sequences as well.
-
+Search the complementary strands of DNA sequences as well.
 .TP
 \-f
-Causes 
-.I pfsearch
-to expect sequence input in Pearson Fasta
-format.
-
+Input sequence-library is in Pearson/Fasta format.
 .TP
 \-r
-Causes
-.I pfsearch
-to rely on raw scores rather than normalized 
+Use raw scores rather than normalized 
 scores for match selection. Normalized scores 
 will not be listed in the output. 
-
+.TP
+\-s
+List the sequences of the matched regions as well. 
+The output will be a Pearson/Fasta-formatted sequence
+library.
 .TP
 \-u
 Forces DISJOINT=UNIQUE. 
-
+.TP
+\-x
+List profile-sequence alignments 
+in pftools PSA format.  
+.TP
+\-y
+Display alignments between the profile and the matched sequence regions in 
+a human-friendly format.   
+.SH PARAMETERS 
+.TP
+C=#
+Cut-off value.
+Over-writes the level zero cut-off value specified in
+the profile.
+An integer argument is interpreted as a raw score value,
+a decimal argument as a normalized score value. 
 .SH EXAMPLES
 .TP
 (1)
 .B pfsearch
--f sh3.prf swiss.seq 70
-.PP
-Searches the SWISS-PROT database for SH3 domains.
-The file sh3.prf contains a profile for
-the SH3 domain.
-The file swiss.seq contains the SWISS-PROT database
-in Pearson Fasta format.
-The third argument causes pfsearch to apply a
-cut-off value of 70 raw score units instead of the  
-cut-off value given in sh3.prf. 
- 
+-f sh3.prf sh3.seq C=6.0
+
+Searches the Pearson/Fasta-formatted protein sequence library sh3.seq
+for SH3 domains with a cut-off value of 6.0 normalized score units.
+sh3.seq contains 20 SH3 domain-containing protein sequences from SWISS-PROT
+release 32.
+sh3.prf contains the PROSITE entry SH3/PS50002.
 .TP
 (2)
-.B pfsearch 
--b ecp.prf PBR322
-.PP
-Searches both strands of plasmid PBR322 for potential
-.I E. coli
-promoters.  
-The file ecp.prf contains a profile for
-.I E. coli
-promoters.
-The file PBR322 contains the EMBL Data Library entry PBR322
-in original format.
-
-.SH BUGS
-Presumably many.
-This version has not been tested extensively.
 .B pfsearch
-does neither support circular profiles nor circular sequences.
+-bx ecp.prf CVPBR322 |
+.B psa2msa   
+-du |    
+.B readseq
+-p -fMSF > ecp.msf
 
+Generates a multiple sequence alignment  of potential
+.I E. coli
+promoters on both strands of plasmid pBR322.
+ecp.prf contains a profile for
+.I E. coli   
+promoters.  
+CVPBR322 contains EMBL entry J01749|CVPBR322.
+The result file
+.I ecp.msf   
+can further be processed by GCG programs accepting MSF files as input.
+
+.I See
+also manual pages of 
+.B psa2msa. 
+.SH BUGS
+.B pfsearch 
+neither supports circular profiles nor circular sequences.
 .SH AUTHOR
 Philipp Bucher
 .br
