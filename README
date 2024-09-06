@@ -1,0 +1,31 @@
+"pftools" is a collection of experimental programs supporting the
+new profile format and search method of PROSITE and NUCSITE.
+
+Version 0.1 contains FORTRAN 77 source code for two main programs:
+
+   pfsearch
+   GtoP  
+
+These programs compile successfully under SunOS and OSF/1 (and
+perhaps other UNIX operation systems).  
+
+In order to compile them, type:
+
+   make 
+
+Man pages are available in: 
+
+   GtoP.1
+   pfsearch.1.
+ 
+Further included in this directory are the following sample
+input files:
+
+   sh3.prf
+   sh3.gpr
+   PBR322 
+
+Please send bug reports to:
+
+   Philipp Bucher
+   E-mail: pbucher@isrec-sun1.unil.ch  

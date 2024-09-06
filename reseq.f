@@ -1,0 +1,84 @@
+*       Version:  This file is part of pftools release 0.1 January 1995
+*----------------------------------------------------------------------*     
+        Subroutine RESEQ
+     *    (NSEQ,FSEQ,NABC,CABC,CSID,CSAC,CSDE,LSEQ,ISEQ,IRC)
+           
+* reads sequence file in Pearson format 
+
+        Character*(*)     FSEQ
+        Character         CABC(0:26)
+        Character*(*)     CSID
+        Character*(*)     CSAC
+        Character*(*)     CSDE
+        Integer*2         ISEQ(*)
+
+        Character*132     RCIN
+        
+        IRC=0
+
+        Open(NSEQ,File=FSEQ,Status='OLD',Err=999)
+    1   Read(NSEQ,'(A)',Err=999,End=901) RCIN
+        If(RCIN(1:2).NE.'ID') go to   1   
+        IC=Index(RCIN(6:17),' ')+5
+        CSID=RCIN( 6:IC)
+
+    2   Read(NSEQ,'(A)',Err=999,End=999) RCIN
+        If(RCIN(1:2).NE.'AC'.AND.RCIN(1:2).NE.'DE') go to   2   
+        If(RCIN(1:2).EQ.'AC') then 
+           CSAC=RCIN( 6:Index(RCIN,';'))
+        Else
+           CSDE=RCIN( 6:80)
+           Go to   4
+        End if 
+
+    3   Read(NSEQ,'(A)',Err=999,End=999) RCIN
+        If(RCIN(1:2).NE.'DE') go to   3   
+        CSDE=RCIN( 6:80)
+
+    4   Read(NSEQ,'(A)',Err=999,End=999) RCIN
+        If(RCIN(1:2).NE.'DE') go to   5   
+        LR=Lnblnk(CSDE)
+        If(CSDE(LR:LR).EQ.Char(13)) LR=LR-1
+        CSDE=CSDE(1:LR) // ' ' // RCIN( 6:80)
+
+    5   Continue
+        If(RCIN(1:2).EQ.'SQ') go to   7
+
+    6   Read(NSEQ,'(A)',Err=999,End=999) RCIN
+        If(RCIN(1:2).NE.'SQ') go to   6   
+
+    7   Continue
+
+           J1=0
+   10   Read(NSEQ,'(Q,A)',Err=999,End= 20) L,RCIN
+        If(RCIN(1:2).EQ.'//') go to  20
+
+        Do 15 I1=1,L
+              N1=0
+              K1=Ichar(RCIN(I1:I1))
+              If(K1.GE.97) then 
+                 K1=K1-32
+                 RCIN(I1:I1)=Char(K1)
+              End if
+              If(K1.GT.90.OR.K1.LT.65) go to  15 
+                  
+           Do 13 I2=1,NABC
+              If(CABC(I2).EQ.RCIN(I1:I1)) then
+                 N1=I2
+                 Go to   14
+              End if
+   13      Continue
+   14      J1=J1+1
+           ISEQ(J1)=N1
+   15   Continue
+        Go to  10 
+
+   20   LSEQ=J1
+
+  100   Return
+
+  901   IRC=-1
+        Go to 100
+  999   IRC=IRC+1 
+        Go to 100 
+        End

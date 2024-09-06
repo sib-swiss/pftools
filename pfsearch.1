@@ -1,0 +1,100 @@
+.TH PFSEARCH 1 "January 1995"
+.SH NAME
+pfsearch \- scan a protein or DNA sequence library for profile matches 
+
+.SH SYNOPSIS
+.B pfsearch 
+[-abfru] profile-file seq-library-file [cut-off] 
+.SH DESCRIPTION
+.B pfsearch 
+scans a protein or nucleic acid sequence library 
+for sequences similar to a profile.
+The result is an unsorted list of profile matches sent to the standard 
+output. 
+.I profile-file
+must be in PROSITE format.
+.I seq-library-file
+may be in EMBL/SWISS-PROT
+format (assumed by default) or in Pearson Fasta
+format (indicated by option -f). 
+The optional argument
+.I cut-off
+over-writes the level zero
+cut-off value specified in
+the profile itself; 
+an integer is interpreted as a raw score value,
+a decimal as normalized score value. 
+ 
+.SH OPTIONS 
+
+.TP
+\-a
+Causes pfsearch to report optimal alignment scores for 
+all sequences regardless of the cut-off value. 
+This option simultaneously forces DISJOINT=UNIQUE.   
+
+.TP
+\-b
+Bidirectional option. Causes 
+.B pfsearch
+to search the
+complementary strands of DNA sequences as well.
+
+.TP
+\-f
+Causes 
+.I pfsearch
+to expect sequence input in Pearson Fasta
+format.
+
+.TP
+\-r
+Causes
+.I pfsearch
+to rely on raw scores rather than normalized 
+scores for match selection. Normalized scores 
+will not be listed in the output. 
+
+.TP
+\-u
+Forces DISJOINT=UNIQUE. 
+
+.SH EXAMPLES
+.TP
+(1)
+.B pfsearch
+-f sh3.prf swiss.seq 70
+.PP
+Searches the SWISS-PROT database for SH3 domains.
+The file sh3.prf contains a profile for
+the SH3 domain.
+The file swiss.seq contains the SWISS-PROT database
+in Pearson Fasta format.
+The third argument causes pfsearch to apply a
+cut-off value of 70 raw score units instead of the  
+cut-off value given in sh3.prf. 
+ 
+.TP
+(2)
+.B pfsearch 
+-b ecp.prf PBR322
+.PP
+Searches both strands of plasmid PBR322 for potential
+.I E. coli
+promoters.  
+The file ecp.prf contains a profile for
+.I E. coli
+promoters.
+The file PBR322 contains the EMBL Data Library entry PBR322
+in original format.
+
+.SH BUGS
+Presumably many.
+This version has not been tested extensively.
+.B pfsearch
+does neither support circular profiles nor circular sequences.
+
+.SH AUTHOR
+Philipp Bucher
+.br
+pbucher@isrec-sun1.unil.ch
