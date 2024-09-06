@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
         Subroutine XALIT
      *    (NABC,CABC,LPRF,LPCI,N1,N2,
@@ -7,6 +7,7 @@
      *     IOPM,IOPI,IOPD, 
      *     LALI,IDMA,CALI,IDMM,CPMA, 
      *     IOPT,JALB,JALE, 
+     *     IPMB,IPME,
      *     IRC) 
 
 * profile and sequence fields :
@@ -239,6 +240,7 @@
 
         K2=JALE
         K3=I2
+        IPME=K3-LPRF-1
 
 * trace back
 
@@ -293,6 +295,8 @@
            CALI(J1)=CH         
            J1=J1-1
         End do
+
+        IPMB=K3+1
            
   100   Return
 

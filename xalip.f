@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
         Subroutine XALIP(
      *     NABC,CABC,LPRF,LPCI,N1,N2,
@@ -469,6 +469,7 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
               IOD2(I2)=IOD2(I2-1)
            End if  
               If(I2.EQ.N1-1) IOD1(I2)=IN
+              If(I2.EQ.N2-1) IOD2(I2)=I1
 
            If     (NEWI.EQ.0) then 
               IOIB(I2)=IN
@@ -496,7 +497,6 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
 
               IOM1(N1-1)=IN
               IOM2(N2-1)=IN
-              IOD2(N2-1)=I1
 
         Return 
         End

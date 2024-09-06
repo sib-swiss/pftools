@@ -1,9 +1,9 @@
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
         Subroutine WPRSM(JSEQ,
-     *     LUNI,LNOR,LREV,LPFA,
+     *     LUNI,LNOR,LREV,LPFA,OPTZ,
      *     CHID,CHAC,CHDE,
-     *     IOPT,JALB,JALE,NALI,
+     *     IOPT,JALB,JALE,NALI,IPMB,IPME,
      *     RNOP,KNPM,MAXN,INOR,IFUN,LSEQ,RAVE)
 
 * profile paramters
@@ -16,6 +16,7 @@
         Logical           LNOR
         Logical           LREV
         Logical           LPFA
+        Logical           OPTZ 
 
 * sequence header 
  
@@ -28,10 +29,9 @@
         Character*08      CHNS
         Character*06      CHRS 
         Character*20      CHLO 
+        Character*18      CHPP
         Character*64      CHER 
         Character*64      CHMI
-
-* work fields 
 
         Character*132     RCEX
 
@@ -49,7 +49,7 @@
 
         Write(CHRS,'(I6)') IOPT
         
-* - location
+* - location in sequence
 
         If(.NOT.LUNI) then 
            If(LREV) then 
@@ -61,7 +61,13 @@
               JALB=LSEQ-JALB+1
               JALE=LSEQ-JALE+1
            End if 
-        End if
+
+* - location in profile 
+
+           If(OPTZ) then 
+              Write(CHPP,'('' ['',I5,'','',I6,'']'')') IPMB,IPME
+           End if
+        End if 
 
 * - entry-ref 
 
@@ -110,7 +116,12 @@
         If(.NOT.LUNI) then 
            RCEX(LNEX+1:)=CHLO
            LNEX=LNEX+20
-        End if 
+
+           If(OPTZ) then
+              RCEX(LNEX+1:)=CHPP
+              LNEX=LNEX+15
+           End if
+        End if
 
         RCEX(LNEX+2:)=CHER(1:LNER)
         LNEX=LNEX+1+LNER

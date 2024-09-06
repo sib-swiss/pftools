@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
         Subroutine REPRF
      *    (NPRF,FPRF,
@@ -34,12 +34,15 @@
         Integer           ISCO(26)
 
         Character*64      CH64
+        Logical           LOPN
         
         IRC=0
         RCIN=' '
 
 * open profile file 
 
+        Inquire(File=FPRF,OPENED=LOPN)
+        If(LOPN) go to   1
         If(FPRF.NE.'-'.OR.NPRF.NE.5)
      *     Open(NPRF,File=FPRF,Status='OLD',Err=999)
 
@@ -184,7 +187,7 @@ C       Print *,CPDE
               Read(CVAL,*,Err=999) LENP
            End if
 
-           If(CPAR.EQ.'TOPOLOGY'.AND.CPAR.EQ.'CIRCULAR') then 
+           If(CPAR.EQ.'TOPOLOGY'.AND.CVAL.EQ.'CIRCULAR') then 
               LPCI=.TRUE.
            End if 
            

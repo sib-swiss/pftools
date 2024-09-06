@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
         Subroutine PRALI
      *    (LPRF,CHIP,CHMP,IDMP,LSEQ,LREV,
@@ -28,7 +28,7 @@
     2   LB=JALB 
            
 
-* Find beginning of alignment, sequence. profile                
+* Find beginning of alignment, sequence, profile                
 
            JE=LPRF
            KE=LALI 

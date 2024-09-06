@@ -1,4 +1,4 @@
-.TH PFSCAN  1 "January 1996"
+.TH PFSCAN  1 "April 1997"
 .SH NAME
 pfscan \- scan a protein or DNA sequence with a profile library 
 
@@ -13,9 +13,9 @@ The result is an unsorted list of profile-sequence matches written to
 the standard output.
 A variety of output formats containing different informations can be specified
 via the options
-.I -a, -r, -u, -s, -x,
+.I -a, -r, -u, -s, -x, -y
 and 
-.I -y.
+.I -z.
 .I seq-file
 contains a sequence in EMBL/SWISS-PROT
 format (assumed by default) or in Pearson/Fasta
@@ -59,6 +59,11 @@ in pftools PSA format.
 \-y
 Display alignments between the profile and the matched sequence regions in 
 a human-friendly format.   
+.TP
+\-z
+Indicate starting and ending position of the matched profile range. The latter
+position will be given as a negative offset from the end of the profile. Thus
+the range [    1,    -1] means entire profile.
 .SH PARAMETERS
 .TP
 L=#

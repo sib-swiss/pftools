@@ -1,4 +1,4 @@
-.TH PFSEARCH 1 "January 1996"
+.TH PFSEARCH 1 "April 1997"
 .SH NAME
 pfsearch \- search a protein or DNA sequence library for sequence segments 
 matching a profile
@@ -12,7 +12,7 @@ compares a query profile against a DNA or protein sequence library.
 The result is an unsorted list of profile-sequence matches written to the standard output. 
 A variety of output formats containing different informations can be specified 
 via the options 
-.I -a, -r, -u, -s, -x, -y
+.I -a, -r, -u, -s, -x, -y, -z
 and the command-line parameter 
 .I C=#.
 .I profile-file
@@ -58,6 +58,11 @@ in pftools PSA format.
 \-y
 Display alignments between the profile and the matched sequence regions in 
 a human-friendly format.   
+.TP
+\-z
+Indicate starting and ending position of the matched profile range. The latter
+position will be given as a negative offset from the end of the profile. Thus
+the range [    1,    -1] means entire profile.
 .SH PARAMETERS 
 .TP
 C=#

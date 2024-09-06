@@ -1,7 +1,7 @@
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
         Subroutine RFSEQ
-     *    (NSEQ,FSEQ,NABC,CABC,CSID,CSAC,CSDE,LSEQ,ISEQ,IRC)
+     *    (NSEQ,FSEQ,NABC,CABC,CSID,CSAC,CSDE,LSEQ,ISEQ,LEOF,RCIN,IRC)
            
 * reads sequence file in Pearson Fasta format 
 
@@ -11,8 +11,9 @@
         Character*(*)     CSAC
         Character*(*)     CSDE
         Integer*2         ISEQ(*)
-
-        Character*256     RCIN
+        Logical           LEOF
+        Logical           LOPN
+        Character*(*)     RCIN
         
         IRC=0
 
@@ -21,13 +22,16 @@
         CSDE=' '
 
         If(RCIN(1:1).EQ.'>') Go to  2
- 
-        If(FSEQ.NE.'-') Open(NSEQ,File=FSEQ,Status='OLD',Err=999)
+
+        Inquire(File=FSEQ,OPENED=LOPN)
+        If(LOPN) go to   1
+        If(FSEQ.NE.'-') Open(NSEQ,File=FSEQ,Status='OLD',Err=902)
     1   Read(NSEQ,'(A)',Err=999,End=901) RCIN
         If(RCIN(1:1).NE.'>') go to   1   
 
     2   L=Lblnk(RCIN)
         IX2=Index(RCIN(1:L),' ')-1
+        If(IX2.LE.0) IX2=L
         Do I1=IX2,2,-1
            If(Index(':;|',RCIN(I1:I1)).NE.0) go to   3
         End do
@@ -41,7 +45,7 @@
         CSDE=RCIN(IX3:L)
 
            J1=0
-   10   Read(NSEQ,'(A)',Err=999,End= 20) RCIN
+   10   Read(NSEQ,'(A)',Err=999,End= 20,Iostat=IOS) RCIN
         L=Lblnk(RCIN)
         If(RCIN(1:1).EQ.'>') go to  20
 
@@ -66,11 +70,13 @@
         Go to  10 
 
    20   LSEQ=J1
+        If(IOS.EQ.-1) LEOF=.TRUE.
 
   100   Return
 
   901   IRC=-1
         Go to 100 
+  902   IRC=IRC+1
   999   IRC=IRC+1 
         Go to 100 
         End

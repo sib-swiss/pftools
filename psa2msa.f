@@ -3,7 +3,7 @@
 *       Function: Converts a pfsearch -x output file into Pearson/Fasta
 *                 multiple sequence asignment format  
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -15,7 +15,7 @@
         Integer           IPRF(0:8191)
 
         Character*512     RCIO
-        Character*01      B
+        Character         B
 
         Logical           OPTL
         Logical           OPTU
@@ -23,7 +23,6 @@
         Logical           OPTD
 
         Integer           Getc
-        Integer           Fputc
 
         Include          'sterr.f' 
 
@@ -50,11 +49,18 @@
 
         If(FSEQ.EQ.'-') then
     1      Open(NSEQ,Status='SCRATCH')
-           Do I1=1,1000000000 
-              If(Getc(B).NE.0) go to 2 
-              J1=Fputc(NSEQ,B)
+    2      Continue 
+           Do I1=1,512
+              If(Getc(B).NE.0) go to 3 
+              If(Ichar(B).EQ.10) then 
+                 Write(NSEQ,'(512A)')(CSEQ(ii1),ii1=1,I1-1)
+                 Go to   2 
+              Else 
+                 CSEQ(I1)=B
+              End if
            End do
-    2      Rewind(NSEQ)
+           Go to   2
+    3      Rewind(NSEQ)
         Else 
            Open(NSEQ,File=FSEQ,Status='OLD',Err=900)
         End if
@@ -130,6 +136,7 @@
               If(Index(CARG,'u').NE.0) OPTU=.TRUE.
               If(Index(CARG,'p').NE.0) OPTP=.TRUE.
               If(Index(CARG,'d').NE.0) OPTD=.TRUE.
+              If(CARG(1:2).EQ.'-h') go to 900
            Else
               FSEQ=CARG 
               K1=K1+1
@@ -152,6 +159,7 @@
         Character*(*)     RCIO
 
         Character*512     RCIN
+	Save              RCIN
 
         IRC=0
         LSEQ=0
@@ -160,14 +168,13 @@
     1   Continue 
         If(RCIN(1:1).NE.'>') then 
            Read(NSEQ,'(A)',Err=900,End=900) RCIN
-           L1=Lblnk(RCIN)
            Go to   1
         End if
 
-        LDES=L1
+        LDES=Lblnk(RCIN)
         RCIO(1:LDES)=RCIN(1:LDES)
 
-    2   Read(NSEQ,'(A)',Err=900,End=900) RCIN
+    2   Read(NSEQ,'(A)',Err=900,End=100) RCIN
         L1=Lblnk(RCIN)
         If(RCIN(1:1).EQ.'>') then 
            Go to 100

@@ -2,7 +2,7 @@
 *----------------------------------------------------------------------*     
 *       Function: Reformats profiles: in-fmt=GRIBSKOV / out-fmt=PROSITE    
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
 *
 * DATA
@@ -15,7 +15,7 @@
         Parameter        (NOUT=   6)    
         Parameter        (NGPR=  11)    
 
-* profile and sequence fields :
+* profile and sequence fields
 
         Character*64      FGPR
 
@@ -46,15 +46,16 @@
 
            RL=NLOW
         Call Repar
-     *    (FGPR,LSYM,RG,RE,RF,IRC)
+     *    (FGPR,LSYM,RG,RE,RF,RO,IRC)
         If(IRC.NE.0) then
            Write(NERR,'(
      *      ''Usage: gtop [ -as ] [ gcg-profile ] '' 
      *      ''[ parameters ]'',//,
      *      ''   valid parameters are:'',//,
-     *      ''                 [G=gap-weigth]             '',/
-     *      ''                 [E=gap-extension-weight]   '',/
+     *      ''                 [G=gap-weigth]             '',/,
+     *      ''                 [E=gap-extension-weight]   '',/,
      *      ''                 [F=output-score-multiplier]'',/
+     *      ''                 [O=output-score-offset]    '',/
      *        )')
            Stop
         End if
@@ -63,7 +64,7 @@
 
         Call REGPR
      *    (NGPR,FGPR,
-     *     RG,RE,RF,LSYM,
+     *     RG,RE,RF,RO,LSYM,
      *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
@@ -88,7 +89,7 @@
         End
 *----------------------------------------------------------------------*     
         Subroutine Repar         
-     *    (FGPR,LSYM,RG,RE,RF,IRC)
+     *    (FGPR,LSYM,RG,RE,RF,RO,IRC)
 
         Character*64      CPAR
         Character*64      FGPR 
@@ -99,6 +100,7 @@
         RG=4.5
         RE=0.05
         RF=100
+        RO=0
  
         FGPR=' '
 
@@ -122,6 +124,8 @@
                  Read(CPAR(3:64),*,Err=900) RE
               Else if(CPAR(1:2).EQ.'F=') then
                  Read(CPAR(3:64),*,Err=900) RF
+              Else if(CPAR(1:2).EQ.'O=') then
+                 Read(CPAR(3:64),*,Err=900) RO
               End if 
            Else
               FGPR=CPAR

@@ -3,7 +3,7 @@
 *       Function: Scan a protein or DNA sequence library for profile 
 *                 matches 
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -37,6 +37,7 @@
         Logical           LREV
         Logical           LTRA
         Logical           LPFA
+        Logical           LEOF
 
 * sequence
 
@@ -63,6 +64,7 @@
         Logical           OPTU 
         Logical           OPTX 
         Logical           OPTY 
+        Logical           OPTZ 
         
         Integer           NCUC
         Integer           KCUC
@@ -99,6 +101,10 @@
         Integer           IOD1(0:IDMP)
         Integer           IOD2(0:IDMP)
 
+* work fields
+
+        Character*256     RCIN
+
 * initialization of controlled vocabularies
 
         Include          'cvini.f' 
@@ -108,19 +114,20 @@
 *----------------------------------------------------------------------*     
 
         IRC=0
+        LEOF=.FALSE.
         CABC(0)='-'
  
 * read command line arguments
 
         Call Repar(
-     *     OPTA,OPTB,OPTF,OPTR,OPTS,OPTU,OPTX,OPTY,
+     *     OPTA,OPTB,OPTF,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
      *     FPRF,FSEQ,NCUC,KCUC,XCUC,IRC)
         If(IRC.NE.0) then 
            Write(NERR,'(
-     *      ''Usage: pfsearch [ -abfrsuxy ] [ profile-file | - ] ''
+     *      ''Usage: pfsearch [ -abfrsuxyz ] [ profile-file | - ] ''
      *      ''[ seq-library-file | - ] [ parameters ]'',//,
      *      ''   valid parameters are:'',//,
-     *      ''                 [C=cut-off-value]          '',/
+     *      ''                 [C=cut-off-value]          '',/,
      *        )')
            Stop
         End if
@@ -170,6 +177,7 @@
                        INOR=J3
                        NPRI=NNPR(J3)    
                        IFUN=MNOR(J3)
+                       KCUT=ICUT(I1)
                        XCUT=RCUT(I2,I1)
                     Else if(NNPR(J3).LT.NPRI) then
                        INOR=J3
@@ -245,8 +253,16 @@
 
 * alignment and ouptut format switches 
 
-        If(OPTX.OR.OPTY) LTRA=.TRUE.
-        If(OPTS.OR.OPTX) LPFA=.TRUE.
+        If(OPTX.OR.OPTY.OR.OPTZ) then 
+           LTRA=.TRUE.
+        Else
+           LTRA=.FALSE.
+        End if
+        If(OPTS.OR.OPTX) then
+           LPFA=.TRUE.
+        Else
+           LPFA=.FALSE.
+        End if
   
 *----------------------------------------------------------------------*
 * major loop over sequences
@@ -255,13 +271,13 @@
 * read sequence  
 
    20   Continue
-
+        If(LEOF) go to 100
         If(OPTF) then 
            Call RFSEQ
-     *       (MSEQ,FSEQ,NABC,CABC,CSID,CSAC,CSDE,LSEQ,ISEQ,IRC)
+     *      (MSEQ,FSEQ,NABC,CABC,CSID,CSAC,CSDE,LSEQ,ISEQ,LEOF,RCIN,IRC)
         Else 
            Call RESEQ
-     *       (MSEQ,FSEQ,NABC,CABC,CSID,CSAC,CSDE,LSEQ,ISEQ,IRC)
+     *      (MSEQ,FSEQ,NABC,CABC,CSID,CSAC,CSDE,LSEQ,ISEQ,LEOF,RCIN,IRC)
         End if 
         If(IRC.EQ.-1) go to 100
 
@@ -343,11 +359,6 @@
         
         Do  40 I1=1,NALI
            JSEQ=JSEQ+1
-           Call WPRSM(JSEQ,
-     *       LUNI,LNOR,LREV,LPFA,
-     *       CSID,CSAC,CSDE,
-     *       IALS(I1),IALB(I1),IALE(I1),NALI,
-     *       RNOP,KNPM,MAXN,INOR,IFUN,LSEQ,RAVE)
 
            If(LTRA) then 
               Call XALIT
@@ -357,8 +368,19 @@
      *           IOPM,IOPI,IOPD,
      *           LALI,IDMA,CALI,IDMM,CPMA,
      *           IALS(I1),IALB(I1),IALE(I1), 
+     *           IPMB,IPME,
      *           IRC)
+              Do  I2=IAL1(I1),IAL2(I1)
+                 LCKS(I2)=.TRUE.
+              End do
            End if 
+
+           Call WPRSM(JSEQ,
+     *       LUNI,LNOR,LREV,LPFA,OPTZ,
+     *       CSID,CSAC,CSDE,
+     *       IALS(I1),IALB(I1),IALE(I1),NALI,IPMB,IPME,
+     *       RNOP,KNPM,MAXN,INOR,IFUN,LSEQ,RAVE)
+
 
            If     (OPTS) then
               Write(6,'((60A))')(CABC(ISEQ(ii1)),ii1=IALB(I1),IALE(I1))
@@ -367,7 +389,7 @@
            Else if(OPTY) then 
               Call PRALI
      *          (LPRF,CHIP,CHMP,IDMP,LSEQ,LREV,
-     *           CALI,LALI,IALB(I1),IALE(I1),LREV)
+     *           CALI,LALI,IALB(I1),IALE(I1))
            End if 
 
    40   Continue
@@ -411,7 +433,7 @@
         End
 *----------------------------------------------------------------------*     
         Subroutine Repar(
-     *     OPTA,OPTB,OPTF,OPTR,OPTS,OPTU,OPTX,OPTY,
+     *     OPTA,OPTB,OPTF,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
      *     FPRF,FSEQ,NCUC,KCUC,XCUC,IRC)
 
         Logical           OPTA 
@@ -422,12 +444,14 @@
         Logical           OPTU 
         Logical           OPTX 
         Logical           OPTY 
+        Logical           OPTZ 
 
         Character*64      FPRF
         Character*64      FSEQ
         Character*64      CARG
 
         IRC=0
+	NCUC=0
 
         N1=Iargc()
 
@@ -444,6 +468,7 @@
               If(Index(CARG,'u').NE.0) OPTU=.TRUE.
               If(Index(CARG,'x').NE.0) OPTX=.TRUE.
               If(Index(CARG,'y').NE.0) OPTY=.TRUE.
+              If(Index(CARG,'z').NE.0) OPTZ=.TRUE.
            Else if(K1.LE.1) then
               K1=K1+1
               If     (K1.EQ.1) then 
@@ -457,7 +482,6 @@
 
               If(CARG(1:2).EQ.'C=') then
                  CARG(1:2)='  '
-                    NCUC=0
                  If(Index(CARG,'.').EQ.0) then
                     NCUC=1 
                     Read(CARG,*) KCUC

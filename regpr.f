@@ -1,8 +1,8 @@
-*       Version:  This file is part of pftools release 1.1 March 1996
+*       Version:  This file is part of pftools release 1.2 April 1997
 *----------------------------------------------------------------------*     
         Subroutine REGPR
      *    (NGPR,FGPR,
-     *     RG,RE,RF,LSYM,
+     *     RG,RE,RF,RO,LSYM,
      *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP, 
@@ -13,6 +13,7 @@
 
         Character*64      FGPR
         Character*256     RCIN  
+	Character         B
 
         Include          'psdat.f'
         Include          'gsdat.f'
@@ -29,17 +30,26 @@
 
         Logical           LSYM
 
+        Integer           Getc
+
         IRC=0
 
 * open input file
  
         If(FGPR.EQ.'-') then
     1      Open(NGPR,Status='SCRATCH')
-           Do I1=1,1000000000
-              If(Getc(B).NE.0) go to 2
-              J1=Fputc(NSEQ,B)
-           End do
-    2      Rewind(NGPR)
+    2      Continue 
+           Do I1=1,256
+	   If(Getc(B).NE.0) go to 3
+              If(Ichar(B).EQ.10) then
+                 Write(NGPR,'(256A)')(RCIN(ii1:ii1),ii1=1,I1-1)
+                 Go to   2  
+              Else
+                 RCIN(ii1:ii1)=B
+              End if
+           End do 
+        Go to   2
+    3      Rewind(NGPR)
         Else
            Open(NGPR,File=FGPR,Status='OLD',Err=901)
         End if
@@ -145,7 +155,7 @@
            Read(RCIN(3:256),*,Err=50,End= 50)
      *        (IPRF(ii1),ii1=1,NABC+2)
            Do  34 I2=1,NABC
-              IPRF(I2)=NINT(Real(IPRF(I2))/100*RF)
+              IPRF(I2)=NINT(Real(IPRF(I2))/100*RF+RO)
    34      Continue
            If(LSYM) then 
               NGO=-NINT(Real(IPRF(NABC+1))/200*RF*RG)

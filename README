@@ -1,7 +1,7 @@
 "pftools" is a collection of experimental programs supporting the
 new profile format and search method of PROSITE and NUCSITE.
 
-Version 1.0 contains FORTRAN 77 source code and manual pages for
+Version 1.2 contains FORTRAN 77 source code and manual pages for
 the following programs:
 
    pfsearch
@@ -10,10 +10,10 @@ the following programs:
    gtop  
 
 These programs have successfully been compiled and tested under
-SunOS, Solaris, OSF1, IRIX, HP-UX operating systems.
+SunOS, Solaris, OSF1, IRIX, HP-UX, and Linux operating systems.
 
-For compilation under HP_UX and IRIX, the Makefile needs to be
-modified according to instructions given therein.  
+For compilation under HP_UX, IRIX, and Linux, the Makefile needs
+to be modified according to instructions given therein.  
 
 For use under HP-UX, the file sterr.f should also be modified
 according to instructions given therein. 
@@ -63,4 +63,4 @@ Please send bug reports to:
    Philipp Bucher
    E-mail: pbucher@isrec-sun1.unil.ch  
 
-Philipp Bucher, March 15 1996  
+Philipp Bucher, April 21 1997  
