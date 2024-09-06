@@ -1,6 +1,6 @@
 # M A K E F I L E   F O R   P F T O O L S  R E L E A S E  2.3
 #----------------------------------------------------------------------#
-# $Id: Makefile,v 2.15 2003/11/18 09:11:24 vflegel Exp $
+# $Id: Makefile,v 2.16 2003/11/28 11:54:37 vflegel Exp $
 #----------------------------------------------------------------------#
 
 PROGS = gtop pfmake pfscan pfw ptoh htop \
@@ -36,7 +36,7 @@ PKGDIR = /usr/share/pftools23
 #FFLAGS= -qcharlen=1024  -O3
 #
 # Tru64 UNIX V5.1A
-#FFLAGS= io.o
+#FFLAGS= -noautomatic -fast -g0
 #----------------------------------------------------------------------#
 
 all  :  io.o $(PROGS)

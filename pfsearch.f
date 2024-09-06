@@ -1,6 +1,6 @@
 *       Program pfsearch
 *----------------------------------------------------------------------*     
-* $Id: pfsearch.f,v 2.28 2003/11/19 11:51:57 vflegel Exp $
+* $Id: pfsearch.f,v 2.30 2003/12/09 13:42:42 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Scan a protein or DNA sequence library for profile 
 *                 matches 
@@ -96,7 +96,7 @@
       Integer           NCUC
       Integer           KCUC
       real              XCUC
-      
+      Logical           LDRS   
 * alignments
 
       Integer           NALI
@@ -165,6 +165,7 @@ C     Character*1024    RCOUT
       LREV=.FALSE.
       LTRA=.FALSE.
       LPFA=.FALSE.
+      LDRS=.FALSE.
       
       LEOF=.FALSE.
       CABC(0)='-'
@@ -179,7 +180,7 @@ C     Character*1024    RCOUT
      *   OPTK,FPRF,FSEQ,NCUC,KCUC,XCUC,NW,NMOD,OPTO,OPTD,OPTV,IRC)
       If(IRC.NE.0) then 
          Write(NERR,'(/,
-     *      ''pfsearch 2.3 revision 3'',//
+     *      ''pfsearch 2.3 revision 4'',//
      *      ''Usage: pfsearch [ -abCdfhlLmMkrsuvWxyz ] [ profile-file'',
      *      '' | - ] [ seq-library-file | - ] [ parameters ]'',//
      *      )')
@@ -237,6 +238,10 @@ C     Character*1024    RCOUT
          MPRF=5
       Else
          MPRF=NPRF
+      End if
+
+      If(OPTR) then
+         LDRS=.TRUE.
       End if
       
 * read profile
@@ -601,14 +606,14 @@ C      End if
          If(.NOT.OPTK) then
             Call WPRSM(JSEQ,NMAT(I1),.FALSE.,
      *         LUNI,LOUT,LNOR,LREV,LPFA,OPTZ,OPTL,OPLU,NW,
-     *         CSID,CSAC,CSDE,OPTD,OPTR,
+     *         CSID,CSAC,CSDE,OPTD,OPTR,LDRS,
      *         IALS(I1),IALB(I1),IALE(I1),NALI,IPMB,IPME,
      *         JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
      *         RNOP,KNPM,MAXN,INOR,IFUN,MNUM,LSEQ,RAVE)
          Else
             Call XPRSM(JSEQ,NMAT(I1),.FALSE.,
      *         LUNI,LOUT,LNOR,LREV,OPTZ,OPTL,OPLU,OPTB,
-     *         CSID,CSAC,CSFH,CPID,CPAC,OPTR,OPTF,
+     *         CSID,CSAC,CSFH,CPID,CPAC,OPTR,OPTF,LDRS,
      *         IALS(I1),IALB(I1),IALE(I1),NALI,IPMB,IPME,
      *         JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
      *         RNOP,KNPM,MAXN,INOR,IFUN,MNUM,LSEQ,RAVE)
@@ -634,7 +639,7 @@ C      End if
                   If(.NOT.OPTK) then
                      Call WPRSM(JSEQ,NMAT(I1)-I2+1,.TRUE.,
      *                  LUNI,LOUT,LNOR,LREV,LPFA,OPTZ,OPTL,OPLU,NW,
-     *                  CSID,CSAC,CSDE,OPTD,OPTR,
+     *                  CSID,CSAC,CSDE,OPTD,OPTR,LDRS,
      *                  IMSC(I2),PK2B(I2),PK2E(I2),NALI,
      *                  PK3B(I2),PK3E(I2)-LPRF-1,
      *                  JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
@@ -642,7 +647,7 @@ C      End if
                   Else
                      Call XPRSM(JSEQ,NMAT(I1)-I2+1,.TRUE.,
      *                  LUNI,LOUT,LNOR,LREV,OPTZ,OPTL,OPLU,OPTB,
-     *                  CSID,CSAC,CSFH,CPID,CPAC,OPTR,OPTF,
+     *                  CSID,CSAC,CSFH,CPID,CPAC,OPTR,OPTF,LDRS,
      *                  IMSC(I2),PK2B(I2),PK2E(I2),NALI,
      *                  PK3B(I2),PK3E(I2)-LPRF-1,
      *                  JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,

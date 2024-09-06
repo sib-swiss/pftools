@@ -1,5 +1,5 @@
 *----------------------------------------------------------------------*     
-* $Id: rhmmer2.f,v 2.6 2003/11/18 10:51:07 vflegel Exp $
+* $Id: rhmmer2.f,v 2.7 2003/11/28 11:57:32 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
@@ -70,14 +70,14 @@
          If(RCIN(I1:I1).EQ.' ') then
             K1=I1+1
 *** To be modified into goto ?
-            Exit
+            go to 3
 ***
          End if
       End do 
 
 * - lower case to upper, dash to underscore
 
-      CPID=' '
+ 3    CPID=' '
       J1=0
       Do I1=K1,K2
          J1=J1+1
@@ -98,36 +98,36 @@
       CPDE=' '
       CMIS='LENG'
 
- 3    Read(NPRF,'(A)',Err=901,End=902) RCIN
+ 4    Read(NPRF,'(A)',Err=901,End=902) RCIN
 
       If(RCIN(1:2).EQ.'//') then 
          go to 920
       Else if(RCIN(1:4).EQ.'ACC ') then
          CPAC=RCIN(7:)
-         Go to   3
+         Go to   4
       Else if(RCIN(1:4).EQ.'LENG') then
-         Go to   5
+         Go to   6
       Else if(RCIN(1:4).NE.'DESC') then
-         Go to   3
+         Go to   4
       Else 
          CPDE=RCIN(7:)
       End if
 
 * length
 
- 4    Read(NPRF,'(A)',Err=901,End=902) RCIN
+ 5    Read(NPRF,'(A)',Err=901,End=902) RCIN
       If(RCIN(1:2).EQ.'//') go to 920
-      If(RCIN(1:4).NE.'LENG') go to   4
+      If(RCIN(1:4).NE.'LENG') go to   5
 
- 5    Read(RCIN(5:),*,Err=910) LPRF
+ 6    Read(RCIN(5:),*,Err=910) LPRF
       If(LPRF.GE.IDMP.OR.LPRF.LE.0) go to 904
 
 * alphabet
 
       CMIS='ALPH'
- 6    Read(NPRF,'(A)',Err=901,End=902) RCIN
+ 7    Read(NPRF,'(A)',Err=901,End=902) RCIN
       If(RCIN(1:2).EQ.'//') go to 920
-      If(RCIN(1:4).NE.'ALPH') go to   6
+      If(RCIN(1:4).NE.'ALPH') go to   7
 
       If(Index(RCIN,'Amino').NE.0) then 
          NABC=20
@@ -145,13 +145,13 @@
 
       LHDR=0
       CMIS='XT'
- 7    Read(NPRF,'(A)',Err=901,End=902) RCIN
+ 8    Read(NPRF,'(A)',Err=901,End=902) RCIN
       If(RCIN(1:2).EQ.'//') go to 920
       If(RCIN(1:2).NE.'XT') then 
          LHDR=LHDR+1
          If(LHDR.LT.512)
      *      CHDR(LHDR)='CC   ' // RCIN
-         Go to   7
+         Go to   8
       End if 
       
 * XT (only NB and EC are relevant)
@@ -526,7 +526,7 @@ C         LEOF=.TRUE.
             If(RCIN(I1:I1).NE.' ') then
                K1=K1+1
 *** To be modified into Go to ?
-               If(K1.GT.N2) Exit
+               If(K1.GT.N2) Return
 ***
                J1=I1
                LSTR=.TRUE.

@@ -1,6 +1,6 @@
 *       Program gtop 
 *----------------------------------------------------------------------*     
-* $Id: gtop.f,v 2.8 2003/11/19 11:51:57 vflegel Exp $
+* $Id: gtop.f,v 2.9 2003/11/28 11:53:33 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Reformats profiles: in-fmt=GRIBSKOV / out-fmt=PROSITE    
 *       Author:   Philipp Bucher
@@ -57,7 +57,7 @@
      *   (FGPR,LSYM,LLLT,RG,RE,RF,RO,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''gtop 2.3 revision 3'',//
+     *      ''gtop 2.3 revision 4'',//
      *      ''Usage: gtop [ -aslhGEFO ] gcg-profile | - '' 
      *      ''[ parameters ]'',/
      *      )')

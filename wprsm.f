@@ -1,11 +1,11 @@
 *----------------------------------------------------------------------*     
-* $Id: wprsm.f,v 2.12 2003/11/18 10:50:07 vflegel Exp $
+* $Id: wprsm.f,v 2.13 2003/12/09 13:42:42 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
       Subroutine WPRSM(JSEQ,JMMA,LPMM,
      *   LUNI,LOUT,LNOR,LREV,LPFA,OPTZ,OPTL,OPLU,NW,
-     *   CHID,CHAC,CHDE,OPTD,OPTR,
+     *   CHID,CHAC,CHDE,OPTD,OPTR,LDRS,
      *   IOPT,JALB,JALE,NALI,IPMB,IPME,
      *   JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
      *   RNOP,KNPM,MAXN,INOR,IFUN,MNUM,LSEQ,RAVE)
@@ -31,6 +31,7 @@
 
       Logical           LPMM
       Logical           LFCL
+      Logical           LDRS
 
 * function return types
 
@@ -217,7 +218,7 @@
          If(OPLU) LNEX=LNEX-2
       End if
 
-      If(LNOR) then 
+      If(LNOR.AND..NOT.LDRS) then 
          RCEX(LNEX+1:)=CHNS
          LNEX=LNEX+8
       End if

@@ -1,11 +1,11 @@
 *----------------------------------------------------------------------*     
-* $Id: xprsm.f,v 2.11 2003/07/24 08:39:46 vflegel Exp $
+* $Id: xprsm.f,v 2.12 2003/12/09 13:42:42 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Version:  File under developpment for release 2.3
 *----------------------------------------------------------------------*     
       Subroutine XPRSM(JSEQ,JMMA,LPMM,
      *   LUNI,LOUT,LNOR,LREV,OPTZ,OPTL,OPLU,OPTB,
-     *   CHID,CHAC,CHFH,CPID,CPAC,OPTR,OPTF,
+     *   CHID,CHAC,CHFH,CPID,CPAC,OPTR,OPTF,LDRS,
      *   IOPT,JALB,JALE,NALI,IPMB,IPME,
      *   JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
      *   RNOP,KNPM,MAXN,INOR,IFUN,MNUM,LSEQ,RAVE)
@@ -31,6 +31,7 @@
 
       Logical           LPMM
       Logical           LFCL
+      Logical           LDRS
 
 
 * sequence and profile header 
@@ -376,7 +377,7 @@ C            Write(NERR,*) 'CHPN: ',CHPN,' ILPN: ',ILPN
       RCEX(LNEX+1:)=CHMO 
       LNEX=LNEX+ILMO+1
 
-      If(LNOR) then 
+      If(LNOR.AND..NOT.LDRS) then 
          RCEX(LNEX+1:)=CHNS
          LNEX=LNEX+ILNS+1
       End if

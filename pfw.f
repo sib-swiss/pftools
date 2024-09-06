@@ -1,6 +1,6 @@
 *       Program pfw
 *----------------------------------------------------------------------*     
-* $Id: pfw.f,v 2.8 2003/11/19 11:51:57 vflegel Exp $
+* $Id: pfw.f,v 2.10 2004/01/09 09:27:36 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Calculate weights for individual sequences of a 
 *                 multiple sequence alignment.      
@@ -21,6 +21,7 @@ C        Parameter        (IDM3=   2024)
       Include          'ardim.f'
 
       Parameter        (NMSF=     11)
+      Parameter        (ICSL=IDMS/26)
 
       Include          'sterr.f'
 
@@ -42,8 +43,8 @@ C        Parameter        (IDM3=   2024)
 
 * character set 
 
-      Character         CSET(26,IDMF)
-      Integer           NSET(   IDMF)
+      Character         CSET(26,ICSL)
+      Integer           NSET(   ICSL)
 
 * work fields 
 
@@ -79,7 +80,7 @@ C       Integer           Fputc
      *   (FMSF,NRAN,RX,RW,IRAN,OPTM,IRC) 
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''pfw 2.3 revision 3'',//
+     *      ''pfw 2.3 revision 4'',//
      *      ''Usage: pfw [ -hmNXRW ] [ msf-file | - ] '',
      *      ''[ parameters ]'',//
      *      )')
@@ -151,6 +152,10 @@ C       End if
       End if
       If(IRC.NE.0) go to 100
 
+* Check needed buffer size
+
+      If((NSEQ*LSEQ).GT.ICSL) go to 904
+
 *----------------------------------------------------------------------*
 * DATA PROCESSING
 *----------------------------------------------------------------------*
@@ -192,7 +197,7 @@ C       End if
 
       Call GCSET
      *   (IDMS,CSEQ,NSEQ,LSEQ,
-     *   IDMP,NSET,CSET) 
+     *   ICSL,NSET,CSET) 
 
 * major loop 
 
@@ -206,7 +211,7 @@ C       End if
 
 * - generate random sequences 
 
-         Call RanSQ(IRAN,IDMP,NSET,CSET,LSEQ,CSQR)
+         Call RanSQ(IRAN,ICSL,NSET,CSET,LSEQ,CSQR)
 
 * - compare random sequence to real sequences
 *
@@ -359,6 +364,10 @@ C    *        SQID(I1)(1:16),RWGT(I1)
  903  Write(NERR,*) 'Error: Unable to write to temporary file.'
       IRC=1
       Go to 100
+ 904  Write(NERR,*) 'Error: Sequence length times sequence number ',
+     *   'exceeds buffer size (',ICSL,').'
+      IRC=1
+      Go to 100
       End
 *----------------------------------------------------------------------*
       Subroutine Repar
@@ -455,11 +464,14 @@ C    *        SQID(I1)(1:16),RWGT(I1)
 *----------------------------------------------------------------------*
       Subroutine GCSET
      *   (IDMS,CSEQ,NSEQ,LSEQ,
-     *   IDMP,NSET,CSET) 
+     *   ICSL,NSET,CSET) 
+
+* CSEQ(IDMS)
+* NSET(ICSL)
 
       Character         CSEQ(*)
       Integer           NSET(*)
-      Character         CSET(26,IDMP)
+      Character         CSET(26,ICSL)
       
       Do  10 I1=1,LSEQ
          NSET(   I1)=0
@@ -469,7 +481,7 @@ C    *        SQID(I1)(1:16),RWGT(I1)
             Do   5 I3=1,NSET(I1)
                If(CSEQ(J2).EQ.CSET(I3,I1)) go to   8 
  5          Continue
-            NSET(I1)=NSET(I1)+1 
+            NSET(I1)=NSET(I1)+1
             CSET(NSET(I1),I1)=CSEQ(J2)
  8       Continue
  10   Continue
@@ -482,10 +494,10 @@ C  20   Continue
       Return
       End
 *----------------------------------------------------------------------*
-      Subroutine RanSQ(IRAN,IDMP,NSET,CSET,LSEQ,CSQR)
+      Subroutine RanSQ(IRAN,ICSL,NSET,CSET,LSEQ,CSQR)
 
       Integer         NSET(*)
-      Character       CSET(26,IDMP) 
+      Character       CSET(26,ICSL) 
       Character       CSQR(*)
       
       Do  10 I1=1,LSEQ

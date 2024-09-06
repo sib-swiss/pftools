@@ -1,6 +1,6 @@
 *       Program pfscale 
 *----------------------------------------------------------------------*     
-* $Id: pfscale.f,v 2.10 2003/11/19 11:51:57 vflegel Exp $
+* $Id: pfscale.f,v 2.11 2003/11/28 11:53:33 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Fits paramters of an extreme value distribution to a
 *                 profile score distribution. Input: sorted score list.
@@ -71,7 +71,7 @@
       Call Repar(FSCL,FPRF,LLLT,DL,NN,RP,RQ,LMNB,IMNB,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''pfscale 2.3 revision 3'',//
+     *      ''pfscale 2.3 revision 4'',//
      *      ''Usage: pfscale [ -lhLMNPQ ] [ score-list | - ] '' 
      *      ''[ profile-file ] [ parameters ]'',/
      *      )')

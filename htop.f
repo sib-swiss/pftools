@@ -1,6 +1,6 @@
 *       Program htop 
 *----------------------------------------------------------------------*     
-* $Id: htop.f,v 2.10 2003/11/19 11:51:57 vflegel Exp $
+* $Id: htop.f,v 2.12 2003/12/01 13:33:04 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Reformats profiles: in-fmt=HMMER / out-fmt=PROSITE    
 *       Author:   Philipp Bucher
@@ -52,6 +52,8 @@
       Logical           LEOF
       Logical           LRPS
 
+      Integer           INBP
+
 * initialization of controlled vocabularies
 
       Include          'cvini.f' 
@@ -66,6 +68,7 @@
       LHDR=0
       LEOF=.FALSE.
       LRNM=.TRUE.
+      INBP=0
 
 * read command line arguments
 
@@ -74,7 +77,7 @@
      *   DB,RC,DL,NM,RP,RQ,RF,RH,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''htop 2.3 revision 3'',//
+     *      ''htop 2.3 revision 4'',//
      *      ''Usage: htop [ -fhilosBCFHLMPQ ] [ hmm-file | - ] ''
      *      ''[ random-model-file ] [ parameters ]'',/
      *      )')

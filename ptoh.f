@@ -1,6 +1,6 @@
 *       Program ptoh 
 *----------------------------------------------------------------------*     
-* $Id: ptoh.f,v 2.9 2003/11/19 11:51:57 vflegel Exp $
+* $Id: ptoh.f,v 2.11 2003/12/01 13:33:05 vflegel Exp $
 *----------------------------------------------------------------------*     
 *       Function: Reformats profile -> hmm: in-fmt=PROSITE / out-fmt=SAM    
 *       Author:   Philipp Bucher
@@ -62,7 +62,8 @@
       Real              RD 
       Real              RI
       Real*8            DL
-      
+      Integer           INBP
+
 * initialization of controlled vocabularies
 
       Include          'cvini.f' 
@@ -73,13 +74,14 @@
 
       IRC=0
       FPRF='stdout'
+      INBP=0
 
 * command line arguments
       
       Call Repar(FPRF,FNUL,OPTF,OPFF,OPTH,OPTS,RD,RI,DL,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''ptoh 2.3 revision 3'',//
+     *      ''ptoh 2.3 revision 4'',//
      *      ''Usage: ptoh [ -fhsFDIL ] [ profile-file | - ] '',
      *      ''[ random-model-file ] [ parameters ]'',//
      *      )')
