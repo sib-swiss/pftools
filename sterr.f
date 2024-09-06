@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 1.2 April 1997
+*       Version:  This file is part of pftools release 2.0 June 1997
 *----------------------------------------------------------------------*     
         Parameter         (NERR=0) 
 

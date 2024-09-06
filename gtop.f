@@ -1,8 +1,8 @@
-        Program gtop 
+*       Program gtop 
 *----------------------------------------------------------------------*     
 *       Function: Reformats profiles: in-fmt=GRIBSKOV / out-fmt=PROSITE    
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.2 April 1997
+*       Version:  This file is part of pftools release 2.0 June 1997
 *----------------------------------------------------------------------*     
 *
 * DATA
@@ -10,7 +10,7 @@
 
 * array dimensions and I/O units
 
-        Parameter        (IDMP=8191)
+        Parameter        (IDMP=9999)
 
         Parameter        (NOUT=   6)    
         Parameter        (NGPR=  11)    
@@ -42,6 +42,8 @@
 
         IRC=0
         FGPR='-'
+        BLOG=0.0
+
 * read command line
 
            RL=NLOW
@@ -82,6 +84,7 @@
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 
      *     IDMP,CHIP,IIPP,CHMP,IMPP,
+     *     BLOG,FABC,P0,
      *     CHID,IIPD,CHMD,IMPD,
      *     IRC)
 

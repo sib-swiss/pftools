@@ -3,7 +3,7 @@
 *       Function: Scan a protein or DNA sequence library for profile 
 *                 matches 
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.2 April 1997
+*       Version:  This file is part of pftools release 2.0 June 1997
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -124,10 +124,10 @@
      *     FPRF,FSEQ,NCUC,KCUC,XCUC,IRC)
         If(IRC.NE.0) then 
            Write(NERR,'(
-     *      ''Usage: pfsearch [ -abfrsuxyz ] [ profile-file | - ] ''
+     *      ''Usage: pfsearch [ -abfrsuxyz ] [ profile-file | - ] '',
      *      ''[ seq-library-file | - ] [ parameters ]'',//,
      *      ''   valid parameters are:'',//,
-     *      ''                 [C=cut-off-value]          '',/,
+     *      ''                 [C=cut-off-value]          '',/
      *        )')
            Stop
         End if
@@ -149,6 +149,7 @@
         Call REPRF
      *    (MPRF,FPRF,
      *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     BLOG,FABC,P0,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP, 
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 

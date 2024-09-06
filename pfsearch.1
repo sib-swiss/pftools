@@ -1,10 +1,10 @@
-.TH PFSEARCH 1 "April 1997"
+.TH PFSEARCH 1 "April 1997" "pftools 2.0"
 .SH NAME
 pfsearch \- search a protein or DNA sequence library for sequence segments 
 matching a profile
 .SH SYNOPSIS
 .B pfsearch 
-[ -abfrsuxy ] [ profile-file | - ]
+[ -abfrsuxyz ] [ profile-file | - ]
             [ seq-library-file | - ]    [C=#] 
 .SH DESCRIPTION
 .B pfsearch 
@@ -12,7 +12,8 @@ compares a query profile against a DNA or protein sequence library.
 The result is an unsorted list of profile-sequence matches written to the standard output. 
 A variety of output formats containing different informations can be specified 
 via the options 
-.I -a, -r, -u, -s, -x, -y, -z
+.I -a, -r, -u, -s,
+.I -x, -y, -z,
 and the command-line parameter 
 .I C=#.
 .I profile-file
@@ -71,11 +72,11 @@ Over-writes the level zero cut-off value specified in
 the profile.
 An integer argument is interpreted as a raw score value,
 a decimal argument as a normalized score value. 
-.SH EXAMPLES
+.SH EXAMPLES 
 .TP
 (1)
 .B pfsearch
--f sh3.prf sh3.seq C=6.0
+\-f sh3.prf sh3.seq C=6.0
 
 Searches the Pearson/Fasta-formatted protein sequence library sh3.seq
 for SH3 domains with a cut-off value of 6.0 normalized score units.
@@ -85,11 +86,11 @@ sh3.prf contains the PROSITE entry SH3/PS50002.
 .TP
 (2)
 .B pfsearch
--bx ecp.prf CVPBR322 |
+\-bx ecp.prf CVPBR322 |
 .B psa2msa   
--du |    
+\-du |    
 .B readseq
--p -fMSF > ecp.msf
+\-p -fMSF > ecp.msf
 
 Generates a multiple sequence alignment  of potential
 .I E. coli

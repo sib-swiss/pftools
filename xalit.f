@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 1.2 April 1997
+*       Version:  This file is part of pftools release 2.0 June 1997
 *----------------------------------------------------------------------*     
         Subroutine XALIT
      *    (NABC,CABC,LPRF,LPCI,N1,N2,
@@ -48,11 +48,11 @@
 
         IRC=0
 
-        If(NABC.LT.20) then 
-           CABC(0)='N'
-        Else 
-           CABC(0)='X'
-        End if    
+C       If(NABC.LT.20) then 
+C          CABC(0)='N'
+C       Else 
+C          CABC(0)='X'
+C       End if    
 
         If((LPRF+1)*(JALE-JALB+1).GT.IDMM) then
            IRC=-1

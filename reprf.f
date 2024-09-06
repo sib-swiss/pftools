@@ -1,8 +1,9 @@
-*       Version:  This file is part of pftools release 1.2 April 1997
+*       Version:  This file is part of pftools release 2.0 June 1997
 *----------------------------------------------------------------------*     
         Subroutine REPRF
      *    (NPRF,FPRF,
      *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     BLOG,FABC,P0,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
@@ -95,6 +96,7 @@ C       Print *,CPDE
         LENP=0
 
         LPCI=.FALSE.
+        P0=0.0
 
 * - disjoint mode
 
@@ -177,19 +179,33 @@ C       Print *,CPDE
 
         If     (NKEY.EQ.1) then 
 
-           If(CPAR.EQ.'ALPHABET') then
+           If     (CPAR.EQ.'ALPHABET') then
               Read(CVAL,*,Err=999) CH64
               NABC=Lblnk(CH64)
               Read(CH64,'(64A)',Err=999)(CABC(ii1),ii1=1,NABC)
-           End if
-   
-           If(CPAR.EQ.'LENGTH') then
-              Read(CVAL,*,Err=999) LENP
-           End if
 
-           If(CPAR.EQ.'TOPOLOGY'.AND.CVAL.EQ.'CIRCULAR') then 
+              If(NABC.LT.20) then
+                CABC(0)='N'
+              Else
+                CABC(0)='X'
+              End if
+           Else if(CPAR.EQ.'LENGTH') then
+              Read(CVAL,*,Err=999) LENP
+           Else if(CPAR.EQ.'TOPOLOGY'.AND.CVAL.EQ.'CIRCULAR') then 
               LPCI=.TRUE.
-           End if 
+           Else if(CPAR.EQ.'LOG_BASE') then
+              Read(CVAL,*,Err=999) BLOG
+              If(P0.EQ.0.0) P0=1.0
+           Else if(CPAR.EQ.'P0') then
+              Read(CVAL,*,Err=999) P0 
+           Else if(CPAR.EQ.'P') then
+              L1=Lblnk(CVAL) 
+                 J1=1
+              Do  I1=1,L1
+                 If(CVAL(I1:I1).EQ.',') J1=J1+1
+              End do 
+              Read(CVAL,*,Err=999)(FABC(ii1),ii1=1,J1)
+           End if
            
 * - DISJOINT:
 

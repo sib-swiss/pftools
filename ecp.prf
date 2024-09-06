@@ -17,7 +17,7 @@ MA      TEXT='Log KBk2';
 MA   /CUT_OFF: LEVEL=2; SCORE=256; N_SCORE=55.0; MODE=1;
 MA   /CUT_OFF: LEVEL=1; SCORE=248; N_SCORE=50.0; MODE=1;
 MA   /CUT_OFF: LEVEL=0; SCORE=240; N_SCORE=45.0; MODE=1;
-MA   /DEFAULT: B0=*; B1=*; E0=*; E1=*; SY_M='*'; 
+MA   /DEFAULT: B0=*; B1=*; E0=*; E1=*; SY_M='*'; II=*;
 MA   /I: B0= 0; B1= 0;
 MA   /M: M= 11, 3, 3, 4;
 MA   /M: M=  8, 4, 2, 7;

@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 1.2 April 1997
+*       Version:  This file is part of pftools release 2.0 June 1997
 *----------------------------------------------------------------------*     
         Subroutine WRPRF
      *    (NOUT,
@@ -7,6 +7,7 @@
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP,
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 
      *     IDMP,CHIP,IIPP,CHMP,IMPP,
+     *     BLOG,FABC,P0,
      *     CHID,IIPD,CHMD,IMPD, 
      *     IRC)
 
@@ -52,6 +53,27 @@
            Data              CPSN(46)/'DE'/
  
         IRC=0
+
+* prevent meaningless parameters from being printed
+
+        If(.NOT.LPCI) then 
+           IIPP(MM,   0)=IIPD(MM)
+           IIPP(MI,   0)=IIPD(MI)
+           IIPP(MD,   0)=IIPD(MD)
+           IIPP(ME,   0)=IIPD(ME)
+           IIPP(DM,   0)=IIPD(DM)
+           IIPP(DI,   0)=IIPD(DI)
+           IIPP(DD,   0)=IIPD(DD)
+           IIPP(DE,   0)=IIPD(DE)
+           IIPP(MM,LPRF)=IIPD(MM)
+           IIPP(IM,LPRF)=IIPD(IM)
+           IIPP(DM,LPRF)=IIPD(DM)
+           IIPP(BM,LPRF)=IIPD(BM)
+           IIPP(MD,LPRF)=IIPD(MD)
+           IIPP(ID,LPRF)=IIPD(ID)
+           IIPP(DD,LPRF)=IIPD(DD)
+           IIPP(BD,LPRF)=IIPD(BD)
+        End if
  
 * write header
 
@@ -103,7 +125,28 @@
            JB=JB+19
         End if
 
+
+* - HMM parameters:
+
+        If(BLOG.NE.0) then 
+           Write(CPAR,'(''LOG_BASE='',F8.6,'';'')') BLOG
+           JP=18
+           Call slpar(CPAR,JP)
+           CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
+           JB=JB+JP+1
+
+           If(P0.NE.1.0) then
+              Write(CPAR,'(''P0='',F6.4,'';'')') P0
+              JP=10
+              Call slpar(CPAR,JP)
+              CBLK(JB+2:JB+JP+1)=CPAR(1:JP)
+              JB=JB+JP+1
+           End if 
+        End if 
+
         Call wrblk(NOUT,CBLK,JB)
+        If(BLOG.NE.0) Call wrnul(NOUT,NABC,FABC)
+     
 
 * write /DISJOINT: block 
 
@@ -727,4 +770,36 @@
         End if
 
         Return
+        End
+*----------------------------------------------------------------------*
+        Subroutine  wrnul(NOUT,NABC,FABC)
+
+        Real              FABC(0:26)
+        Character*80      RCEX
+
+        Write(RCEX,'(''MA      P='',10(F6.3,'',''))')
+     *    (100*FABC(ii1),ii1=1,MIN(10,NABC))
+        If(NABC.LE.10) then 
+           L=10+NABC*7
+           RCEX(L:L)=';'
+           Write(NOUT,'(80A)')(RCEX(ii1:ii1),ii1=1,L)
+           Go to 100
+        End if
+           L=80
+           Write(NOUT,'(80A)')(RCEX(ii1:ii1),ii1=1,L)
+
+           K1=11
+        Do I1=11,(NABC-1)/10*10,10
+           Write(NOUT,'(''MA        '',10(F6.3,'',''))')
+     *       (100*FABC(ii1),ii1=I1,I1+9)
+           K1=K1+10
+        End do 
+
+        Write(RCEX,'(''MA        '',10(F6.3,'',''))')
+     *    (100*FABC(ii1),ii1=I1,NABC)
+           L=10+(NABC-I1+1)*7
+           RCEX(L:L)=';'
+           Write(NOUT,'(80A)')(RCEX(ii1:ii1),ii1=1,L)
+
+  100   Return
         End

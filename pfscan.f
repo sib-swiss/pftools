@@ -2,7 +2,7 @@
 *----------------------------------------------------------------------*     
 *       Function: Scan a DNA or protein sequences with a profile library 
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.2 April 1997
+*       Version:  This file is part of pftools release 2.0 June 1997
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -202,6 +202,7 @@
         Call REPRF
      *    (MPRF,FPRF,
      *     CPID,CPAC,CPDE,NABC,CABC,LPRF,LPCI,
+     *     BLOG,FABC,P0,
      *     CDIS,JDIP,MDIS,NDIP,
      *     CNOR,JNOP,JNOR,MNOR,NNOR,NNPR,CNTX,RNOP, 
      *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT, 

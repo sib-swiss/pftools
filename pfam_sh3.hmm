@@ -1,0 +1,3023 @@
+# HMM v1.7
+57	# M -- length of model
+20	# alphabet length
+3	# alphabet type
+ACDEFGHIKLMNPQRSTVWY	# alphabet
+no	# Optional reference line annotation?
+no	# Optional consensus structure annotation?
+###MATCH_STATE 0 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.000000	# Symbol A probability
+0.000000	# Symbol C probability
+0.000000	# Symbol D probability
+0.000000	# Symbol E probability
+0.000000	# Symbol F probability
+0.000000	# Symbol G probability
+0.000000	# Symbol H probability
+0.000000	# Symbol I probability
+0.000000	# Symbol K probability
+0.000000	# Symbol L probability
+0.000000	# Symbol M probability
+0.000000	# Symbol N probability
+0.000000	# Symbol P probability
+0.000000	# Symbol Q probability
+0.000000	# Symbol R probability
+0.000000	# Symbol S probability
+0.000000	# Symbol T probability
+0.000000	# Symbol V probability
+0.000000	# Symbol W probability
+0.000000	# Symbol Y probability
+###DELETE_STATE 0
+0.000000	# t_m1
+0.000000	# t_d1
+0.000000	# t_i0
+###INSERT_STATE 0
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 1 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.015072	# Symbol A probability
+0.016249	# Symbol C probability
+0.051744	# Symbol D probability
+0.105966	# Symbol E probability
+0.035885	# Symbol F probability
+0.042244	# Symbol G probability
+0.021587	# Symbol H probability
+0.037635	# Symbol I probability
+0.128537	# Symbol K probability
+0.041521	# Symbol L probability
+0.035537	# Symbol M probability
+0.019354	# Symbol N probability
+0.132454	# Symbol P probability
+0.059354	# Symbol Q probability
+0.073196	# Symbol R probability
+0.039564	# Symbol S probability
+0.083279	# Symbol T probability
+0.025442	# Symbol V probability
+0.001209	# Symbol W probability
+0.034172	# Symbol Y probability
+###DELETE_STATE 1
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 1
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 2 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.058079	# Symbol A probability
+0.017165	# Symbol C probability
+0.006685	# Symbol D probability
+0.047359	# Symbol E probability
+0.044724	# Symbol F probability
+0.009680	# Symbol G probability
+0.006139	# Symbol H probability
+0.058933	# Symbol I probability
+0.121577	# Symbol K probability
+0.088387	# Symbol L probability
+0.033180	# Symbol M probability
+0.006649	# Symbol N probability
+0.024347	# Symbol P probability
+0.082507	# Symbol Q probability
+0.064633	# Symbol R probability
+0.037274	# Symbol S probability
+0.090416	# Symbol T probability
+0.098249	# Symbol V probability
+0.014882	# Symbol W probability
+0.089136	# Symbol Y probability
+###DELETE_STATE 2
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 2
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 3 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.169479	# Symbol A probability
+0.020719	# Symbol C probability
+0.004868	# Symbol D probability
+0.006444	# Symbol E probability
+0.068297	# Symbol F probability
+0.061215	# Symbol G probability
+0.022203	# Symbol H probability
+0.043977	# Symbol I probability
+0.010469	# Symbol K probability
+0.041193	# Symbol L probability
+0.003978	# Symbol M probability
+0.021385	# Symbol N probability
+0.006125	# Symbol P probability
+0.005194	# Symbol Q probability
+0.004667	# Symbol R probability
+0.012251	# Symbol S probability
+0.028358	# Symbol T probability
+0.387430	# Symbol V probability
+0.001535	# Symbol W probability
+0.080215	# Symbol Y probability
+###DELETE_STATE 3
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 3
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 4 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.017139	# Symbol A probability
+0.004530	# Symbol C probability
+0.006330	# Symbol D probability
+0.037815	# Symbol E probability
+0.006424	# Symbol F probability
+0.008755	# Symbol G probability
+0.005112	# Symbol H probability
+0.158723	# Symbol I probability
+0.188810	# Symbol K probability
+0.022979	# Symbol L probability
+0.014747	# Symbol M probability
+0.006648	# Symbol N probability
+0.006649	# Symbol P probability
+0.053877	# Symbol Q probability
+0.125648	# Symbol R probability
+0.012390	# Symbol S probability
+0.067375	# Symbol T probability
+0.231812	# Symbol V probability
+0.001063	# Symbol W probability
+0.023175	# Symbol Y probability
+###DELETE_STATE 4
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 4
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 5 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.719575	# Symbol A probability
+0.007315	# Symbol C probability
+0.005366	# Symbol D probability
+0.007819	# Symbol E probability
+0.004749	# Symbol F probability
+0.030838	# Symbol G probability
+0.003766	# Symbol H probability
+0.007800	# Symbol I probability
+0.012705	# Symbol K probability
+0.015143	# Symbol L probability
+0.002632	# Symbol M probability
+0.004770	# Symbol N probability
+0.007948	# Symbol P probability
+0.006040	# Symbol Q probability
+0.006270	# Symbol R probability
+0.033664	# Symbol S probability
+0.028264	# Symbol T probability
+0.090901	# Symbol V probability
+0.000862	# Symbol W probability
+0.003572	# Symbol Y probability
+###DELETE_STATE 5
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 5
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 6 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.030010	# Symbol A probability
+0.005479	# Symbol C probability
+0.004703	# Symbol D probability
+0.031233	# Symbol E probability
+0.008840	# Symbol F probability
+0.006910	# Symbol G probability
+0.003780	# Symbol H probability
+0.135022	# Symbol I probability
+0.112156	# Symbol K probability
+0.527564	# Symbol L probability
+0.016899	# Symbol M probability
+0.004845	# Symbol N probability
+0.005404	# Symbol P probability
+0.035812	# Symbol Q probability
+0.019677	# Symbol R probability
+0.010608	# Symbol S probability
+0.010557	# Symbol T probability
+0.024176	# Symbol V probability
+0.001212	# Symbol W probability
+0.005112	# Symbol Y probability
+###DELETE_STATE 6
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 6
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 7 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.027365	# Symbol A probability
+0.004163	# Symbol C probability
+0.004588	# Symbol D probability
+0.006341	# Symbol E probability
+0.143857	# Symbol F probability
+0.008513	# Symbol G probability
+0.039070	# Symbol H probability
+0.006844	# Symbol I probability
+0.027066	# Symbol K probability
+0.032811	# Symbol L probability
+0.002795	# Symbol M probability
+0.021772	# Symbol N probability
+0.004488	# Symbol P probability
+0.006320	# Symbol Q probability
+0.005320	# Symbol R probability
+0.025206	# Symbol S probability
+0.007775	# Symbol T probability
+0.011169	# Symbol V probability
+0.004394	# Symbol W probability
+0.610143	# Symbol Y probability
+###DELETE_STATE 7
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 7
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 8 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.076320	# Symbol A probability
+0.003311	# Symbol C probability
+0.590305	# Symbol D probability
+0.047716	# Symbol E probability
+0.003515	# Symbol F probability
+0.032670	# Symbol G probability
+0.005419	# Symbol H probability
+0.003611	# Symbol I probability
+0.029187	# Symbol K probability
+0.021353	# Symbol L probability
+0.001563	# Symbol M probability
+0.025405	# Symbol N probability
+0.068142	# Symbol P probability
+0.008787	# Symbol Q probability
+0.005508	# Symbol R probability
+0.056544	# Symbol S probability
+0.010464	# Symbol T probability
+0.006781	# Symbol V probability
+0.000681	# Symbol W probability
+0.002720	# Symbol Y probability
+###DELETE_STATE 8
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 8
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 9 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.011267	# Symbol A probability
+0.004250	# Symbol C probability
+0.004239	# Symbol D probability
+0.005491	# Symbol E probability
+0.338664	# Symbol F probability
+0.023961	# Symbol G probability
+0.012114	# Symbol H probability
+0.007861	# Symbol I probability
+0.008969	# Symbol K probability
+0.030372	# Symbol L probability
+0.003149	# Symbol M probability
+0.004556	# Symbol N probability
+0.004021	# Symbol P probability
+0.005387	# Symbol Q probability
+0.004558	# Symbol R probability
+0.008940	# Symbol S probability
+0.007464	# Symbol T probability
+0.011694	# Symbol V probability
+0.004557	# Symbol W probability
+0.498486	# Symbol Y probability
+###DELETE_STATE 9
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 9
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 10 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.110539	# Symbol A probability
+0.018055	# Symbol C probability
+0.103847	# Symbol D probability
+0.126976	# Symbol E probability
+0.021172	# Symbol F probability
+0.012254	# Symbol G probability
+0.020090	# Symbol H probability
+0.006464	# Symbol I probability
+0.083304	# Symbol K probability
+0.024257	# Symbol L probability
+0.028933	# Symbol M probability
+0.050860	# Symbol N probability
+0.054261	# Symbol P probability
+0.107319	# Symbol Q probability
+0.008268	# Symbol R probability
+0.042989	# Symbol S probability
+0.096130	# Symbol T probability
+0.079023	# Symbol V probability
+0.001003	# Symbol W probability
+0.004254	# Symbol Y probability
+###DELETE_STATE 10
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 10
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 11 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.438101	# Symbol A probability
+0.005410	# Symbol C probability
+0.006909	# Symbol D probability
+0.020287	# Symbol E probability
+0.003826	# Symbol F probability
+0.135776	# Symbol G probability
+0.004280	# Symbol H probability
+0.004497	# Symbol I probability
+0.064556	# Symbol K probability
+0.010686	# Symbol L probability
+0.002115	# Symbol M probability
+0.022410	# Symbol N probability
+0.113147	# Symbol P probability
+0.038171	# Symbol Q probability
+0.007026	# Symbol R probability
+0.070617	# Symbol S probability
+0.037252	# Symbol T probability
+0.010924	# Symbol V probability
+0.000858	# Symbol W probability
+0.003152	# Symbol Y probability
+###DELETE_STATE 11
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 11
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 12 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.042337	# Symbol A probability
+0.003877	# Symbol C probability
+0.024557	# Symbol D probability
+0.120033	# Symbol E probability
+0.004470	# Symbol F probability
+0.051112	# Symbol G probability
+0.025499	# Symbol H probability
+0.038149	# Symbol I probability
+0.061751	# Symbol K probability
+0.013686	# Symbol L probability
+0.025460	# Symbol M probability
+0.063261	# Symbol N probability
+0.007309	# Symbol P probability
+0.116691	# Symbol Q probability
+0.119536	# Symbol R probability
+0.096989	# Symbol S probability
+0.109270	# Symbol T probability
+0.070903	# Symbol V probability
+0.000996	# Symbol W probability
+0.004115	# Symbol Y probability
+###DELETE_STATE 12
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 12
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 13 ( ) ( )
+0.908214	# t_m1
+0.000462	# t_d1
+0.091324	# t_i0
+0.055603	# Symbol A probability
+0.003518	# Symbol C probability
+0.130646	# Symbol D probability
+0.148887	# Symbol E probability
+0.003898	# Symbol F probability
+0.083753	# Symbol G probability
+0.037337	# Symbol H probability
+0.014122	# Symbol I probability
+0.048067	# Symbol K probability
+0.009581	# Symbol L probability
+0.017720	# Symbol M probability
+0.059904	# Symbol N probability
+0.026097	# Symbol P probability
+0.094961	# Symbol Q probability
+0.044701	# Symbol R probability
+0.132581	# Symbol S probability
+0.075532	# Symbol T probability
+0.008434	# Symbol V probability
+0.000917	# Symbol W probability
+0.003741	# Symbol Y probability
+###DELETE_STATE 13
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 13
+0.686434	# t_m1
+0.005387	# t_d1
+0.308179	# t_i0
+0.087135	# Symbol A probability
+0.033467	# Symbol C probability
+0.046901	# Symbol D probability
+0.049526	# Symbol E probability
+0.039767	# Symbol F probability
+0.088603	# Symbol G probability
+0.033617	# Symbol H probability
+0.036887	# Symbol I probability
+0.080473	# Symbol K probability
+0.085353	# Symbol L probability
+0.014749	# Symbol M probability
+0.040451	# Symbol N probability
+0.050676	# Symbol P probability
+0.038257	# Symbol Q probability
+0.040897	# Symbol R probability
+0.069585	# Symbol S probability
+0.058535	# Symbol T probability
+0.064715	# Symbol V probability
+0.010489	# Symbol W probability
+0.029918	# Symbol Y probability
+###MATCH_STATE 14 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.113494	# Symbol A probability
+0.003751	# Symbol C probability
+0.156867	# Symbol D probability
+0.113638	# Symbol E probability
+0.003488	# Symbol F probability
+0.089807	# Symbol G probability
+0.015000	# Symbol H probability
+0.003561	# Symbol I probability
+0.047174	# Symbol K probability
+0.008077	# Symbol L probability
+0.001844	# Symbol M probability
+0.009205	# Symbol N probability
+0.167785	# Symbol P probability
+0.024576	# Symbol Q probability
+0.019227	# Symbol R probability
+0.170949	# Symbol S probability
+0.039890	# Symbol T probability
+0.007802	# Symbol V probability
+0.000796	# Symbol W probability
+0.003071	# Symbol Y probability
+###DELETE_STATE 14
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 14
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 15 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.014915	# Symbol A probability
+0.015649	# Symbol C probability
+0.309105	# Symbol D probability
+0.109919	# Symbol E probability
+0.004124	# Symbol F probability
+0.119061	# Symbol G probability
+0.018113	# Symbol H probability
+0.003569	# Symbol I probability
+0.031928	# Symbol K probability
+0.008235	# Symbol L probability
+0.024317	# Symbol M probability
+0.058047	# Symbol N probability
+0.007506	# Symbol P probability
+0.049841	# Symbol Q probability
+0.040857	# Symbol R probability
+0.118912	# Symbol S probability
+0.040165	# Symbol T probability
+0.006985	# Symbol V probability
+0.000926	# Symbol W probability
+0.017828	# Symbol Y probability
+###DELETE_STATE 15
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 15
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 16 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.012955	# Symbol A probability
+0.002316	# Symbol C probability
+0.243369	# Symbol D probability
+0.522603	# Symbol E probability
+0.019853	# Symbol F probability
+0.011562	# Symbol G probability
+0.041519	# Symbol H probability
+0.003204	# Symbol I probability
+0.021606	# Symbol K probability
+0.006887	# Symbol L probability
+0.001651	# Symbol M probability
+0.021872	# Symbol N probability
+0.008096	# Symbol P probability
+0.025505	# Symbol Q probability
+0.008077	# Symbol R probability
+0.016022	# Symbol S probability
+0.021081	# Symbol T probability
+0.006988	# Symbol V probability
+0.000872	# Symbol W probability
+0.003961	# Symbol Y probability
+###DELETE_STATE 16
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 16
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 17 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.016505	# Symbol A probability
+0.026170	# Symbol C probability
+0.003315	# Symbol D probability
+0.004716	# Symbol E probability
+0.010025	# Symbol F probability
+0.006033	# Symbol G probability
+0.003133	# Symbol H probability
+0.092381	# Symbol I probability
+0.010257	# Symbol K probability
+0.665000	# Symbol L probability
+0.037844	# Symbol M probability
+0.003768	# Symbol N probability
+0.004848	# Symbol P probability
+0.004997	# Symbol Q probability
+0.005112	# Symbol R probability
+0.009232	# Symbol S probability
+0.011016	# Symbol T probability
+0.078872	# Symbol V probability
+0.001318	# Symbol W probability
+0.005456	# Symbol Y probability
+###DELETE_STATE 17
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 17
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 18 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.071484	# Symbol A probability
+0.004491	# Symbol C probability
+0.051986	# Symbol D probability
+0.038896	# Symbol E probability
+0.003935	# Symbol F probability
+0.056761	# Symbol G probability
+0.005252	# Symbol H probability
+0.004104	# Symbol I probability
+0.033245	# Symbol K probability
+0.009698	# Symbol L probability
+0.002207	# Symbol M probability
+0.038990	# Symbol N probability
+0.082535	# Symbol P probability
+0.064591	# Symbol Q probability
+0.018299	# Symbol R probability
+0.342426	# Symbol S probability
+0.158150	# Symbol T probability
+0.008753	# Symbol V probability
+0.000897	# Symbol W probability
+0.003302	# Symbol Y probability
+###DELETE_STATE 18
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 18
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 19 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.028171	# Symbol A probability
+0.005291	# Symbol C probability
+0.004233	# Symbol D probability
+0.004995	# Symbol E probability
+0.475776	# Symbol F probability
+0.007887	# Symbol G probability
+0.005079	# Symbol H probability
+0.081393	# Symbol I probability
+0.009003	# Symbol K probability
+0.205859	# Symbol L probability
+0.042383	# Symbol M probability
+0.004013	# Symbol N probability
+0.004313	# Symbol P probability
+0.004427	# Symbol Q probability
+0.004496	# Symbol R probability
+0.009958	# Symbol S probability
+0.023563	# Symbol T probability
+0.061093	# Symbol V probability
+0.002823	# Symbol W probability
+0.015244	# Symbol Y probability
+###DELETE_STATE 19
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 19
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 20 ( ) ( )
+0.981444	# t_m1
+0.000462	# t_d1
+0.018095	# t_i0
+0.056258	# Symbol A probability
+0.016375	# Symbol C probability
+0.021024	# Symbol D probability
+0.066478	# Symbol E probability
+0.004783	# Symbol F probability
+0.046844	# Symbol G probability
+0.022175	# Symbol H probability
+0.005179	# Symbol I probability
+0.273512	# Symbol K probability
+0.072192	# Symbol L probability
+0.044535	# Symbol M probability
+0.034588	# Symbol N probability
+0.021582	# Symbol P probability
+0.044619	# Symbol Q probability
+0.119941	# Symbol R probability
+0.059890	# Symbol S probability
+0.061064	# Symbol T probability
+0.009800	# Symbol V probability
+0.001053	# Symbol W probability
+0.018107	# Symbol Y probability
+###DELETE_STATE 20
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 20
+0.701178	# t_m1
+0.014577	# t_d1
+0.284245	# t_i0
+0.087129	# Symbol A probability
+0.033470	# Symbol C probability
+0.046869	# Symbol D probability
+0.049541	# Symbol E probability
+0.039770	# Symbol F probability
+0.088609	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080479	# Symbol K probability
+0.085359	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050679	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069579	# Symbol S probability
+0.058539	# Symbol T probability
+0.064719	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 21 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.058444	# Symbol A probability
+0.003107	# Symbol C probability
+0.010228	# Symbol D probability
+0.195231	# Symbol E probability
+0.003639	# Symbol F probability
+0.010506	# Symbol G probability
+0.005889	# Symbol H probability
+0.020253	# Symbol I probability
+0.329030	# Symbol K probability
+0.025235	# Symbol L probability
+0.002457	# Symbol M probability
+0.008221	# Symbol N probability
+0.074540	# Symbol P probability
+0.054065	# Symbol Q probability
+0.101587	# Symbol R probability
+0.030674	# Symbol S probability
+0.026114	# Symbol T probability
+0.036387	# Symbol V probability
+0.000861	# Symbol W probability
+0.003533	# Symbol Y probability
+###DELETE_STATE 21
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 21
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 22 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.027760	# Symbol A probability
+0.002589	# Symbol C probability
+0.039573	# Symbol D probability
+0.006767	# Symbol E probability
+0.002959	# Symbol F probability
+0.706629	# Symbol G probability
+0.004406	# Symbol H probability
+0.002195	# Symbol I probability
+0.025041	# Symbol K probability
+0.005047	# Symbol L probability
+0.001205	# Symbol M probability
+0.105790	# Symbol N probability
+0.005468	# Symbol P probability
+0.004881	# Symbol Q probability
+0.005087	# Symbol R probability
+0.026695	# Symbol S probability
+0.019510	# Symbol T probability
+0.005064	# Symbol V probability
+0.000973	# Symbol W probability
+0.002360	# Symbol Y probability
+###DELETE_STATE 22
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 22
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 23 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.075596	# Symbol A probability
+0.002967	# Symbol C probability
+0.474898	# Symbol D probability
+0.252489	# Symbol E probability
+0.003421	# Symbol F probability
+0.014097	# Symbol G probability
+0.006367	# Symbol H probability
+0.003308	# Symbol I probability
+0.017816	# Symbol K probability
+0.006578	# Symbol L probability
+0.001561	# Symbol M probability
+0.040106	# Symbol N probability
+0.008320	# Symbol P probability
+0.034293	# Symbol Q probability
+0.006763	# Symbol R probability
+0.030583	# Symbol S probability
+0.010298	# Symbol T probability
+0.006835	# Symbol V probability
+0.000729	# Symbol W probability
+0.002974	# Symbol Y probability
+###DELETE_STATE 23
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 23
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 24 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.047546	# Symbol A probability
+0.004828	# Symbol C probability
+0.006946	# Symbol D probability
+0.070290	# Symbol E probability
+0.047446	# Symbol F probability
+0.009057	# Symbol G probability
+0.004636	# Symbol H probability
+0.178132	# Symbol I probability
+0.132900	# Symbol K probability
+0.046894	# Symbol L probability
+0.020309	# Symbol M probability
+0.020109	# Symbol N probability
+0.026124	# Symbol P probability
+0.041319	# Symbol Q probability
+0.045216	# Symbol R probability
+0.012944	# Symbol S probability
+0.081813	# Symbol T probability
+0.196926	# Symbol V probability
+0.001131	# Symbol W probability
+0.005437	# Symbol Y probability
+###DELETE_STATE 24
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 24
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 25 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.016407	# Symbol A probability
+0.025934	# Symbol C probability
+0.004066	# Symbol D probability
+0.005138	# Symbol E probability
+0.085339	# Symbol F probability
+0.006788	# Symbol G probability
+0.004537	# Symbol H probability
+0.300217	# Symbol I probability
+0.009440	# Symbol K probability
+0.209422	# Symbol L probability
+0.074357	# Symbol M probability
+0.003992	# Symbol N probability
+0.005015	# Symbol P probability
+0.004904	# Symbol Q probability
+0.004575	# Symbol R probability
+0.009512	# Symbol S probability
+0.010950	# Symbol T probability
+0.147340	# Symbol V probability
+0.001740	# Symbol W probability
+0.070328	# Symbol Y probability
+###DELETE_STATE 25
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 25
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 26 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.015079	# Symbol A probability
+0.018567	# Symbol C probability
+0.038929	# Symbol D probability
+0.083211	# Symbol E probability
+0.076381	# Symbol F probability
+0.009425	# Symbol G probability
+0.060237	# Symbol H probability
+0.093026	# Symbol I probability
+0.079659	# Symbol K probability
+0.070831	# Symbol L probability
+0.016382	# Symbol M probability
+0.019885	# Symbol N probability
+0.006385	# Symbol P probability
+0.077593	# Symbol Q probability
+0.040901	# Symbol R probability
+0.030070	# Symbol S probability
+0.129071	# Symbol T probability
+0.052745	# Symbol V probability
+0.017176	# Symbol W probability
+0.064448	# Symbol Y probability
+###DELETE_STATE 26
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 26
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 27 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.018743	# Symbol A probability
+0.005888	# Symbol C probability
+0.017947	# Symbol D probability
+0.006159	# Symbol E probability
+0.008334	# Symbol F probability
+0.007914	# Symbol G probability
+0.003594	# Symbol H probability
+0.253385	# Symbol I probability
+0.010027	# Symbol K probability
+0.141473	# Symbol L probability
+0.005426	# Symbol M probability
+0.053886	# Symbol N probability
+0.005711	# Symbol P probability
+0.004809	# Symbol Q probability
+0.004315	# Symbol R probability
+0.009960	# Symbol S probability
+0.013039	# Symbol T probability
+0.423078	# Symbol V probability
+0.000989	# Symbol W probability
+0.005323	# Symbol Y probability
+###DELETE_STATE 27
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 27
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 28 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.017574	# Symbol A probability
+0.036520	# Symbol C probability
+0.004460	# Symbol D probability
+0.005547	# Symbol E probability
+0.024799	# Symbol F probability
+0.007456	# Symbol G probability
+0.033328	# Symbol H probability
+0.223172	# Symbol I probability
+0.010165	# Symbol K probability
+0.367597	# Symbol L probability
+0.005745	# Symbol M probability
+0.004894	# Symbol N probability
+0.005261	# Symbol P probability
+0.004913	# Symbol Q probability
+0.004882	# Symbol R probability
+0.068885	# Symbol S probability
+0.048191	# Symbol T probability
+0.119649	# Symbol V probability
+0.001200	# Symbol W probability
+0.005764	# Symbol Y probability
+###DELETE_STATE 28
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 28
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 29 ( ) ( )
+0.943337	# t_m1
+0.055739	# t_d1
+0.000923	# t_i0
+0.086775	# Symbol A probability
+0.003226	# Symbol C probability
+0.150082	# Symbol D probability
+0.215112	# Symbol E probability
+0.003525	# Symbol F probability
+0.058661	# Symbol G probability
+0.024377	# Symbol H probability
+0.003366	# Symbol I probability
+0.078321	# Symbol K probability
+0.007863	# Symbol L probability
+0.001860	# Symbol M probability
+0.150316	# Symbol N probability
+0.007528	# Symbol P probability
+0.045754	# Symbol Q probability
+0.034024	# Symbol R probability
+0.090041	# Symbol S probability
+0.027687	# Symbol T probability
+0.007228	# Symbol V probability
+0.000806	# Symbol W probability
+0.003448	# Symbol Y probability
+###DELETE_STATE 29
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 29
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 30 ( ) ( )
+0.998534	# t_m1
+0.000489	# t_d1
+0.000977	# t_i0
+0.014830	# Symbol A probability
+0.003379	# Symbol C probability
+0.156993	# Symbol D probability
+0.064041	# Symbol E probability
+0.018216	# Symbol F probability
+0.011809	# Symbol G probability
+0.022109	# Symbol H probability
+0.019365	# Symbol I probability
+0.294224	# Symbol K probability
+0.012197	# Symbol L probability
+0.027252	# Symbol M probability
+0.032805	# Symbol N probability
+0.007705	# Symbol P probability
+0.050719	# Symbol Q probability
+0.109816	# Symbol R probability
+0.050955	# Symbol S probability
+0.033794	# Symbol T probability
+0.039858	# Symbol V probability
+0.001097	# Symbol W probability
+0.028834	# Symbol Y probability
+###DELETE_STATE 30
+0.968148	# t_m1
+0.022751	# t_d1
+0.009100	# t_i0
+###INSERT_STATE 30
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 31 ( ) ( )
+0.950618	# t_m1
+0.048459	# t_d1
+0.000923	# t_i0
+0.028302	# Symbol A probability
+0.004122	# Symbol C probability
+0.100764	# Symbol D probability
+0.103747	# Symbol E probability
+0.019916	# Symbol F probability
+0.030419	# Symbol G probability
+0.029995	# Symbol H probability
+0.031968	# Symbol I probability
+0.084475	# Symbol K probability
+0.063491	# Symbol L probability
+0.002864	# Symbol M probability
+0.055791	# Symbol N probability
+0.039110	# Symbol P probability
+0.037787	# Symbol Q probability
+0.007377	# Symbol R probability
+0.175900	# Symbol S probability
+0.075060	# Symbol T probability
+0.103653	# Symbol V probability
+0.000948	# Symbol W probability
+0.004311	# Symbol Y probability
+###DELETE_STATE 31
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 31
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 32 ( ) ( )
+0.998546	# t_m1
+0.000485	# t_d1
+0.000970	# t_i0
+0.041509	# Symbol A probability
+0.003116	# Symbol C probability
+0.208795	# Symbol D probability
+0.173665	# Symbol E probability
+0.004373	# Symbol F probability
+0.045012	# Symbol G probability
+0.019892	# Symbol H probability
+0.003754	# Symbol I probability
+0.093293	# Symbol K probability
+0.025448	# Symbol L probability
+0.001931	# Symbol M probability
+0.160668	# Symbol N probability
+0.064411	# Symbol P probability
+0.025571	# Symbol Q probability
+0.008396	# Symbol R probability
+0.054413	# Symbol S probability
+0.028545	# Symbol T probability
+0.007496	# Symbol V probability
+0.000928	# Symbol W probability
+0.028785	# Symbol Y probability
+###DELETE_STATE 32
+0.965685	# t_m1
+0.024510	# t_d1
+0.009804	# t_i0
+###INSERT_STATE 32
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 33 ( ) ( )
+0.095530	# t_m1
+0.000462	# t_d1
+0.904009	# t_i0
+0.089422	# Symbol A probability
+0.018713	# Symbol C probability
+0.199591	# Symbol D probability
+0.135997	# Symbol E probability
+0.003483	# Symbol F probability
+0.175285	# Symbol G probability
+0.020350	# Symbol H probability
+0.003293	# Symbol I probability
+0.039762	# Symbol K probability
+0.007370	# Symbol L probability
+0.001697	# Symbol M probability
+0.059332	# Symbol N probability
+0.042735	# Symbol P probability
+0.021481	# Symbol Q probability
+0.033096	# Symbol R probability
+0.112473	# Symbol S probability
+0.024993	# Symbol T probability
+0.006999	# Symbol V probability
+0.000827	# Symbol W probability
+0.003102	# Symbol Y probability
+###DELETE_STATE 33
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 33
+0.687114	# t_m1
+0.000682	# t_d1
+0.312205	# t_i0
+0.087067	# Symbol A probability
+0.033442	# Symbol C probability
+0.046994	# Symbol D probability
+0.049604	# Symbol E probability
+0.039747	# Symbol F probability
+0.088723	# Symbol G probability
+0.033639	# Symbol H probability
+0.036869	# Symbol I probability
+0.080448	# Symbol K probability
+0.085296	# Symbol L probability
+0.014751	# Symbol M probability
+0.040481	# Symbol N probability
+0.050685	# Symbol P probability
+0.038258	# Symbol Q probability
+0.040865	# Symbol R probability
+0.069543	# Symbol S probability
+0.058490	# Symbol T probability
+0.064684	# Symbol V probability
+0.010494	# Symbol W probability
+0.029921	# Symbol Y probability
+###MATCH_STATE 34 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.007856	# Symbol A probability
+0.004268	# Symbol C probability
+0.002988	# Symbol D probability
+0.004466	# Symbol E probability
+0.014343	# Symbol F probability
+0.011299	# Symbol G probability
+0.004287	# Symbol H probability
+0.003326	# Symbol I probability
+0.007256	# Symbol K probability
+0.010884	# Symbol L probability
+0.002660	# Symbol M probability
+0.002578	# Symbol N probability
+0.003231	# Symbol P probability
+0.004878	# Symbol Q probability
+0.003688	# Symbol R probability
+0.006273	# Symbol S probability
+0.007464	# Symbol T probability
+0.005835	# Symbol V probability
+0.877160	# Symbol W probability
+0.015260	# Symbol Y probability
+###DELETE_STATE 34
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 34
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 35 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.027597	# Symbol A probability
+0.047396	# Symbol C probability
+0.003661	# Symbol D probability
+0.005023	# Symbol E probability
+0.044617	# Symbol F probability
+0.010368	# Symbol G probability
+0.005386	# Symbol H probability
+0.006198	# Symbol I probability
+0.008584	# Symbol K probability
+0.086220	# Symbol L probability
+0.016388	# Symbol M probability
+0.003641	# Symbol N probability
+0.004040	# Symbol P probability
+0.005187	# Symbol Q probability
+0.004244	# Symbol R probability
+0.034416	# Symbol S probability
+0.036543	# Symbol T probability
+0.026443	# Symbol V probability
+0.527006	# Symbol W probability
+0.097042	# Symbol Y probability
+###DELETE_STATE 35
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 35
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 36 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.014985	# Symbol A probability
+0.003599	# Symbol C probability
+0.051663	# Symbol D probability
+0.131766	# Symbol E probability
+0.050094	# Symbol F probability
+0.009967	# Symbol G probability
+0.006238	# Symbol H probability
+0.019874	# Symbol I probability
+0.228722	# Symbol K probability
+0.086046	# Symbol L probability
+0.018353	# Symbol M probability
+0.018731	# Symbol N probability
+0.006950	# Symbol P probability
+0.033404	# Symbol Q probability
+0.131822	# Symbol R probability
+0.028764	# Symbol S probability
+0.084141	# Symbol T probability
+0.040992	# Symbol V probability
+0.001264	# Symbol W probability
+0.032625	# Symbol Y probability
+###DELETE_STATE 36
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 36
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 37 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.285017	# Symbol A probability
+0.056800	# Symbol C probability
+0.005634	# Symbol D probability
+0.006175	# Symbol E probability
+0.004599	# Symbol F probability
+0.333093	# Symbol G probability
+0.003538	# Symbol H probability
+0.040571	# Symbol I probability
+0.010126	# Symbol K probability
+0.014645	# Symbol L probability
+0.002556	# Symbol M probability
+0.022975	# Symbol N probability
+0.006255	# Symbol P probability
+0.004814	# Symbol Q probability
+0.004852	# Symbol R probability
+0.015445	# Symbol S probability
+0.010532	# Symbol T probability
+0.168040	# Symbol V probability
+0.000948	# Symbol W probability
+0.003385	# Symbol Y probability
+###DELETE_STATE 37
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 37
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 38 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.038701	# Symbol A probability
+0.019357	# Symbol C probability
+0.033965	# Symbol D probability
+0.195661	# Symbol E probability
+0.004207	# Symbol F probability
+0.010757	# Symbol G probability
+0.018830	# Symbol H probability
+0.032438	# Symbol I probability
+0.141689	# Symbol K probability
+0.030083	# Symbol L probability
+0.018348	# Symbol M probability
+0.025623	# Symbol N probability
+0.007234	# Symbol P probability
+0.088170	# Symbol Q probability
+0.225282	# Symbol R probability
+0.028801	# Symbol S probability
+0.024479	# Symbol T probability
+0.051400	# Symbol V probability
+0.000953	# Symbol W probability
+0.004021	# Symbol Y probability
+###DELETE_STATE 38
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 38
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 39 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.027434	# Symbol A probability
+0.078244	# Symbol C probability
+0.070777	# Symbol D probability
+0.009225	# Symbol E probability
+0.023434	# Symbol F probability
+0.011837	# Symbol G probability
+0.005934	# Symbol H probability
+0.031069	# Symbol I probability
+0.062168	# Symbol K probability
+0.176234	# Symbol L probability
+0.018694	# Symbol M probability
+0.142796	# Symbol N probability
+0.036017	# Symbol P probability
+0.007218	# Symbol Q probability
+0.055837	# Symbol R probability
+0.112643	# Symbol S probability
+0.023267	# Symbol T probability
+0.064187	# Symbol V probability
+0.001186	# Symbol W probability
+0.041798	# Symbol Y probability
+###DELETE_STATE 39
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 39
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 40 ( ) ( )
+0.773468	# t_m1
+0.225609	# t_d1
+0.000923	# t_i0
+0.055321	# Symbol A probability
+0.004071	# Symbol C probability
+0.078426	# Symbol D probability
+0.023355	# Symbol E probability
+0.019690	# Symbol F probability
+0.047978	# Symbol G probability
+0.030681	# Symbol H probability
+0.065901	# Symbol I probability
+0.144953	# Symbol K probability
+0.121995	# Symbol L probability
+0.016879	# Symbol M probability
+0.107534	# Symbol N probability
+0.037958	# Symbol P probability
+0.052110	# Symbol Q probability
+0.044719	# Symbol R probability
+0.044715	# Symbol S probability
+0.043665	# Symbol T probability
+0.041499	# Symbol V probability
+0.001057	# Symbol W probability
+0.017495	# Symbol Y probability
+###DELETE_STATE 40
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 40
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 41 ( ) ( )
+0.801789	# t_m1
+0.197020	# t_d1
+0.001191	# t_i0
+0.069788	# Symbol A probability
+0.005021	# Symbol C probability
+0.125993	# Symbol D probability
+0.032605	# Symbol E probability
+0.006028	# Symbol F probability
+0.146928	# Symbol G probability
+0.006873	# Symbol H probability
+0.020544	# Symbol I probability
+0.037629	# Symbol K probability
+0.059470	# Symbol L probability
+0.019962	# Symbol M probability
+0.113129	# Symbol N probability
+0.008314	# Symbol P probability
+0.009262	# Symbol Q probability
+0.060339	# Symbol R probability
+0.078306	# Symbol S probability
+0.117333	# Symbol T probability
+0.062540	# Symbol V probability
+0.001225	# Symbol W probability
+0.018712	# Symbol Y probability
+###DELETE_STATE 41
+0.158212	# t_m1
+0.838386	# t_d1
+0.003402	# t_i0
+###INSERT_STATE 41
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 42 ( ) ( )
+0.793317	# t_m1
+0.205201	# t_d1
+0.001482	# t_i0
+0.047278	# Symbol A probability
+0.005562	# Symbol C probability
+0.063049	# Symbol D probability
+0.013789	# Symbol E probability
+0.005304	# Symbol F probability
+0.261832	# Symbol G probability
+0.007098	# Symbol H probability
+0.005502	# Symbol I probability
+0.039732	# Symbol K probability
+0.013024	# Symbol L probability
+0.002724	# Symbol M probability
+0.075328	# Symbol N probability
+0.009995	# Symbol P probability
+0.033453	# Symbol Q probability
+0.050452	# Symbol R probability
+0.087551	# Symbol S probability
+0.259922	# Symbol T probability
+0.012619	# Symbol V probability
+0.001434	# Symbol W probability
+0.004352	# Symbol Y probability
+###DELETE_STATE 42
+0.101353	# t_m1
+0.896467	# t_d1
+0.002180	# t_i0
+###INSERT_STATE 42
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 43 ( ) ( )
+0.216600	# t_m1
+0.781536	# t_d1
+0.001864	# t_i0
+0.045994	# Symbol A probability
+0.005526	# Symbol C probability
+0.014316	# Symbol D probability
+0.015053	# Symbol E probability
+0.006833	# Symbol F probability
+0.288088	# Symbol G probability
+0.036298	# Symbol H probability
+0.007592	# Symbol I probability
+0.068076	# Symbol K probability
+0.091219	# Symbol L probability
+0.003951	# Symbol M probability
+0.181097	# Symbol N probability
+0.009819	# Symbol P probability
+0.032133	# Symbol Q probability
+0.080783	# Symbol R probability
+0.076106	# Symbol S probability
+0.016804	# Symbol T probability
+0.012777	# Symbol V probability
+0.001559	# Symbol W probability
+0.005977	# Symbol Y probability
+###DELETE_STATE 43
+0.588366	# t_m1
+0.409959	# t_d1
+0.001676	# t_i0
+###INSERT_STATE 43
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 44 ( ) ( )
+0.953307	# t_m1
+0.001184	# t_d1
+0.045509	# t_i0
+0.031271	# Symbol A probability
+0.004767	# Symbol C probability
+0.067726	# Symbol D probability
+0.014635	# Symbol E probability
+0.005665	# Symbol F probability
+0.626877	# Symbol G probability
+0.008418	# Symbol H probability
+0.004108	# Symbol I probability
+0.047853	# Symbol K probability
+0.009633	# Symbol L probability
+0.002354	# Symbol M probability
+0.063055	# Symbol N probability
+0.010756	# Symbol P probability
+0.010237	# Symbol Q probability
+0.034739	# Symbol R probability
+0.028528	# Symbol S probability
+0.013570	# Symbol T probability
+0.009371	# Symbol V probability
+0.001882	# Symbol W probability
+0.004554	# Symbol Y probability
+###DELETE_STATE 44
+0.826830	# t_m1
+0.171764	# t_d1
+0.001406	# t_i0
+###INSERT_STATE 44
+0.552060	# t_m1
+0.011569	# t_d1
+0.436371	# t_i0
+0.087128	# Symbol A probability
+0.033469	# Symbol C probability
+0.046869	# Symbol D probability
+0.049540	# Symbol E probability
+0.039769	# Symbol F probability
+0.088608	# Symbol G probability
+0.033619	# Symbol H probability
+0.036889	# Symbol I probability
+0.080478	# Symbol K probability
+0.085369	# Symbol L probability
+0.014750	# Symbol M probability
+0.040429	# Symbol N probability
+0.050679	# Symbol P probability
+0.038259	# Symbol Q probability
+0.040899	# Symbol R probability
+0.069578	# Symbol S probability
+0.058539	# Symbol T probability
+0.064719	# Symbol V probability
+0.010490	# Symbol W probability
+0.029919	# Symbol Y probability
+###MATCH_STATE 45 ( ) ( )
+0.998443	# t_m1
+0.000519	# t_d1
+0.001038	# t_i0
+0.016338	# Symbol A probability
+0.003338	# Symbol C probability
+0.010352	# Symbol D probability
+0.103423	# Symbol E probability
+0.004197	# Symbol F probability
+0.045514	# Symbol G probability
+0.035678	# Symbol H probability
+0.017072	# Symbol I probability
+0.254413	# Symbol K probability
+0.012542	# Symbol L probability
+0.018458	# Symbol M probability
+0.040080	# Symbol N probability
+0.008063	# Symbol P probability
+0.163768	# Symbol Q probability
+0.146847	# Symbol R probability
+0.028097	# Symbol S probability
+0.045496	# Symbol T probability
+0.040697	# Symbol V probability
+0.001074	# Symbol W probability
+0.004555	# Symbol Y probability
+###DELETE_STATE 45
+0.979367	# t_m1
+0.014738	# t_d1
+0.005895	# t_i0
+###INSERT_STATE 45
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 46 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.016254	# Symbol A probability
+0.003598	# Symbol C probability
+0.011121	# Symbol D probability
+0.243145	# Symbol E probability
+0.050422	# Symbol F probability
+0.010208	# Symbol G probability
+0.006225	# Symbol H probability
+0.036125	# Symbol I probability
+0.073128	# Symbol K probability
+0.014275	# Symbol L probability
+0.014640	# Symbol M probability
+0.008163	# Symbol N probability
+0.037296	# Symbol P probability
+0.097371	# Symbol Q probability
+0.113009	# Symbol R probability
+0.044065	# Symbol S probability
+0.107254	# Symbol T probability
+0.092384	# Symbol V probability
+0.016111	# Symbol W probability
+0.005204	# Symbol Y probability
+###DELETE_STATE 46
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 46
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 47 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.017424	# Symbol A probability
+0.002434	# Symbol C probability
+0.006664	# Symbol D probability
+0.005230	# Symbol E probability
+0.002936	# Symbol F probability
+0.873111	# Symbol G probability
+0.003435	# Symbol H probability
+0.002114	# Symbol I probability
+0.008381	# Symbol K probability
+0.016276	# Symbol L probability
+0.001175	# Symbol M probability
+0.008073	# Symbol N probability
+0.005128	# Symbol P probability
+0.015250	# Symbol Q probability
+0.004259	# Symbol R probability
+0.013930	# Symbol S probability
+0.006000	# Symbol T probability
+0.004908	# Symbol V probability
+0.001060	# Symbol W probability
+0.002212	# Symbol Y probability
+###DELETE_STATE 47
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 47
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 48 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.013791	# Symbol A probability
+0.017063	# Symbol C probability
+0.003906	# Symbol D probability
+0.005431	# Symbol E probability
+0.110928	# Symbol F probability
+0.007680	# Symbol G probability
+0.005846	# Symbol H probability
+0.135940	# Symbol I probability
+0.021474	# Symbol K probability
+0.239353	# Symbol L probability
+0.054141	# Symbol M probability
+0.004005	# Symbol N probability
+0.004579	# Symbol P probability
+0.017229	# Symbol Q probability
+0.004959	# Symbol R probability
+0.009073	# Symbol S probability
+0.009571	# Symbol T probability
+0.060066	# Symbol V probability
+0.141798	# Symbol W probability
+0.133167	# Symbol Y probability
+###DELETE_STATE 48
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 48
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 49 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.046315	# Symbol A probability
+0.005737	# Symbol C probability
+0.004371	# Symbol D probability
+0.005370	# Symbol E probability
+0.243639	# Symbol F probability
+0.007857	# Symbol G probability
+0.004344	# Symbol H probability
+0.259827	# Symbol I probability
+0.008825	# Symbol K probability
+0.058661	# Symbol L probability
+0.004952	# Symbol M probability
+0.003835	# Symbol N probability
+0.005057	# Symbol P probability
+0.004234	# Symbol Q probability
+0.003999	# Symbol R probability
+0.009665	# Symbol S probability
+0.011426	# Symbol T probability
+0.282808	# Symbol V probability
+0.001923	# Symbol W probability
+0.027155	# Symbol Y probability
+###DELETE_STATE 49
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 49
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 50 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.013871	# Symbol A probability
+0.002702	# Symbol C probability
+0.007299	# Symbol D probability
+0.007752	# Symbol E probability
+0.002314	# Symbol F probability
+0.009807	# Symbol G probability
+0.003721	# Symbol H probability
+0.003398	# Symbol I probability
+0.012597	# Symbol K probability
+0.007214	# Symbol L probability
+0.001716	# Symbol M probability
+0.004475	# Symbol N probability
+0.864989	# Symbol P probability
+0.005988	# Symbol Q probability
+0.004527	# Symbol R probability
+0.010891	# Symbol S probability
+0.009320	# Symbol T probability
+0.024415	# Symbol V probability
+0.000590	# Symbol W probability
+0.002415	# Symbol Y probability
+###DELETE_STATE 50
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 50
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 51 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.206107	# Symbol A probability
+0.023508	# Symbol C probability
+0.007856	# Symbol D probability
+0.026374	# Symbol E probability
+0.004795	# Symbol F probability
+0.047364	# Symbol G probability
+0.031121	# Symbol H probability
+0.006804	# Symbol I probability
+0.059470	# Symbol K probability
+0.052310	# Symbol L probability
+0.002720	# Symbol M probability
+0.008806	# Symbol N probability
+0.007436	# Symbol P probability
+0.007482	# Symbol Q probability
+0.017580	# Symbol R probability
+0.343057	# Symbol S probability
+0.072715	# Symbol T probability
+0.069758	# Symbol V probability
+0.000910	# Symbol W probability
+0.003829	# Symbol Y probability
+###DELETE_STATE 51
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 51
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 52 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.040039	# Symbol A probability
+0.003565	# Symbol C probability
+0.030163	# Symbol D probability
+0.029190	# Symbol E probability
+0.003812	# Symbol F probability
+0.032691	# Symbol G probability
+0.008364	# Symbol H probability
+0.004806	# Symbol I probability
+0.017347	# Symbol K probability
+0.009894	# Symbol L probability
+0.017853	# Symbol M probability
+0.495084	# Symbol N probability
+0.022400	# Symbol P probability
+0.037646	# Symbol Q probability
+0.008242	# Symbol R probability
+0.119825	# Symbol S probability
+0.066127	# Symbol T probability
+0.048662	# Symbol V probability
+0.000755	# Symbol W probability
+0.003535	# Symbol Y probability
+###DELETE_STATE 52
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 52
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 53 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.011131	# Symbol A probability
+0.021791	# Symbol C probability
+0.004127	# Symbol D probability
+0.005741	# Symbol E probability
+0.164964	# Symbol F probability
+0.007680	# Symbol G probability
+0.029019	# Symbol H probability
+0.024798	# Symbol I probability
+0.009338	# Symbol K probability
+0.034150	# Symbol L probability
+0.002933	# Symbol M probability
+0.004764	# Symbol N probability
+0.004209	# Symbol P probability
+0.005920	# Symbol Q probability
+0.004790	# Symbol R probability
+0.008700	# Symbol S probability
+0.007414	# Symbol T probability
+0.012297	# Symbol V probability
+0.004589	# Symbol W probability
+0.631644	# Symbol Y probability
+###DELETE_STATE 53
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 53
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 54 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.019987	# Symbol A probability
+0.006025	# Symbol C probability
+0.004158	# Symbol D probability
+0.005813	# Symbol E probability
+0.038020	# Symbol F probability
+0.007443	# Symbol G probability
+0.003222	# Symbol H probability
+0.127979	# Symbol I probability
+0.009972	# Symbol K probability
+0.151538	# Symbol L probability
+0.019142	# Symbol M probability
+0.003829	# Symbol N probability
+0.005897	# Symbol P probability
+0.004794	# Symbol Q probability
+0.004086	# Symbol R probability
+0.009319	# Symbol S probability
+0.029932	# Symbol T probability
+0.541665	# Symbol V probability
+0.001146	# Symbol W probability
+0.006035	# Symbol Y probability
+###DELETE_STATE 54
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 54
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 55 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.103123	# Symbol A probability
+0.015141	# Symbol C probability
+0.059547	# Symbol D probability
+0.255576	# Symbol E probability
+0.003815	# Symbol F probability
+0.011884	# Symbol G probability
+0.006327	# Symbol H probability
+0.004647	# Symbol I probability
+0.046716	# Symbol K probability
+0.010572	# Symbol L probability
+0.002446	# Symbol M probability
+0.009046	# Symbol N probability
+0.008068	# Symbol P probability
+0.170855	# Symbol Q probability
+0.063234	# Symbol R probability
+0.045608	# Symbol S probability
+0.143966	# Symbol T probability
+0.034657	# Symbol V probability
+0.000987	# Symbol W probability
+0.003784	# Symbol Y probability
+###DELETE_STATE 55
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 55
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 56 ( ) ( )
+0.998615	# t_m1
+0.000462	# t_d1
+0.000923	# t_i0
+0.029994	# Symbol A probability
+0.018901	# Symbol C probability
+0.058268	# Symbol D probability
+0.125176	# Symbol E probability
+0.005205	# Symbol F probability
+0.022157	# Symbol G probability
+0.004956	# Symbol H probability
+0.052351	# Symbol I probability
+0.115535	# Symbol K probability
+0.117875	# Symbol L probability
+0.036320	# Symbol M probability
+0.006859	# Symbol N probability
+0.213540	# Symbol P probability
+0.020906	# Symbol Q probability
+0.042399	# Symbol R probability
+0.042807	# Symbol S probability
+0.028632	# Symbol T probability
+0.042149	# Symbol V probability
+0.000973	# Symbol W probability
+0.014995	# Symbol Y probability
+###DELETE_STATE 56
+0.930000	# t_m1
+0.050000	# t_d1
+0.020000	# t_i0
+###INSERT_STATE 56
+0.590000	# t_m1
+0.020000	# t_d1
+0.390000	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability
+###MATCH_STATE 57 ( ) ( )
+0.999077	# t_m1
+0.000000	# t_d1
+0.000924	# t_i0
+0.028294	# Symbol A probability
+0.019899	# Symbol C probability
+0.019900	# Symbol D probability
+0.061678	# Symbol E probability
+0.041467	# Symbol F probability
+0.022935	# Symbol G probability
+0.020063	# Symbol H probability
+0.147349	# Symbol I probability
+0.082817	# Symbol K probability
+0.099159	# Symbol L probability
+0.029122	# Symbol M probability
+0.042309	# Symbol N probability
+0.020870	# Symbol P probability
+0.021626	# Symbol Q probability
+0.033915	# Symbol R probability
+0.060474	# Symbol S probability
+0.023599	# Symbol T probability
+0.170457	# Symbol V probability
+0.001347	# Symbol W probability
+0.052719	# Symbol Y probability
+###DELETE_STATE 57
+0.978947	# t_m1
+0.000000	# t_d1
+0.021053	# t_i0
+###INSERT_STATE 57
+0.602041	# t_m1
+0.000000	# t_d1
+0.397959	# t_i0
+0.087130	# Symbol A probability
+0.033470	# Symbol C probability
+0.046870	# Symbol D probability
+0.049530	# Symbol E probability
+0.039770	# Symbol F probability
+0.088610	# Symbol G probability
+0.033620	# Symbol H probability
+0.036890	# Symbol I probability
+0.080480	# Symbol K probability
+0.085360	# Symbol L probability
+0.014750	# Symbol M probability
+0.040430	# Symbol N probability
+0.050680	# Symbol P probability
+0.038260	# Symbol Q probability
+0.040900	# Symbol R probability
+0.069580	# Symbol S probability
+0.058540	# Symbol T probability
+0.064720	# Symbol V probability
+0.010490	# Symbol W probability
+0.029920	# Symbol Y probability

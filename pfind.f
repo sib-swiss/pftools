@@ -1,6 +1,6 @@
 *       Version:  This file is part of pftools release 2.0 June 1997
 *----------------------------------------------------------------------*     
-* PROFILE 
+* Profile/HMM indices 
 
         Integer           B0 
         Integer           B1 
@@ -51,12 +51,3 @@
         Parameter        (M0=   0)
         Parameter        (I0=   0)
         Parameter        (D =  27)
-* 
-        Integer            NLOW
-        Parameter         (NLOW=-536870912)   
-
-        Character*01      CHIP(0:IDMP)
-        Integer           IIPP(0:46,0:IDMP)     
-
-        Character*01      CHMP(IDMP)
-        Integer           IMPP(0:27,0:IDMP)

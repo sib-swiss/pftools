@@ -1,0 +1,98 @@
+.TH HTOP 1 "May 1997" "pftools 2.0"
+.SH NAME
+htop \- convert a HMMER ASCII-formatted HMM into an equivalent profile  
+.SH SYNOPSIS
+.LP
+.nf
+\fBhtop\fP [ -fis ] [ hmm-file | - ] [ random-model-file ] [B=#]
+        [C=#] [L=#] [P=#] [Q=#] 
+.fi
+.SH DESCRIPTION
+.B htop
+converts a hidden Markov model (HMM) into an equivalent PROSITE-formatted generalized profile. 
+.I hmm-file
+is a nucleic acid or protein HMM in HMMER ascii-format.
+.I random-model-file
+contains a simple null-model in the format used by the HMM search programs
+of the HMMER package.
+If this parameter is omitted, the random model
+will consist of the average residue 
+probabilities of the insert states.
+By default, the resulting profile will emulate HMM local search as implemented
+in the HMMER program 
+.B hmmls.
+.SH OPTIONS 
+.TP
+\-f
+Emulate HMM fragment search. When given as input to the pftools programs
+.B pfsearch 
+or
+.B pfscan,
+the resulting profile will behave like the original HMM searched with 
+the HMMER program 
+.B hmmfs. 
+.TP
+\-i
+Force all insert extension scores to be zero.
+.TP
+\-s
+Implement semiglobal alignment mode. This option forces all external
+initiation (termination) scores to be identical to the internal initiation
+(termination) score at the beginning (end) of the profile. 
+.SH ADDITIONAL PARAMETERS 
+.TP
+B=#
+Logarithmic base to be used for normalization of profile
+match scores.
+Default: B=2.0.
+.TP
+C=#
+Cut-off value in normalized score units.
+Default: C=0.0.
+.TP
+L=#
+Logarithmic base to be used for representation of profile
+scores.
+Default: 1.0233739 (1/30 bit units).
+.TP
+M=#
+Maximal number of unprotected residues at the ends of the profile.
+Default: M=5.
+.TP
+P=#
+Percent profile-length at the ends of the profile
+which will not be included  included in the protected area
+(may be overwritten by parameter 
+.I M,
+see above). Default: P=0.
+.TP
+Q=#
+Position-independent odds ratio assumed for unknown residues.
+This parameter determines 
+the default values for profile scores
+.I M0
+and 
+.I I0.
+Note that the 
+.I I0
+scores may be over-written by the
+.I -i   
+option.
+Default: Q=0.8.
+.SH EXAMPLES
+.TP
+(1)
+.B htop 
+\-i pfam_sh3.hmm standard.random C=10.0 B=2.0 > pfam_sh3.prf.
+
+Generates a domain-global profile for the SH3 domain which 
+emulates the behavior of the SH3 domain model from the Pfam A library
+searched with HMMER program 
+.B hmmls.
+"pfma_sh3.hmm" contains the source model in HMMER-ASCII format.
+"standard.random" contains the random model used for conversion
+of the probabilities into log-odds ratios.
+.SH AUTHOR
+Philipp Bucher
+.br
+pbucher@isrec-sun1.unil.ch

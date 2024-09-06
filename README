@@ -1,13 +1,18 @@
 "pftools" is a collection of experimental programs supporting the
 new profile format and search method of PROSITE and NUCSITE.
 
-Version 1.2 contains FORTRAN 77 source code and manual pages for
+Version 2.0 contains FORTRAN 77 source code and manual pages for
 the following programs:
 
    pfsearch
    pfscan
    psa2msa
    gtop  
+   htop
+   ptoh
+   pfmake
+   pfw
+   pfscale 
 
 These programs have successfully been compiled and tested under
 SunOS, Solaris, OSF1, IRIX, HP-UX, and Linux operating systems.
@@ -21,35 +26,41 @@ according to instructions given therein.
 To run the programs on machines with less than 32 MB RAM, modify 
 the file ardim.f according to instructions given therein. 
 
+The "Integer*2" declarations may cause problems with some versions
+of the g77 compiler; solution: replace "Integer*2" by "Integer". 
+
 In order to compile the programs, type:
 
    make
 
-This will create the four binaries listed above. You may now move these
-binaries as well as the corresponding manual pages in:
- 
-   pfsearch.1
-   pfscan.1
-   psa2msa.1
-   gtop.1  
+This will create the nine binaries listed above. To install the 
+the binaries and the corresponding manual pages, first define
+the target directories in "Makefile", then type:
 
-to more appropriate directories.  
- 
-Further included in this release are seven demo data files:
+   make install
 
-   CVPBR322 
+*-----
+ 
+Further included in this release are the following demo data files:
+
+   CVPBR322
+   sh3.seq 
    GTPA_HUMAN
+   sh3.msf
    ecp.prf
-   prosite13.prf
    sh3.gpr
-   sh3.prf
-   sh3.seq
+   sh3.prf 
+   pfam_sh3.hmm
+   prosite13.prf
+   standard.random
+   blosum45.cmp
+   score.lis
 
 a test script: 
 
    test.csh 
 
-and a test ouput file. 
+and a test ouput file: 
 
    test.out
 
@@ -58,9 +69,22 @@ To test the programs, type:
    ( csh test.csh ) > out 
    diff test.out out 
 
+Some rounding or formatting variation may occur with real number
+editing. With g77 there will be lots of small integer rounding
+differences in ther result of test 7.  
+
+Note that file pfam_sh3.hmm contains a hidden Markov model from the
+PFAM A collection release 2.0 (see http://www.sanger.ac.uk/Pfam).
+
+*-----
+
+Total number of files included in this directory: 72
+
+*-----
+
 Please send bug reports to:
 
    Philipp Bucher
    E-mail: pbucher@isrec-sun1.unil.ch  
 
-Philipp Bucher, April 21 1997  
+Philipp Bucher, June 15 1997  

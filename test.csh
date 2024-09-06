@@ -1,5 +1,40 @@
-./pfsearch -f  sh3.prf    sh3.seq       C=6.0
-./pfsearch -bx ecp.prf    CVPBR322              | ./psa2msa -du
-./pfscan   -s  GTPA_HUMAN prosite13.prf
-./pfscan   -by CVPBR322     ecp.prf      L=2
+echo "#----------------------------------------------------------------------#"
+echo "# pftools test 1: ./pfsearch -f sh3.prf sh3.seq C=6.0"
+echo "#----------------------------------------------------------------------#"
+./pfsearch -f sh3.prf sh3.seq C=6.0
+echo "#----------------------------------------------------------------------#"
+echo "# pftools test 2: ./pfsearch -bx ecp.prf CVPBR322 | ./psa2msa -du"
+echo "#----------------------------------------------------------------------#"
+./pfsearch -bx ecp.prf CVPBR322 | ./psa2msa -du
+echo "#----------------------------------------------------------------------#"
+echo "# pftools test 3: ./pfscan -s GTPA_HUMAN prosite13.prf"
+echo "#----------------------------------------------------------------------#"
+./pfscan -s GTPA_HUMAN prosite13.prf
+echo "#----------------------------------------------------------------------#"
+echo "# pftools test 4: ./pfscan -by CVPBR322 ecp.prf L=2"
+echo "#----------------------------------------------------------------------#"
+./pfscan -by CVPBR322 ecp.prf L=2
+echo "#----------------------------------------------------------------------#"
+echo "# pftools test 5: ./gtop sh3.gpr F=50 | ./pfsearch -far - sh3.seq  \"
+echo "#                    | sort -nr"
+echo "#----------------------------------------------------------------------#"
 ./gtop sh3.gpr F=50 | ./pfsearch -far - sh3.seq | sort -nr
+echo "#----------------------------------------------------------------------#"
+echo "# pftools test 6: ./htop -i pfam_sh3.hmm standard.random C=10.0 B=2.0 \"
+echo "#                    L=1.02329 P=0.0 | ./pfsearch -f - sh3.seq | sort -nr"
+echo "#----------------------------------------------------------------------#"
+./htop -i pfam_sh3.hmm standard.random C=10.0 B=2.0 L=1.02329 P=0.0 | ./pfsearch -f - sh3.seq | sort -nr
+echo "#----------------------------------------------------------------------#"
+echo "# pftools test 7: ./pfw sh3.msf N=1000 |"
+echo "#                    ./pfmake -b - blosum45.cmp M=0.0"
+echo "#----------------------------------------------------------------------#"
+./pfw sh3.msf N=1000 | ./pfmake -b - blosum45.cmp M=0.0
+echo "#----------------------------------------------------------------------#"
+echo "# pftools test 8:./ptoh ecp.prf L=1.15"
+echo "#----------------------------------------------------------------------#"
+./ptoh ecp.prf L=1.15
+echo "#----------------------------------------------------------------------#"
+echo "# pftools test 9: ./pfscale score.lis N=14147368 P=0.0001 \"
+echo "#                    Q=0.000001 | sed -n 1,25p"
+echo "#----------------------------------------------------------------------#"
+./pfscale score.lis N=14147368 P=0.0001 Q=0.000001 | sed -n 1,25p

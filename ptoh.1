@@ -1,0 +1,124 @@
+.TH PTOH 1 "May 1997" "pftools 2.0"
+.SH NAME
+ptoh \- converts a PROSITE-formatted profile into an approximately equivalent HMM
+.SH SYNOPSIS
+.LP
+.nf
+\fBptoh\fP [ -fFhs ] [ profile-file | - ] [ random-model-file ] [L=#]
+        [I=#] [D=#] 
+.fi
+.SH DESCRIPTION
+.B ptoh
+converts a PROSITE-formatted generalized profile into an approximately equivalent
+HMMER- or SAM-formatted hidden Markov model (HMM).
+.I profile-file
+is a nucleic acid or protein profile in PROSITE format.
+.I random-model-file
+contains a simple null-model in the format used by the HMM search programs
+of the HMMER package.
+The result is written to the standard output.
+
+The profile-to-HMM conversion method is described in Bucher et al. (1996). 
+All profile scores corresponding to transitions which are not supported
+by the HMM architectures of the SAM and HMMER packages, are ignored. 
+If no random model is specified on the command line, 
+the null model given in the GENERAL_SPEC data block of the profile is used. 
+If this is also missing, a flat residue distribution
+is assumed.
+.SH OPTIONS 
+.TP
+\-f
+Generate free insert-modules (FIMs) at the beginning
+and at the end of the model which approximately emulate domain-global
+or semi-global alignment mode 
+.I (see
+Bucher et al. 1996).
+.TP
+\-F
+Generate free insert-modules (FIMs) at the beginning
+and at the end of the model which approximately emulate 
+local alignment mode. 
+.TP 
+\-h
+Output in HMMER ascii format. This is the default.
+.TP 
+\-s
+Output in SAM format.
+.SH ADDITIONAL PARAMETERS 
+.TP
+D=#
+Delete-to-delete transition probabilities used in conjunction with FIMs (options 
+.I -f, -F).
+This value will be imposed on
+all delete-to-delete transitions of the model.
+The other outgoing transitions from the affected delete states will be renormalized to satisfy
+the "sum to one" requirement. 
+Note that the application of the 
+.I D
+parameter precedes the application of the
+.I I
+parameter.
+Delete-to-delete probabilities at the beginning and at the end of the
+model may thus change again as a result of renormalizations  
+following the application of the  
+.I I
+parameter.
+Default: D=0.9. 
+.TP
+I=#
+Insert-to-insert transition probabilities used in the FIMs (
+.I see
+options 
+-f, -F).
+This value will be imposed on the first and the last match-to-insert and insert-to-insert 
+transition probabilities of the model. 
+The other outgoing transitions of the affected states 
+will be renormalized such as to satisfy the "summing to one" requirement.
+If the 
+.I -F 
+option is simultaneously set, the
+.I I
+parameter will also be imposed on the insert-to-delete transition probability
+at the beginning, and on the delete-to-insert transition probability at the 
+end of the model.
+Default: I=0.99. 
+.TP
+L=#
+Logarithmic base used for conversion of the profile scores into HMM probabilities
+(The profile scores are interpreted as log-odds ratios,
+.I see
+Bucher et al. 1996). This value over-writes the logarithmic base 
+specified within the profile by the optional 
+.I LOG_BASE
+parameter. 
+Default: 1.0233739 (1/30 bit units).
+.SH EXAMPLES
+.TP
+(1)
+.B ptoh
+-Fs sh3.prf standard.random L=1.0233739 > sh3.hmm
+
+Generates a SAM-formatted HMM for the SH3 domain
+from a profile.
+sh3.prf contains the source profile
+in PROSITE format.
+standard.random contains the null-model used for conversion
+of the log-odds ratios into probabilities.
+The logarithmic base 1.0233739 corresponds to 1/30 bits, the implicit scale
+of the profile.
+The 
+.I -F 
+option causes the HMM to emulate 
+local alignment (fragment search) mode.
+.SH REFERENCES
+.LP
+Bucher P, Karplus K, Moeri N & Hofmann, K. (1996).
+.I A flexible motif search
+.I technique based on generalized
+.I profiles.
+Comput. Chem.
+\fB20\fR:3-24.
+.SH AUTHOR
+Philipp Bucher
+.br
+pbucher@isrec-sun1.unil.ch

@@ -3,7 +3,7 @@
 *       Function: Converts a pfsearch -x output file into Pearson/Fasta
 *                 multiple sequence asignment format  
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 1.2 April 1997
+*       Version:  This file is part of pftools release 2.0 June 1997
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -40,7 +40,7 @@
      *    (FSEQ,OPTL,OPTU,OPTP,OPTD,IRC)
         If(IRC.NE.0) then
            Write(NERR,'(
-     *      ''Usage: psa2msa [ -ulpd ] [ [ psa-file | - ] ]''
+     *      ''Usage: psa2msa [ -dlpd ] [ [ psa-file | - ] ]''
      *        )')
            Stop
         End if
