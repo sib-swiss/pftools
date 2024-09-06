@@ -3,7 +3,7 @@
 *       Function: Scan a protein or DNA sequence library for profile 
 *                 matches 
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -59,6 +59,7 @@
         Logical           OPTA
         Logical           OPTB 
         Logical           OPTF 
+        Logical           OPTL 
         Logical           OPTR 
         Logical           OPTS 
         Logical           OPTU 
@@ -120,11 +121,11 @@
 * read command line arguments
 
         Call Repar(
-     *     OPTA,OPTB,OPTF,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
+     *     OPTA,OPTB,OPTF,OPTL,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
      *     FPRF,FSEQ,NCUC,KCUC,XCUC,IRC)
         If(IRC.NE.0) then 
            Write(NERR,'(
-     *      ''Usage: pfsearch [ -abfrsuxyz ] [ profile-file | - ] '',
+     *      ''Usage: pfsearch [ -abflrsuxyz ] [ profile-file | - ] '',
      *      ''[ seq-library-file | - ] [ parameters ]'',//,
      *      ''   valid parameters are:'',//,
      *      ''                 [C=cut-off-value]          '',/
@@ -217,15 +218,17 @@
 
 * - initialize profile lock
 
-           Do  8 I1=0,NDIP(1)-1 
-              IIPP(E0,I1)=NLOW
-              IIPP(E1,I1)=NLOW
-    8      Continue
+           If(.NOT.LPCI) then
+              Do  8 I1=0,NDIP(1)-1 
+                 IIPP(E0,I1)=NLOW
+                 IIPP(E1,I1)=NLOW
+    8         Continue
 
-           Do  9 I1=NDIP(2),LPRF 
-              IIPP(B0,I1)=NLOW
-              IIPP(B1,I1)=NLOW
-    9      Continue
+              Do  9 I1=NDIP(2),LPRF 
+                 IIPP(B0,I1)=NLOW
+                 IIPP(B1,I1)=NLOW
+    9         Continue
+           End if
 
         End if
 
@@ -377,11 +380,11 @@
            End if 
 
            Call WPRSM(JSEQ,
-     *       LUNI,LNOR,LREV,LPFA,OPTZ,
+     *       LUNI,LNOR,LREV,LPFA,OPTZ,OPTL,
      *       CSID,CSAC,CSDE,
      *       IALS(I1),IALB(I1),IALE(I1),NALI,IPMB,IPME,
+     *       JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
      *       RNOP,KNPM,MAXN,INOR,IFUN,LSEQ,RAVE)
-
 
            If     (OPTS) then
               Write(6,'((60A))')(CABC(ISEQ(ii1)),ii1=IALB(I1),IALE(I1))
@@ -434,12 +437,13 @@
         End
 *----------------------------------------------------------------------*     
         Subroutine Repar(
-     *     OPTA,OPTB,OPTF,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
+     *     OPTA,OPTB,OPTF,OPTL,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,
      *     FPRF,FSEQ,NCUC,KCUC,XCUC,IRC)
 
         Logical           OPTA 
         Logical           OPTB 
         Logical           OPTF 
+        Logical           OPTL 
         Logical           OPTR 
         Logical           OPTS 
         Logical           OPTU 
@@ -464,6 +468,7 @@
               If(Index(CARG,'a').NE.0) OPTA=.TRUE.
               If(Index(CARG,'b').NE.0) OPTB=.TRUE.
               If(Index(CARG,'f').NE.0) OPTF=.TRUE.
+              If(Index(CARG,'l').NE.0) OPTL=.TRUE.
               If(Index(CARG,'r').NE.0) OPTR=.TRUE.
               If(Index(CARG,'s').NE.0) OPTS=.TRUE.
               If(Index(CARG,'u').NE.0) OPTU=.TRUE.

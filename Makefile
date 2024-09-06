@@ -1,9 +1,10 @@
-# M A K E F I L E   F O R   P F T O O L S  R E L E A S E  2.0
+# M A K E F I L E   F O R   P F T O O L S  R E L E A S E  2.1
 #----------------------------------------------------------------------#
 
-PROGS = gtop pfmake pfscan pfw ptoh htop pfscale pfsearch psa2msa
+PROGS = gtop pfmake pfscan pfw ptoh htop pfscale pfsearch psa2msa \
+        2ft 6ft ptof
 MANS =  gtop.1 pfmake.1 pfscan.1 pfw.1 ptoh.1 htop.1 pfscale.1 \
-        pfsearch.1 psa2msa.1
+        pfsearch.1 psa2msa.1 2ft.1 6ft.1 ptof.1
 
 F77   = f77
 FFLAGS= -O4
@@ -30,7 +31,8 @@ MANDIR = /usr/local/man
 #
 # For compilation with g77 (Linux)
 #F77   = g77
-#FFLAGS= -O io.c 
+#CC    = gcc
+#FFLAGS= -O -fno_automatc io.o 
 #----------------------------------------------------------------------#
 
 all  :  $(PROGS)
@@ -41,7 +43,10 @@ install: $(PROGS)
 	cp -i $(PROGS) $(BINDIR)/
 	cp -i $(MANS)  $(MANDIR)/man1
 
-gtop :  gtop.f io.c psdat.f gsdat.f djdat.f nodat.f codat.f pfdat.f dfdat.f \
+io.o :  io.c 
+	$(CC) -c io.c -o io.o
+
+gtop :  gtop.f io.o psdat.f gsdat.f djdat.f nodat.f codat.f pfdat.f dfdat.f \
         sterr.f cvini.f lblnk.f regpr.f wrprf.f sterr.f  
 	$(F77) $(FFLAGS) gtop.f -o gtop
 
@@ -60,7 +65,7 @@ pfscan : pfscan.f psdat.f gsdat.f djdat.f nodat.f codat.f pfdat.f dfdat.f \
         prali.f
 	$(F77) $(FFLAGS) pfscan.f -o pfscan
 
-psa2msa : psa2msa.f io.c sterr.f lblnk.f   
+psa2msa : psa2msa.f io.o sterr.f lblnk.f   
 	$(F77) $(FFLAGS) psa2msa.f -o psa2msa
 
 pfmake : pfmake.f psdat.f gsdat.f djdat.f nodat.f codat.f pfdat.f dfdat.f \
@@ -76,3 +81,13 @@ pfw :   pfw.f sterr.f remsf.f lblnk.f
 
 pfscale : pfscale.f sterr.f
 	$(F77) $(FFLAGS) pfscale.f -o pfscale 
+
+2ft :   2ft.f lblnk.f 
+	$(F77) $(FFLAGS) 2ft.f -o 2ft 
+
+6ft :   6ft.f lblnk.f 
+	$(F77) $(FFLAGS) 6ft.f -o 6ft 
+
+ptof :  ptof.f codat.f cvini.f dfdat.f djdat.f gsdat.f lblnk.f nodat.f pfdat.f \
+        psdat.f reprf.f sterr.f wrprf.f
+	$(F77) $(FFLAGS) ptof.f -o ptof

@@ -1,0 +1,40 @@
+.TH 6FT 1 "February 1998" "pftools 2.1"
+.SH NAME
+6ft \- 6-frame translation of a DNA sequence into protein 
+.SH SYNOPSIS
+.B 6ft
+[ -rs ] seq-library-file
+.SH DESCRIPTION
+.B 2ft
+Translates all six reading frames of a double-stranded DNA sequence into
+individual protein sequences.
+Stop codons are represented by character "O".
+.I seq-library-file
+contains one or several sequences in Pearson/Fasta format.
+
+This program may be used for searching genomic or EST sequence databases
+with a protein profile. Better results are usually obtained by first
+converting the protein profile into frame-search profile, and then
+searching a 2-frame translation of the DNA sequence generated with
+pftools program
+.B 2ft,
+.I see
+manual pages of pftool programs 
+.B ptof
+and  
+.B 2ft.
+.SH OPTIONS
+.TP
+\-r 
+Translate only reversed (antisense) strand.
+.TP
+\-s
+Translate only sense strand.
+.SH EXAMPLES
+.I See
+manual pages of pftools program
+.B ptof.
+.SH AUTHOR
+Philipp Bucher
+.br
+pbucher@isrec-sun1.unil.ch

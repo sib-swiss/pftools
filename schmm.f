@@ -1,7 +1,7 @@
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
         Subroutine SCHMM 
-     *    (IDMP,RIHM,RMHM,LHMM,NABC,FLOW,FSCA,OPTF,OPFF,RD,RI)
+     *    (NOUT,IDMP,RIHM,RMHM,LHMM,NABC,FLOW,FSCA,OPTF,OPFF,RD,RI)
  
 
         Real             FNOR(26)
@@ -30,7 +30,7 @@
            End if 
 
            If(RIHM(II,I1).GE.0) then 
-              Write(6,'(''Insert position '',I4,
+              Write(NOUT,'(''# Insert position '',I4,
      *      '': Log Prob(I->I)='',F8.4,'' reset to -0.01'')')
      *        I1,RIHM(II,I1)
               RIHM(II,I1)=-0.01

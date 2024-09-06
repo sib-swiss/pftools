@@ -3,7 +3,7 @@
 *       Function: Constructs a profile from a multiple sequence 
 *                 alignment 
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*
@@ -558,9 +558,9 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
         IIPP(BM,   0)=IIPP(MM,   0)
         IIPP(BI,   0)=IIPP(MI,   0)
         IIPP(BD,   0)=IIPP(MD,   0)
-        IIPP(MM,LPRF)=IIPP(ME,LPRF)
-        IIPP(IM,LPRF)=IIPP(IE,LPRF)
-        IIPP(DM,LPRF)=IIPP(DE,LPRF)
+        IIPP(ME,LPRF)=IIPP(MM,LPRF)
+        IIPP(IE,LPRF)=IIPP(IM,LPRF)
+        IIPP(DE,LPRF)=IIPP(DM,LPRF)
       
 * alignment mode
 
@@ -692,12 +692,15 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
               Do  I2=2,Lblnk(CPAR)
                  If     (CPAR(I2:I2).EQ.'0') then
                     OPT0=.TRUE. 
+                    OPT2=.FALSE.
                  else if(CPAR(I2:I2).EQ.'1') then
                     OPT1=.TRUE. 
+                    OPT2=.FALSE.
                  else if(CPAR(I2:I2).EQ.'2') then
                     OPT2=.TRUE. 
                  else if(CPAR(I2:I2).EQ.'3') then
                     OPT3=.TRUE. 
+                    OPT2=.FALSE.
                  else if(CPAR(I2:I2).EQ.'a') then
                     LSYM=.FALSE.
                  else if(CPAR(I2:I2).EQ.'b') then

@@ -2,7 +2,7 @@
 *----------------------------------------------------------------------*     
 *       Function: Reformats profiles: in-fmt=GRIBSKOV / out-fmt=PROSITE    
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
 *
 * DATA

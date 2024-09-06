@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
         Subroutine WRPRF
      *    (NOUT,
@@ -86,9 +86,9 @@
 
 * - AC line 
  
-        RCEX='AC   ' 
-     *    // CPAC(1:Lblnk(CPAC))
-     *    // ';'
+        IX=Lblnk(CPAC)
+        If(CPAC(IX:IX).EQ.'|') IX=IX-1
+        RCEX='AC   '  // CPAC(1:IX) // ';'
         Write(NOUT,'(78A)')(RCEX(ii1:ii1),ii1=1,Lblnk(RCEX))
 
 * - DE line

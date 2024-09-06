@@ -3,7 +3,7 @@
 *       Function: Fits paramters of an extreme value distribution to a
 *                 profile score distribution. Input: sorted score list.
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*
@@ -49,7 +49,7 @@
         If(IRC.NE.0.OR.IOP.NE.0) then
            Write(NERR,'(
      *      ''pfscale [ score-list | - ] [L=#] [N=#] [P=#] [Q=#]'',/, 
-     *      ''  e.g. pfscale N=14147368 P=0.0001 Q=0.000001'',
+     *      ''  e.g. pfscale - N=14147368 P=0.0001 Q=0.000001'',
      *      '' < score-list''
      *        )')
            Stop

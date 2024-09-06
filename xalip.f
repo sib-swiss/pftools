@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
         Subroutine XALIP(
      *     NABC,CABC,LPRF,LPCI,N1,N2,
@@ -94,10 +94,10 @@ C       Write(6,'(''Searching range:'',I6,'' - '',I6)') IBEG,LSEQ
         JALS=NLOW
 
 * initiate work arrays 
-
+   
         Call InitR(
-     *     I1,
-     *     N1,N2,
+     *     I1,LPCI,
+     *     N1,N2,LSEQ,
      *     IDMP,LPRF,IIPP,IMPP,CHIP,CHMP,IIPX,  
      *     IOPM,IOPI,IOPD,
      *     IOMB,IOM1,IOM2,IOIB,IOI1,IOI2,IODB,IOD1,IOD2)
@@ -121,13 +121,20 @@ C       Write(6,'(''Searching range:'',I6,'' - '',I6)') IBEG,LSEQ
            NSCA=NSCA+1
 
            Call NextR( 
-     *        I1,
+     *        I1,LPCI,
      *        NABC,LPRF,N1,N2,
      *        KCUT,IDMP,IIPP,IMPP,CHIP,CHMP,IIPX,
      *        IDMS,LSEQ,ISEQ,LCKS,
      *        IOPM,IOPI,IOPD,
      *        IOMB,IOM1,IOM2,IOIB,IOI1,IOI2,IODB,IOD1,IOD2,
      *        JALS,JALB,JAL1,JAL2,JALE) 
+C          Write(6,'(20I6)') I1,(IOPM(ii1),ii1=0,LPRF)
+C          Write(6,'(20I6)') I1,(IOM1(ii1),ii1=0,LPRF)
+C          Write(6,'(20I6)') I1,(IOPI(ii1),ii1=0,LPRF)
+C          Write(6,'(20I6)') I1,(IOI1(ii1),ii1=0,LPRF)
+C          Write(6,'(20I6)') I1,(IOPD(ii1),ii1=0,LPRF)
+C          Write(6,'(20I6)') I1,(IOD1(ii1),ii1=0,LPRF)
+C          Write(6,'('''')')
 
 *----------------------------------------------------------------------* 
 * work arrays updated, what next ?
@@ -138,13 +145,34 @@ C       Write(6,'(''Searching range:'',I6,'' - '',I6)') IBEG,LSEQ
            If(JALS.GE.KCUT) then
 
 * - determine first ENTRY of current row 
- 
+
                  IFER=I1
               Do 51 I2=N1,LPRF
-                 If(IOD1(I2).LT.IFER) IFER=IOD1(I2) 
-                 If(IOM1(I2).LT.IFER) IFER=IOM1(I2) 
-                 If(IOI1(I2).LT.IFER) IFER=IOI1(I2) 
+                 If(IOD1(I2).LT.IFER) IFER=IOD1(I2)
+                 If(IOM1(I2).LT.IFER) IFER=IOM1(I2)
+                 If(IOI1(I2).LT.IFER) IFER=IOI1(I2)
    51         Continue
+
+ 
+C                IFER=I1
+C                L1=-1
+C                L2=-1
+C                L3=-1
+C             Do 51 I2=N1,LPRF
+C                If(IOD1(I2).LT.IFER) then 
+C                   IFER=IOD1(I2)
+C                   L1=I2
+C                End if 
+C                If(IOM1(I2).LT.IFER) then
+C                   IFER=IOM1(I2)
+C                   L2=I2
+C                End if
+C                If(IOI1(I2).LT.IFER) then
+C                   IFER=IOI1(I2)
+C                   L3=I2
+C                End if
+C  51         Continue
+C             Write(6,'(5I8)') I1,IFER,L1,L2,L3
 
               If(IFER.GT.JAL2.OR.I1.EQ.LSEQ) then 
 
@@ -237,7 +265,7 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
         End
 *----------------------------------------------------------------------*
         Subroutine NextR( 
-     *     I1,
+     *     I1,LPCI,
      *     NABC,LPRF,N1,N2,
      *     KCUT,IDMP,IIPP,IMPP,CHIP,CHMP,IIPX,
      *     IDMS,LSEQ,ISEQ,LCKS,
@@ -249,6 +277,8 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
 
         Include          'pfdat.f'
         Include          'pxdat.f'
+
+        Logical           LPCI
 
 * sequence
 
@@ -331,12 +361,14 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
         If(JI.GT.IIPX(XM, 0)) then
            IOPM( 0)=JI
            IOMB( 0)=IOIB( 0)
+           IOM1( 0)=IOI1( 0)
+           IOM2( 0)=IOI2( 0)
         Else
            IOPM( 0)=IIPX(XM, 0)
            IOMB( 0)=IN
-        End if
-           IOM1( 0)=0
+           IOM1( 0)=LSEQ+1
            IOM2( 0)=0
+        End if
 
 * - deletion position
 
@@ -344,12 +376,14 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
         If(JI.GT.IIPX(XD, 0)) then
            IOPD( 0)=JI
            IODB( 0)=IOIB( 0)
+           IOD1( 0)=IOI1( 0)
+           IOD2( 0)=IOI2( 0)
         Else
            IOPD( 0)=IIPX(XD, 0)
            IODB( 0)=IN
-        End if
-           IOD1( 0)=0
+           IOD1( 0)=LSEQ+1
            IOD2( 0)=0
+        End if
 
 * - insert position
 
@@ -359,15 +393,38 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
         Else
            IOPI( 0)=IIPX(XI, 0)
            IOIB( 0)=IN
-        End if
-           IOI1( 0)=0
+           IOI1( 0)=LSEQ+1
            IOI2( 0)=0
+        End if
+
+* - circular match extensions (presumably not necessary)
+
+C       If(LPCI) then 
+C          KM=IOPM(LPRF-1)+IMPP(J1,LPRF)
+C          If(KM+IIPP(MM, 0).GT.IOPM( 0)) then
+C             IOPM( 0)=KM+IIPP(MM, 0)
+C             IOMB( 0)=IOMB(LPRF-1)
+C             IOM1( 0)=IOM1(LPRF-1)
+C             IOM2( 0)=IOM2(LPRF-1)
+C          End if
+C          If(KM+IIPP(MI, 0).GT.IOPI( 0)) then
+C             IOPI( 0)=KM+IIPP(MI, 0)
+C             IOIB( 0)=IOMB(LPRF-1)
+C             IOI1( 0)=IOM1(LPRF-1)
+C             IOI2( 0)=IOM2(LPRF-1)
+C          End if
+C          If(KM+IIPP(MD, 0).GT.IOPD( 0)) then
+C             IOPD( 0)=KM+IIPP(MD, 0)
+C             IODB( 0)=IOMB(LPRF-1)
+C             IOD1( 0)=IOM1(LPRF-1)
+C             IOD2( 0)=IOM2(LPRF-1)
+C          End if
+C       End if
+* -----------------------------------------------------------
 
 * profile positions 1 to LPRF  
 
-           JE=0
-        Do  99 I2=1,LPRF
-           If(I2.GE.N1) JE=IN
+        Do  79 I2=1,LPRF
 
            KM=KOPM       + IMPP(J1,I2)
            KI=IOPI(I2  ) + IIPP(J1,I2)
@@ -426,6 +483,7 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
               JALE=I1 
               If(JAL1.EQ.0) JAL1=JALB
               If(JAL2.EQ.0) JAL2=I1
+C             Write(6,'(7I8)'),I1,I2,JALS,JALB,JAL1,JAL2,JALE
            End if 
 
 * - update alignment positions  
@@ -435,7 +493,7 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
               JOM2=IOM2(I2)
            If     (NEWM.EQ.0) then 
               IOMB(I2)=IN
-              IOM1(I2)=JE
+              IOM1(I2)=LSEQ+1
               IOM2(I2)=0
            Else if(NEWM.EQ.1) then 
               IOMB(I2)=KOMB
@@ -453,7 +511,7 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
 
            If     (NEWD.EQ.0) then 
               IODB(I2)=IN
-              IOD1(I2)=JE
+              IOD1(I2)=LSEQ+1
               IOD2(I2)=0
            Else if(NEWD.EQ.1) then 
               IODB(I2)=KOMB
@@ -468,12 +526,10 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
               IOD1(I2)=IOD1(I2-1) 
               IOD2(I2)=IOD2(I2-1)
            End if  
-              If(I2.EQ.N1-1) IOD1(I2)=IN
-              If(I2.EQ.N2-1) IOD2(I2)=I1
 
            If     (NEWI.EQ.0) then 
               IOIB(I2)=IN
-              IOI1(I2)=JE
+              IOI1(I2)=LSEQ+1
               IOI2(I2)=0
            Else if(NEWI.EQ.1) then 
               IOIB(I2)=KOMB
@@ -491,12 +547,84 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
               KOM1=JOM1
               KOM2=JOM2
 
-   99   Continue
+   79   Continue
+
+* - circular extensions
+
+        If(LPCI) then
+           If(IOPM(LPRF).GT.IOPM( 0)) then 
+              IOPM( 0)=IOPM(LPRF)
+              IOMB( 0)=IOMB(LPRF)
+              IOM1( 0)=IOM1(LPRF)
+              IOM2( 0)=IOM2(LPRF)
+           End if
+           If(IOPI(LPRF).GT.IOPI( 0)) then 
+              IOPI( 0)=IOPI(LPRF)
+              IOIB( 0)=IOIB(LPRF)
+              IOI1( 0)=IOI1(LPRF)
+              IOI2( 0)=IOI2(LPRF)
+           End if
+           If(IOPD(LPRF).GT.IOPD( 0)) then 
+              IOPD( 0)=IOPD(LPRF)
+              IODB( 0)=IODB(LPRF)
+              IOD1( 0)=IOD1(LPRF)
+              IOD2( 0)=IOD2(LPRF)
+           End if
+
+           Do  89, I2=1,LPRF
+              KD=IOPD(I2-1)+IMPP( D,I2)
+              If(IOPD(I2).GE.KD+IIPP(DD,I2)) then
+                 Go to  90
+              Else
+                 If(KD+IIPP(DM,I2).GT.IOPM(I2)) then 
+                    IOPM(I2)=KD+IIPP(DM,I2)
+                    IOMB(I2)=IODB(I2-1)
+                    IOM1(I2)=IOD1(I2-1)
+                    IOM2(I2)=IOD2(I2-1)
+                 End if
+                 If(KD+IIPP(DI,I2).GT.IOPI(I2)) then 
+                    IOPI(I2)=KD+IIPP(DI,I2)
+                    IOIB(I2)=IODB(I2-1)
+                    IOI1(I2)=IOD1(I2-1)
+                    IOI2(I2)=IOD2(I2-1)
+                 End if
+                    IOPD(I2)=KD+IIPP(DD,I2)
+                    IODB(I2)=IODB(I2-1)
+                    IOD1(I2)=IOD1(I2-1)
+                    IOD2(I2)=IOD2(I2-1)
+                 IOPT    =MAX(KD+IIPX(DX,I2),IOPT)
+              End if
+
+* - - check for new maxumum 
+
+              KE=KD+IIPX(DZ,I2)
+
+              If(KE.GT.JALS) then
+                 JALS=KE
+                 JALB=IODB(I2-1)
+                 JAL1=IOD1(I2-1)
+                 JAL2=IOD2(I2-1)
+                 If(JAL1.EQ.0) JAL1=JALB
+                 If(JAL2.EQ.0) JAL2=I1
+                 Write(6,'(7I8)'),I1,I2,JALS,JALB,JAL1,JAL2,JALE
+              End if 
+   89      Continue
+   90      Continue
+
+        End if
+* -----------------------------------------------------------
 
 * entry and exit from protected regions:
 
-              IOM1(N1-1)=IN
-              IOM2(N2-1)=IN
+           IOM1(N1-1)=MIN(IOM1(N1-1),IN)
+           IOM2(N1-1)=IN
+
+        Do I2=N1,N2-1
+           IOM1(I2)=MIN(IOM1(I2),IN)
+           IOI1(I2)=MIN(IOI1(I2),IN)
+           IOM2(I2)=IN
+           IOI2(I2)=IN
+        End do 
 
         Return 
         End
@@ -525,8 +653,8 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
         End 
 *----------------------------------------------------------------------*
         Subroutine InitR(
-     *     I1,
-     *     N1,N2,
+     *     I1,LPCI,
+     *     N1,N2,LSEQ,
      *     IDMP,LPRF,IIPP,IMPP,CHIP,CHMP,IIPX,  
      *     IOPM,IOPI,IOPD,
      *     IOMB,IOM1,IOM2,IOIB,IOI1,IOI2,IODB,IOD1,IOD2)
@@ -535,6 +663,8 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
 
         Include          'pfdat.f'
         Include          'pxdat.f'
+
+        Logical           LPCI
 
 * alignment scores
 
@@ -574,7 +704,7 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
            IOPI( 0)=IIPX(ZI, 0)
            IOPD( 0)=IIPX(ZD, 0)
 
-        Do  10 I2=1,LPRF
+        Do   8 I2=1,LPRF
 
            KD=IOPD(I2-1)+IMPP( D,I2)
    
@@ -584,37 +714,57 @@ C    *   '' positions scanned.'')') LSEQ,NSCA
      *                  KD+IIPP(DI,I2))
            IOPD(I2)=MAX(IIPX(ZD,I2),
      *                  KD+IIPP(DD,I2))
-   10   Continue     
+    8   Continue     
+
+* - circular extensions 
+
+        If(LPCI) then
+           IOPM( 0)=MAX(IOPM( 0),IOPM(LPRF))
+           IOPI( 0)=MAX(IOPI( 0),IOPI(LPRF))
+           IOPD( 0)=MAX(IOPD( 0),IOPD(LPRF))
+
+           Do   9 I2=1, LPRF
+              KD=IOPD(I2-1)+IMPP( D,I2)
+              If(IOPD(I2).GE.KD+IIPP(DD,I2)) then
+                 Go to 10
+                 Else
+                    IOPM(I2)=MAX(KD+IIPP(DM,I2),IOPM(I2))
+                    IOPI(I2)=MAX(KD+IIPP(DI,I2),IOPI(I2))
+                    IOPD(I2)=    KD+IIPP(DD,I2)
+                 End if
+    9      Continue
+   10      Continue
+        End if
+* -----------------------------------------------------------
+
+* initialise begin, entry, exit positions
 
            IN=I1+1
-           JE=0
         Do  20 I2=0,LPRF
-           If(I2.EQ.N1) JE=IN
-
               IOMB(I2)=IN
-              IOM1(I2)=JE
+              IOM1(I2)=LSEQ+1
               IOM2(I2)=0
 
               IOIB(I2)=IN
-              IOI1(I2)=JE
+              IOI1(I2)=LSEQ+1
               IOI2(I2)=0
 
               IODB(I2)=IN
-              IOD1(I2)=JE
+              IOD1(I2)=LSEQ+1
               IOD2(I2)=0
-
    20   Continue     
 
-* entry and exit from protected regions:
+* entry and exit positions within protected region
 
         IOM1(N1-1)=IN
-        IOD1(N1-1)=IN
-        IOM2(N2-1)=I1
-        IOD2(N2-1)=I1
+        IOM2(N1-1)=IN
 
-        Do  30 I2=N1,N2-1
+        Do I2=N1,N2-1
+           IOM1(I2)=IN
+           IOM2(I2)=IN
            IOI1(I2)=IN
-   30   Continue
+           IOI2(I2)=IN
+        End do 
 
         Return
         End 

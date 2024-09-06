@@ -1,12 +1,15 @@
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
         Subroutine WPRSM(JSEQ,
-     *     LUNI,LNOR,LREV,LPFA,OPTZ,
+     *     LUNI,LNOR,LREV,LPFA,OPTZ,OPTL,
      *     CHID,CHAC,CHDE,
      *     IOPT,JALB,JALE,NALI,IPMB,IPME,
+     *     JCUT,MCLE,CCUT,ICUT,JCNM,RCUT,MCUT,
      *     RNOP,KNPM,MAXN,INOR,IFUN,LSEQ,RAVE)
 
-* profile paramters
+* profile parameters
+
+        Include          'codat.f'
 
         Real              RNOP(KNPM,MAXN)
 
@@ -16,6 +19,7 @@
         Logical           LNOR
         Logical           LREV
         Logical           LPFA
+        Logical           OPTL
         Logical           OPTZ 
 
 * sequence header 
@@ -26,6 +30,7 @@
 
 * Output fields 
 
+        Character*04      CHLE
         Character*08      CHNS
         Character*06      CHRS 
         Character*20      CHLO 
@@ -44,6 +49,34 @@
      *        (IOPT,XOPT,RNOP,KNPM,MAXN,INOR,IFUN,LSEQ,RAVE)
            Write(CHNS,'(F8.4)') XOPT
         End if 
+
+* - cut-off level
+
+        If(OPTL) then
+           If(LNOR) then
+              K=MCLE(1)
+              Do I1=2,JCUT
+                 K=MIN(K,MCLE(I1))
+              End do
+              K=MAX(-9,K-1)
+              Do I1=1,JCUT
+                 Do I2=1,JCNM(I1)
+                    If(MCUT(I2,I1).EQ.INOR) then 
+                       If(XOPT.GE.RCUT(I2,I1)) K=MAX(K,MCLE(I1))
+                    End if
+                 End do
+              End do
+           Else
+              Do I1=1,JCUT
+                 If(IOPT.GE.ICUT(I1)) K=MAX(K,MCLE(I1))
+              End do 
+           End if 
+           If(K.LT.0.OR.K.GT.9) then 
+              Write(CHLE,'(''L='',I2)') K 
+           Else
+              Write(CHLE,'(''L='',I1,'' '')') K 
+           End if
+        End if  
 
 * - raw-score
 
@@ -104,6 +137,11 @@
            RCEX(LNEX+1:)='>' // CHMI // ' ' 
            LNEX=LNEX+LNMI+2
         End if 
+
+        If(OPTL) then
+           RCEX(LNEX+1:)=CHLE
+           LNEX=LNEX+4
+        End if
 
         If(LNOR) then 
            RCEX(LNEX+1:)=CHNS

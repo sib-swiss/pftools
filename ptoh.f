@@ -2,7 +2,7 @@
 *----------------------------------------------------------------------*     
 *       Function: Reformats profile -> hmm: in-fmt=PROSITE / out-fmt=SAM    
 *       Author:   Philipp Bucher
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
 * DATA
 *----------------------------------------------------------------------*     
@@ -93,7 +93,6 @@
      *     CHID,IIPD,CHMD,IMPD,
      *     IRC)
 
-
 * read null model
 
         If(NABC.GE.20) then 
@@ -114,15 +113,16 @@
 
 * reduce / rearrange alphabet
 
+           K1=0
         Do I1=1,NABC
            N1=Index(DABC(1:MABC),CABC(I1)) 
            If(N1.NE.0) then
-              DABC(N1:N1)=' '
               IABC(N1)=I1
+              K1=K1+1
            End if
         End do 
 
-        If(DABC(1:MABC).NE.' ') then
+        If(K1.NE.MABC) then
            Write(NERR,'(
      *      ''Error termination: ''
      *      ''Alphabets of profile and null model incompatible.''
@@ -147,6 +147,9 @@
            End if
         End do 
         NABC=MABC
+        Do I1=1,NABC
+           CABC(I1)=DABC(I1:I1) 
+        End do 
 
 * convert profile into Log(Prob) 
 
@@ -198,11 +201,16 @@
         RIHM(MD,   0)=FLOW
         RIHM(ID,   0)=FLOW
         RIHM(DD,   0)=FLOW
-
+         
 * scale HMM
 
-        Call SCHMM
-     *    (IDMP,RIHM,RMHM,LPRF,NABC,FLOW,FSCA,OPTF,OPFF,RD,RI)  
+        If(OPTS) then 
+           Call SCHMM(NOUT,
+     *        IDMP,RIHM,RMHM,LPRF,NABC,FLOW,FSCA,OPTF,OPFF,RD,RI)  
+        Else 
+           Call SCHMM(NERR,
+     *        IDMP,RIHM,RMHM,LPRF,NABC,FLOW,FSCA,OPTF,OPFF,RD,RI)  
+        End if
 
 * print HMM  
 
@@ -220,9 +228,11 @@
                  RMHM(2,I1)=R
               End do
            End if
-           Call WRSAM(NOUT,IDMP,RIHM,RMHM,LPRF,NABC,FABC,FLOW,FSCA,DL) 
+           Call WRSAM(NOUT,
+     *        IDMP,RIHM,RMHM,LPRF,NABC,FABC,FLOW,FSCA,DL) 
         Else
-           Call WRHMR(NOUT,IDMP,RIHM,RMHM,LPRF,NABC,CABC,FLOW,FSCA,DL) 
+           Call WRHMR(NOUT,NERR,
+     *        IDMP,RIHM,RMHM,LPRF,NABC,CABC,FLOW,FSCA,DL) 
         End if
 
   100   Stop

@@ -1,10 +1,10 @@
-.TH PFSCAN  1 "April 1997" "pftools 2.0"
+.TH PFSCAN  1 "February 1998" "pftools 2.1"
 .SH NAME
 pfscan \- scan a protein or DNA sequence with a profile library 
 
 .SH SYNOPSIS
 .B pfscan
-[ -abfrsuxy ] [ seq-file | - ]
+[ -abflrsuxy ] [ seq-file | - ]
             [ profile-library-file | - ]    [L=#] 
 .SH DESCRIPTION
 .B pfscan 
@@ -13,7 +13,7 @@ The result is an unsorted list of profile-sequence matches written to
 the standard output.
 A variety of output formats containing different informations can be specified
 via the options
-.I -a, -r, -u, -s, -x, -y
+.I -a, -l, -r, -u, -s, -x, -y
 and 
 .I -z.
 .I seq-file
@@ -38,6 +38,10 @@ Search the complementary strand of the DNA sequence as well.
 .TP
 \-f
 Input sequence is in Pearson/Fasta format.
+.TP
+\-l
+Indicate highest cut-off level exceeded by the match score
+in the output list. 
 .TP
 \-r
 Use raw scores rather than normalized 
@@ -103,9 +107,6 @@ ecp.prf contains a profile for
 promoters.
 The output includes profile-sequence alignments in a human-friendly
 format. 
-.SH BUGS
-.B pfscan
-neither supports circular profiles nor circular sequences.
 .SH AUTHOR
 Philipp Bucher
 .br

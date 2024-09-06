@@ -1,7 +1,7 @@
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
         Subroutine WRHMR
-     *    (NOUT,IDMP,RIHM,RMHM,LHMM,NABC,CABC,FLOW,RSCA,BLOG) 
+     *    (NOUT,NERR,IDMP,RIHM,RMHM,LHMM,NABC,CABC,FLOW,RSCA,BLOG) 
 
         Include         'pfind.f' 
         Include         'hmdat.f'
@@ -39,13 +39,13 @@
 
 * header 
 
+        Write(NOUT,'(''# HMM v1.7'')')
         RSCA=RSCA/BLOG
-        Write(NOUT,'(
+        Write(NERR,'(
      *     ''# HMM converted from generalized profile'',
      *     '' with pftools program htop.'',
      *   /,''# Logarithic base of profile: '',F12.8,''.'',
-     *   /,''# Offset: profile score = '',E10.4,'' + Log(Prob).'',
-     *   /,''#'')')
+     *   /,''# Offset: profile score = '',E10.4,'' + Log(Prob).'')')
      *     exp(BLOG),RSCA
 
         Write(RCEX(1:8),'(I8)') LHMM 
@@ -129,7 +129,7 @@
            Do I2=1,NABC
               Write(NOUT,
      *         '(F8.6,''        # Symbol '',A,'' probability'')')
-     *           RMHM(I2,I1),CABC(I2)
+     *           RIHM(I2,I1),CABC(I2)
            End do 
 
         End do 

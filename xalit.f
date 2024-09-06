@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
         Subroutine XALIT
      *    (NABC,CABC,LPRF,LPCI,N1,N2,
@@ -109,13 +109,58 @@ C       End if
 
     9      Continue
 
+* - circular extensions
+
+           If(LPCI) then
+                 L1=K1-LPRF
+                 Call Dcode(CPMA(L1),LM,LI,LD)
+                 If(IOPM( 0).LT.IOPM(LPRF)) then
+                    IOPM( 0)=IOPM(LPRF)
+                    LM=JM 
+                 End if 
+                 If(IOPI( 0).LT.IOPI(LPRF)) then
+                    IOPI( 0)=IOPI(LPRF)
+                    LI=JI 
+                 End if 
+                 If(IOPD( 0).LT.IOPD(LPRF)) then
+                    IOPD( 0)=IOPD(LPRF)
+                    LD=JD 
+                 End if 
+                 Call Ncode(CPMA(L1),LM,LI,LD)
+
+              Do I2=1,LPRF
+                 L1=L1+1
+                 KD=IOPD(I2-1)+IMPP( D,I2)
+                 If(IOPD(I2).GE.KD+IIPP(DD,I2)) then
+                    Go to  10
+                 Else
+                    Call Dcode(CPMA(L1),LM,LI,LD)
+                    If(IOPM(I2).LT.KD+IIPP(DM,I2)) then
+                       IOPM(I2)=KD+IIPP(DM,I2)
+                       LM=3
+                    End if 
+                    If(IOPI(I2).LT.KD+IIPP(DI,I2)) then
+                       IOPI(I2)=KD+IIPP(DI,I2)
+                       LI=3
+                    End if 
+                       IOPD(I2)=KD+IIPP(DD,I2)
+                       LD=3
+                    Call Ncode(CPMA(L1),LM,LI,LD)
+                 End if
+              End do
+   10         Continue
+           End if
+C          Call wtrace(IDMP,IDMM,LPRF,CPMA,K1-LPRF,IOPM,IOPI,IOPD)
+* -----------------------------------------------------------
+
+
 * internal sequence positions
 
               ZM=XM
               ZI=XI
               ZD=XD
 
-        Do  20 I1=JALB,JALE-1
+        Do  25 I1=JALB,JALE-1
 
            If(LCKS(I1)) then
                  IOPM(N1-1)=NLOW
@@ -163,7 +208,51 @@ C       End if
 
    19      Continue
 
-   20   Continue
+* - circular extensions
+
+           If(LPCI) then
+                 L1=K1-LPRF
+                 Call Dcode(CPMA(L1),LM,LI,LD)
+                 If(IOPM( 0).LT.IOPM(LPRF)) then
+                    IOPM( 0)=IOPM(LPRF)
+                 LM=JM 
+                 End if 
+                 If(IOPI( 0).LT.IOPI(LPRF)) then
+                    IOPI( 0)=IOPI(LPRF)
+                    LI=JI 
+                 End if 
+                 If(IOPD( 0).LT.IOPD(LPRF)) then
+                    IOPD( 0)=IOPD(LPRF)
+                    LD=JD 
+                 End if 
+                 Call Ncode(CPMA(L1),LM,LI,LD)
+
+              Do I2=1,LPRF
+                 L1=L1+1
+                 KD=IOPD(I2-1)+IMPP( D,I2)
+                 If(IOPD(I2).GE.KD+IIPP(DD,I2)) then
+                    Go to  20
+                 Else
+                    Call Dcode(CPMA(L1),LM,LI,LD)
+                    If(IOPM(I2).LT.KD+IIPP(DM,I2)) then
+                       IOPM(I2)=KD+IIPP(DM,I2)
+                       LM=3
+                    End if 
+                    If(IOPI(I2).LT.KD+IIPP(DI,I2)) then
+                       IOPI(I2)=KD+IIPP(DI,I2)
+                       LI=3
+                    End if 
+                       IOPD(I2)=KD+IIPP(DD,I2)
+                       LD=3
+                    Call Ncode(CPMA(L1),LM,LI,LD)
+                 End if
+              End do
+   20         Continue
+           End if
+* -----------------------------------------------------------
+C          Call wtrace(IDMP,IDMM,LPRF,CPMA,K1-LPRF,IOPM,IOPI,IOPD)
+
+   25   Continue
 
 * end of sequence 
 
@@ -236,7 +325,40 @@ C       End if
 
    29      Continue
 
+* - circular extensions
+
+           If(LPCI) then
+                 L1=K1-LPRF
+                 Call Dcode(CPMA(L1),LM,LI,LD)
+                 If(IOPD( 0).LT.IOPD(LPRF)) then
+                    IOPD( 0)=IOPD(LPRF)
+                    LD=JD 
+                 End if 
+                 Call Ncode(CPMA(L1),LM,LI,LD)
+
+              Do I2=1,LPRF
+                 L1=L1+1
+                 KD=IOPD(I2-1)+IMPP( D,I2)
+                 If(KD+IIPX(DZ,I2).GE.IOPT) then
+                    JS=3
+                    K1=L1
+                 End if 
+                 If(IOPD(I2).GE.KD+IIPP(DD,I2)) then
+                    Go to  30
+                 Else
+                    Call Dcode(CPMA(L1),LM,LI,LD)
+                    IOPD(I2)=KD+IIPP(DD,I2)
+                    LD=3
+                    Call Ncode(CPMA(L1),LM,LI,LD)
+                 End if
+              End do
+   30         Continue
+           End if
+* -----------------------------------------------------------
+
    50   Continue
+
+C          Call wtrace(IDMP,IDMM,LPRF,CPMA,K1-LPRF,IOPM,IOPI,IOPD)
 
         K2=JALE
         K3=I2
@@ -251,7 +373,7 @@ C       End if
         End do
 
    60   Continue
-
+C       Write(6,'(5I5)') K1,K2,K3,JS
         If     (JS.EQ.1) then 
            J1=J1+1
            CALI(J1)=Char(Ichar(CABC(ISEQ(K2)))+32)
@@ -263,11 +385,19 @@ C       End if
            K1=K1-LPRF-2
            K2=K2-1
            K3=K3-1
+           If(LPCI.AND.K3.EQ.0) then 
+              K3=K3+LPRF
+              K1=K1+LPRF
+           End if
         Else if(JS.EQ.3) then 
            J1=J1+1
            CALI(J1)='-'
            K1=K1-1
            K3=K3-1
+           If(LPCI.AND.K3.EQ.0) then 
+              K3=K3+LPRF
+              K1=K1+LPRF
+           End if
         End if 
 
         Call Dcode(CPMA(K1),JM,JI,JD)
@@ -281,12 +411,16 @@ C       End if
 
         If(JS.NE.0) Go to 60
 
+        If(K3.GE.LPRF) K3=0
+
         Do I1=K3,1,-1
            J1=J1+1
            CALI(J1)='-'
         End do
 
         LALI=J1
+
+* reverse alignment
 
            J1=(LALI+1)/2
         Do I1=LALI/2+1,LALI 
@@ -297,7 +431,7 @@ C       End if
         End do
 
         IPMB=K3+1
-           
+
   100   Return
 
         End 
@@ -385,3 +519,28 @@ C       End if
         JD=JD-JI* 4
         Return 
         End 
+*----------------------------------------------------------------------*
+        Subroutine wtrace(IDMP,IDMM,LPRF,CPMA,K1,IOPM,IOPI,IOPD)
+
+        Character CPMA(IDMM)
+        Integer   IOPM(0:IDMP)
+        Integer   IOPI(0:IDMP)
+        Integer   IOPD(0:IDMP)
+
+        Integer   IM(20)
+        Integer   II(20)
+        Integer   ID(20)
+
+           J1=1
+        Do I1=K1,K1+LPRF
+           Call Dcode(CPMA(I1),IM(J1),II(J1),ID(J1))
+           J1=J1+1
+        End do
+
+        Write(6,'(I4)') K1/(LPRF+1)
+        Write(6,'(20(I4,I2))')(IOPM(ii1-1),IM(ii1),ii1=1,LPRF+1)
+        Write(6,'(20(I4,I2))')(IOPI(ii1-1),II(ii1),ii1=1,LPRF+1)
+        Write(6,'(20(I4,I2))')(IOPD(ii1-1),ID(ii1),ii1=1,LPRF+1)
+        Return
+        End
+

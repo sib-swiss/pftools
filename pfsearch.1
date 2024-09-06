@@ -1,10 +1,10 @@
-.TH PFSEARCH 1 "April 1997" "pftools 2.0"
+.TH PFSEARCH 1 "February 1998" "pftools 2.1"
 .SH NAME
 pfsearch \- search a protein or DNA sequence library for sequence segments 
 matching a profile
 .SH SYNOPSIS
 .B pfsearch 
-[ -abfrsuxyz ] [ profile-file | - ]
+[ -abflrsuxyz ] [ profile-file | - ]
             [ seq-library-file | - ]    [C=#] 
 .SH DESCRIPTION
 .B pfsearch 
@@ -12,7 +12,7 @@ compares a query profile against a DNA or protein sequence library.
 The result is an unsorted list of profile-sequence matches written to the standard output. 
 A variety of output formats containing different informations can be specified 
 via the options 
-.I -a, -r, -u, -s,
+.I -a, -l, -r, -u, -s,
 .I -x, -y, -z,
 and the command-line parameter 
 .I C=#.
@@ -38,6 +38,10 @@ Search the complementary strands of DNA sequences as well.
 .TP
 \-f
 Input sequence-library is in Pearson/Fasta format.
+.TP
+\-l
+Indicate highest cut-off level exceeded by the match score
+in the output list. 
 .TP
 \-r
 Use raw scores rather than normalized 
@@ -106,9 +110,6 @@ can further be processed by GCG programs accepting MSF files as input.
 .I See
 also manual pages of 
 .B psa2msa. 
-.SH BUGS
-.B pfsearch 
-neither supports circular profiles nor circular sequences.
 .SH AUTHOR
 Philipp Bucher
 .br

@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
         Subroutine PRALI
      *    (LPRF,CHIP,CHMP,IDMP,LSEQ,LREV,
@@ -20,6 +20,7 @@
         Do I1=1,LALI
            If(CALI(I1).EQ.'-') then 
               JB=JB+1
+              If(JB.GT.LPRF) JB=JB-LPRF
               KB=KB+1
            Else 
               Go to   2
@@ -71,6 +72,7 @@
            K1=Ichar(CALI(I1))
            If     (K1.GE.65.AND.K1.LE. 90) then 
               JB=JB+1
+              If(JB.GT.LPRF) JB=JB-LPRF
               LB=LB+1
               RCPR(IX:IX)=CHMP(JB)
               RCSQ(IX:IX)=CALI(I1)
@@ -80,6 +82,7 @@
               RCSQ(IX:IX)=CALI(I1)
            Else if(CALI(I1).EQ.'-') then 
               JB=JB+1
+              If(JB.GT.LPRF) JB=JB-LPRF
               RCPR(IX:IX)=CHMP(JB)
               RCSQ(IX:IX)=CALI(I1)
            End if 

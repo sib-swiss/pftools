@@ -1,4 +1,4 @@
-*       Version:  This file is part of pftools release 2.0 June 1997
+*       Version:  This file is part of pftools release 2.1 February 1998
 *----------------------------------------------------------------------*     
         Subroutine RHNUL(NNUL,FNUL,FABC,NABC,IRC)   
 
@@ -33,7 +33,7 @@
         End if 
         CBUF(M+1:)=RCIN(1:L)
         M=M+L
-        CBUF(M+1:M+1)='@'
+        CBUF(M+2:M+2)=' @'
         Read(CBUF(1:M+1),*,End=  2,Err=  2)(FABC(ii1),ii1=1,NABC)
 
   100   Return
