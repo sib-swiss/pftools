@@ -87,6 +87,7 @@
       Logical           OPTZ 
       Logical           OPTM
       Logical           OPTK
+      Logical           OPTJ
       Logical           OPTO
       Logical           OPTD
       Logical           OPTV
@@ -177,10 +178,10 @@ C     Character*1024    RCOUT
 
       Call Repar(
      *   OPTA,OPTB,OPTF,OPTL,OPLU,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,OPTM,
-     *   OPTK,FPRF,FSEQ,NCUC,KCUC,XCUC,NW,NMOD,OPTO,OPTD,OPTV,IRC)
+     *   OPTK,OPTJ,FPRF,FSEQ,NCUC,KCUC,XCUC,NW,NMOD,OPTO,OPTD,OPTV,IRC)
       If(IRC.NE.0) then 
          Write(NERR,'(/,
-     *      ''pfsearch 2.3 revision 4'',//
+     *      ''pfsearch 2.3 revision 5.d'',//
      *      ''Usage: pfsearch [ -abCdfhlLmMkrsuvWxyz ] [ profile-file'',
      *      '' | - ] [ seq-library-file | - ] [ parameters ]'',//
      *      )')
@@ -211,6 +212,8 @@ C     Character*1024    RCOUT
      *      ''    -d: impose length limit on sequence description.'',/
      *      ''    -k: output using the xPSA header (using keyword'',
      *      ''=value pairs).'',/
+     *      ''    -j: output using the xPSA header adding the sequence'',
+     *      '' matched by itself.'',/
      *      ''    -s: list sequences of the matched regions.'',/
      *      ''    -v: suppress warnings on stderr.'',/
      *      ''    -x: list alignments in PSA format.'',/
@@ -243,7 +246,11 @@ C     Character*1024    RCOUT
       If(OPTR) then
          LDRS=.TRUE.
       End if
-      
+    
+      If(OPTJ) then
+          OPTK=.TRUE.
+      End if
+
 * read profile
 
       Call REPRF
@@ -580,6 +587,14 @@ C      End if
          IALS(1)=IOPT
       End if 
       
+      if(OPTJ .AND. (NALI > 0)) then
+            Do I1=1,LSEQ
+               CALI(I1)=Char(Ichar(CABC(ISEQ(I1))))
+            End do
+            Call JPRSM(CSID,CSAC,CSFH,OPTF,1,LSEQ)
+            Call PRSP(CABC,ISEQ,CALI,1,LSEQ,NW,OPTS,OPTX)
+      End if
+
       Do  40 I1=1,NALI
          JSEQ=JSEQ+1
          
@@ -742,7 +757,7 @@ C      End if
 *----------------------------------------------------------------------*     
       Subroutine Repar(
      *   OPTA,OPTB,OPTF,OPTL,OPLU,OPTR,OPTS,OPTU,OPTX,OPTY,OPTZ,OPTM,
-     *   OPTK,FPRF,FSEQ,NCUC,KCUC,XCUC,NW,NMOD,OPTO,OPTD,OPTV,IRC)
+     *   OPTK,OPTJ,FPRF,FSEQ,NCUC,KCUC,XCUC,NW,NMOD,OPTO,OPTD,OPTV,IRC)
       
       Logical           OPTA 
       Logical           OPTB 
@@ -757,6 +772,7 @@ C      End if
       Logical           OPTZ 
       Logical           OPTM
       Logical           OPTK
+      Logical           OPTJ
       Logical           OPTO
       Logical           OPTD
       Logical           OPTV
@@ -781,6 +797,7 @@ C      End if
       OPTM=.FALSE.
       OPTO=.FALSE.
       OPTK=.FALSE.
+      OPTJ=.FALSE.
       OPTD=.FALSE.
       OPTV=.FALSE.
       
@@ -809,6 +826,7 @@ C      End if
             If(Index(CARG,'z').NE.0) OPTZ=.TRUE.
             If(Index(CARG,'m').NE.0) OPTM=.TRUE.
             If(Index(CARG,'k').NE.0) OPTK=.TRUE.
+            If(Index(CARG,'j').NE.0) OPTJ=.TRUE.
             If(Index(CARG,'v').NE.0) OPTV=.TRUE.
             If(Index(CARG,'W').NE.0) then
                If(CARG(3:3).NE.' ') then
@@ -894,6 +912,7 @@ C      End if
       Include          'CPAve.f'
       Include          'wprsm.f'
       Include          'xprsm.f'
+      Include          'jprsm.f'
       Include          'xalit.f'
       Include          'lblnk.f'
       Include          'prali.f'

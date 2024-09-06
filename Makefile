@@ -8,10 +8,20 @@ PROGS = gtop pfmake pfscan pfw ptoh htop \
 MANS =  gtop.1 pfmake.1 pfscan.1 pfw.1 ptoh.1 htop.1 pfscale.1 \
         pfsearch.1 psa2msa.1 2ft.1 6ft.1 ptof.1 psa.5 xpsa.5
 
-F77   = g77
+F77   = gfortran
 CC    = gcc
-FFLAGS= -O2 -init-local-zero -fno-automatic io.o
+#FFLAGS= -O2 -init-local-zero -fno-automatic io.o
+#FFLAGS= -O2 -finit-local-zero -fno-automatic io.o
+FFLAGS= -O2 -fno-automatic io.o
 #PRFLAG= -g -pg
+
+
+# For MAC OX X SnowLeopard we need to specify the 32bit architecture for gcc
+#CFLAGS= -m32
+# otherwise keep it empty
+CFLAGS=
+
+
 #----------------------------------------------------------------------#
 # Location of package installation directory
 #
@@ -48,7 +58,7 @@ clean:
 	rm $(PROGS) io.o
 
 io.o :  io.c 
-	$(CC) -c io.c -o io.o $(PRFLAG)
+	$(CC) -c io.c -o io.o $(CFLAGS) $(PRFLAG)
 
 gtop :  gtop.f io.o psdat.f gsdat.f djdat.f nodat.f codat.f pfdat.f dfdat.f \
         sterr.f cvini.f lblnk.f regpr.f wrprf.f sterr.f ardim.f
@@ -61,7 +71,7 @@ htop :  htop.f codat.f cvini.f dfdat.f djdat.f gsdat.f lblnk.f nodat.f \
 pfsearch : pfsearch.f gsdat.f djdat.f nodat.f codat.f pfdat.f dfdat.f pxdat.f \
         avdat.f sterr.f cvini.f reprf.f reseq.f rfseq.f xali1.f xalip.f \
         RtoN.f NtoR.f CFAve.f CPAve.f wprsm.f xprsm.f xalit.f lblnk.f prali.f sterr.f \
-        pmali.f ardim.f prsp.f prxp.f Xblnk.f
+        pmali.f ardim.f prsp.f prxp.f Xblnk.f jprsm.f
 	$(F77) $(FFLAGS) pfsearch.f -o pfsearch $(PRFLAG)
 
 pfscan : pfscan.f psdat.f gsdat.f djdat.f nodat.f codat.f pfdat.f dfdat.f \

@@ -128,7 +128,7 @@
       Call Repar(OPTS,OPTR,NW,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''2ft 2.3 revision 4'',//
+     *      ''2ft 2.3 revision 5.d'',//
      *      ''Usage: 2ft [-[r|s]hW] < seq-library-file '',/
      *      )')
          Write(NERR,'(

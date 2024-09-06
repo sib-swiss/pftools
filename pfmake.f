@@ -69,8 +69,7 @@ C      Character*64      FOUT
 * profile
 
       Character*512     FPRF
-      Character*24      FDAT,Fdate
-      External          Fdate
+      Character*30      FDAT
 
 
 * function return types
@@ -133,7 +132,7 @@ C      Character*64      FOUT
      *   LLLT,OPTM,RE,RF,RG,RH,RI,RL,RM,RS,RT,RX,NLOW,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''pfmake 2.3 revision 4'',//
+     *      ''pfmake 2.3 revision 5.d'',//
      *      ''Usage: pfmake [ -0123abcehlsEFGHILMSTX ] [ msf-file'',
      *      '' | - ] score-matrix [ profile-file ] [ parameters ]'',//
      *      )')
@@ -433,7 +432,7 @@ C                Write(6,'(I4,1x,A,F10.4)') K1,CABC(I2),SPRF(I2,K1)
 
       If(CPID.EQ.' ') CPID='SEQUENCE_PROFILE'
       If(CPAC.EQ.' ') CPAC='ZZ99999'
-      FDAT=Fdate()
+      CALL Fdate(FDAT)
       If(CPDT.NE.' ') then
          CPDT=FDAT(1:Lblnk(FDAT)) // ' ! ' // CPDT
       Else

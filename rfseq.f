@@ -56,6 +56,8 @@
       End do
  4    IX3=I1 
       CSAC=RCIN(2:IX1)
+*      FIXME
+*      Write(NERR,*) 'SEQUENCE_READ=',CSAC
       CSID=RCIN(IX1+1:IX2)
       CSDE=RCIN(IX3:L)
       CSFH=RCIN(2:IX2)

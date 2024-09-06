@@ -47,7 +47,7 @@
       Character*13      CHLE
       Character*20      CHNS
       Character*17      CHRS 
-      Character*21      CHLO
+      Character*64      CHLO
       Character*21      CHSE
       Character*17      CHTY
       
@@ -57,7 +57,7 @@
       Character*24      CHPE
       Character*09      CHST 
       Character*64      CHER 
-      Character*21      CHMN 
+      Character*64      CHMN 
       Character*22      CHRN 
       Character*26      CHPN 
       
@@ -221,8 +221,9 @@
 * - location in profile
 
          If(OPTZ) then
-            CHPS='motif_start= '
-            Write(CHPS(14:),*) IPMB
+*            CHPS='motif_start= '
+*            Write(CHPS(14:),*) IPMB
+            Write(CHPS,'(''motif_start='',I7)') IPMB
             J1=12
             Do I1=13,Lblnk(CHPS)
                If(CHPS(I1:I1).NE.' ') then 
@@ -231,8 +232,9 @@
                   CHPS(I1:I1)=' '
                End if
             End do
-            CHPE='motif_end= '
-            Write(CHPE(12:),*) IPME
+*            CHPE='motif_end= '
+*            Write(CHPE(12:),*) IPME
+            Write(CHPE,'(''motif_end='',I7)') IPME
             J1=10
             Do I1=11,Lblnk(CHPE)
                If(CHPE(I1:I1).NE.' ') then 

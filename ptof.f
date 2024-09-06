@@ -73,7 +73,7 @@
       Call Repar(FPRF,OPTR,LLLT,RB,RF,RI,RX,RY,RZ,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''ptof 2.3 revision 4'',//
+     *      ''ptof 2.3 revision 5.d'',//
      *      ''Usage: ptof [ -hlrBFIXYZ ] [ profile | - ] '',
      *      ''[ parameters ]'',//
      *      )')

@@ -71,7 +71,7 @@
       Call Repar(FSCL,FPRF,LLLT,DL,NN,RP,RQ,LMNB,IMNB,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''pfscale 2.3 revision 4'',//
+     *      ''pfscale 2.3 revision 5.d'',//
      *      ''Usage: pfscale [ -lhLMNPQ ] [ score-list | - ] '' 
      *      ''[ profile-file ] [ parameters ]'',/
      *      )')

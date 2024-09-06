@@ -80,7 +80,7 @@ C       Integer           Fputc
      *   (FMSF,NRAN,RX,RW,IRAN,OPTM,IRC) 
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''pfw 2.3 revision 4'',//
+     *      ''pfw 2.3 revision 5.d'',//
      *      ''Usage: pfw [ -hmNXRW ] [ msf-file | - ] '',
      *      ''[ parameters ]'',//
      *      )')

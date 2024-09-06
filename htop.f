@@ -77,7 +77,7 @@
      *   DB,RC,DL,NM,RP,RQ,RF,RH,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''htop 2.3 revision 4'',//
+     *      ''htop 2.3 revision 5.d'',//
      *      ''Usage: htop [ -fhilosBCFHLMPQ ] [ hmm-file | - ] ''
      *      ''[ random-model-file ] [ parameters ]'',/
      *      )')

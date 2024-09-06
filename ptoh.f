@@ -81,7 +81,7 @@
       Call Repar(FPRF,FNUL,OPTF,OPFF,OPTH,OPTS,RD,RI,DL,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''ptoh 2.3 revision 4'',//
+     *      ''ptoh 2.3 revision 5.d'',//
      *      ''Usage: ptoh [ -fhsFDIL ] [ profile-file | - ] '',
      *      ''[ random-model-file ] [ parameters ]'',//
      *      )')

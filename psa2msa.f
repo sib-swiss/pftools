@@ -49,7 +49,7 @@
      *   (FSEQ,OPTL,OPTU,OPTP,OPTD,NM,NW,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''psa2msa 2.3 revision 4'',//
+     *      ''psa2msa 2.3 revision 5.d'',//
      *      ''Usage: psa2msa [ -dhlpuMW ] [ psa-file | - ] '',
      *      ''[ parameters ]'',//
      *      )')

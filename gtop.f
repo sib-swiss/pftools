@@ -57,7 +57,7 @@
      *   (FGPR,LSYM,LLLT,RG,RE,RF,RO,IRC)
       If(IRC.NE.0) then
          Write(NERR,'(/,
-     *      ''gtop 2.3 revision 4'',//
+     *      ''gtop 2.3 revision 5.d'',//
      *      ''Usage: gtop [ -aslhGEFO ] gcg-profile | - '' 
      *      ''[ parameters ]'',/
      *      )')
